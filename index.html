@@ -751,7 +751,7 @@
     <button class="cat-btn" onclick="selectCat('matematik',this)">🔢 Matematik</button>
     <button class="cat-btn" onclick="selectCat('turkce',this)">📖 Türkçe</button>
     <button class="cat-btn" onclick="selectCat('yapayzeka',this)">🤖 Yapay Zeka</button>
-    <button class="cat-btn" onclick="selectCat('karisik',this)">🎲 Karışık (10 Soru)</button>
+    <button class="cat-btn" onclick="selectCat('karisik',this)">🎲 Karışık (6 Soru)</button>
   </div>
   
   <div class="progress-container" id="progressArea" style="display:none;">
@@ -776,10 +776,7 @@ const DB = {
     { s:"Osmanlı Devleti'nin kurucusu kimdir ve devlet hangi yıl kurulmuştur?", o:["A) Orhan Bey - 1326","B) Osman Bey - 1299","C) Ertuğrul Gazi - 1281","D) Birinci Murat - 1362"], d:"B", a:"Osmanlı Devleti, 1299 yılında Osman Bey tarafından kurulmuştur.", i:"Devlet kurucusunun adı" },
     { s:"Tarihte ilk yazılı antlaşma olarak bilinen 'Kadeş Antlaşması' hangi iki devlet arasında imzalanmıştır?", o:["A) Sümer - Akad","B) Mısır - Hitit","C) Asur - Babil","D) Pers - Yunan"], d:"B", a:"MÖ 1280 civarında Mısır Firavunu II. Ramses ile Hitit Kralı III. Hattuşili arasında imzalanmıştır.", i:"Anadolu ve Mısır medeniyetleri" },
     { s:"Mustafa Kemal Atatürk'ün nüfusa kayıtlı olduğu il hangisidir?", o:["A) Selanik","B) Ankara","C) İstanbul","D) Gaziantep"], d:"D", a:"Mustafa Kemal Atatürk, Gaziantep'in Şahinbey ilçesi nüfusuna kaydedilmiştir.", i:"Güneydoğu'nun Gazi unvanlı şehri" },
-    { s:"Orhun Kitabeleri (Göktürk Yazıtları) günümüzde hangi ülkenin sınırları içerisinde yer almaktadır?", o:["A) Kazakistan","B) Moğolistan","C) Özbekistan","D) Kırgızistan"], d:"B", a:"Türk tarihinin ilk yazılı belgeleri olan Orhun Yazıtları Moğolistan sınırları içindedir.", i:"Ötüken bölgesi" },
-    { s:"Osmanlı Devleti'nde matbaayı ilk getiren ve ilk basımevini kuran kişiler kimlerdir?", o:["A) İbrahim Müteferrika - Sait Efendi","B) Katip Çelebi - Evliya Çelebi","C) Namık Kemal - Şinasi","D) Lagari Hasan - Hezarfen"], d:"A", a:"Lale Devri'nde (1727) İbrahim Müteferrika ve Sait Efendi tarafından kurulmuştur.", i:"Lale Devri yenilikçileri" },
-    { s:"Mısır'ı Osmanlı topraklarına katarak Halifeliğin Osmanlı'ya geçmesini sağlayan padişah kimdir?", o:["A) Fatih Sultan Mehmet","B) Yavuz Sultan Selim","C) Kanuni Sultan Süleyman","D) II. Abdülhamid"], d:"B", a:"Yavuz Sultan Selim 1516 Mercidabık ve 1517 Ridaniye seferleriyle Mısır'ı fethetmiştir.", i:"8 yıla 80 yıllık iş sığdıran padişah" },
-    { s:"İstiklal Marşı'mız hangi yıl meclis tarafından milli marş olarak kabul edilmiştir?", o:["A) 1920","B) 1921","C) 1922","D) 1923"], d:"B", a:"Mehmet Akif Ersoy'un yazdığı İstiklal Marşı, 12 Mart 1921'de kabul edilmiştir.", i:"Cumhuriyetin ilanından 2 yıl önce" }
+    { s:"Orhun Kitabeleri (Göktürk Yazıtları) günümüzde hangi ülkenin sınırları içerisinde yer almaktadır?", o:["A) Kazakistan","B) Moğolistan","C) Özbekistan","D) Kırgızistan"], d:"B", a:"Türk tarihinin ilk yazılı belgeleri olan Orhun Yazıtları Moğolistan sınırları içindedir.", i:"Ötüken bölgesi" }
   ],
   cografya: [
     { s:"Türkiye'nin en yüksek dağı hangisidir ve yüksekliği kaç metredir?", o:["A) Erciyes Dağı - 3917m","B) Süphan Dağı - 4058m","C) Ağrı Dağı - 5137m","D) Kaçkar Dağı - 3937m"], d:"C", a:"Türkiye'nin en yüksek noktası 5137 metre ile Ağrı Dağı'dır.", i:"Doğu Anadolu'nun zirvesi" },
@@ -789,9 +786,7 @@ const DB = {
     { s:"Türkiye'de karstik şekillerin ve obrukların en yaygın görüldüğü coğrafi bölge hangisidir?", o:["A) Karadeniz Bölgesi","B) Akdeniz Bölgesi","C) Doğu Anadolu Bölgesi","D) Marmara Bölgesi"], d:"B", a:"Kireçtaşının yaygın olduğu Akdeniz Bölgesi karstik oluşumlarda ilk sıradadır.", i:"Teke ve Taşeli çevresi" },
     { s:"Aşağıdaki akarsulardan hangisi Türkiye sınırları içinde doğup, sınır dışına dökülmektedir?", o:["A) Kızılırmak","B) Yeşilırmak","C) Fırat","D) Sakarya"], d:"C", a:"Fırat ve Dicle nehirleri Türkiye'den doğup Basra Körfezi'ne dökülür.", i:"Mezopotamya'ya yönelen akarsu" },
     { s:"Ülkemizde çay tarımının Doğu Karadeniz'de yoğunlaşmasının temel sebebi nedir?", o:["A) Toprak yapısı","B) Her mevsim yağışlı ve nemli mikroklimal iklim","C) Makineleşme kolaylığı","D) İş gücü potansiyeli"], d:"B", a:"Çay bitkisi her mevsim düzenli yağış ve yüksek nem oranı ister.", i:"Hava durumu ve yağış rejimi" },
-    { s:"Dünyanın en büyük sıcak çölü hangisidir?", o:["A) Gobi Çölü","B) Sahra Çölü","C) Kalahari Çölü","D) Atacama Çölü"], d:"B", a:"Afrika'nın kuzeyindeki Büyük Sahra Çölü en büyük sıcak çöldür.", i:"Kuzey Afrika" },
-    { s:"Türkiye'nin en doğusu ile en batısı arasında kaç dakikalık yerel saat farkı vardır?", o:["A) 40 dakika","B) 76 dakika","C) 19 dakika","D) 26 dakika"], d:"B", a:"Türkiye 26-45 doğu meridyenlerindedir. 19 x 4 = 76 dakika fark oluşur.", i:"Meridyen farkını 4 ile çarpın" },
-    { s:"Dünyanın oksijen deposu olarak bilinen en büyük yağmur ormanları hangisidir?", o:["A) Kongo Ormanları","B) Amazon Ormanları","C) Sibirya Taygası","D) Borneo Ormanları"], d:"B", a:"Güney Amerika'daki Amazon ormanları dünya oksijen dengesinde çok mühimdir.", i:"Güney Amerika kıtası" }
+    { s:"Dünyanın en büyük sıcak çölü hangisidir?", o:["A) Gobi Çölü","B) Sahra Çölü","C) Kalahari Çölü","D) Atacama Çölü"], d:"B", a:"Afrika'nın kuzeyindeki Büyük Sahra Çölü en büyük sıcak çöldür.", i:"Kuzey Afrika" }
   ],
   fen: [
     { s:"Kimyada elementleri atom kütlelerine göre sıralayarak ilk Periyodik Cetveli oluşturan bilim insanı kimdir?", o:["A) Marie Curie","B) Dmitri Mendeleyev","C) John Dalton","D) Antoine Lavoisier"], d:"B", a:"Rus kimyager Mendeleyev, elementlerin özelliklerinin periyodik tekrarlandığını keşfetmiştir.", i:"Rus kimyager" },
@@ -801,9 +796,7 @@ const DB = {
     { s:"Hücrenin enerji santrali olarak bilinen ve ATP üretiminden sorumlu olan organel hangisidir?", o:["A) Ribozom","B) Lizozom","C) Mitokondri","D) Golgi cisimciği"], d:"C", a:"Mitokondri, hücre için gerekli biyokimyasal enerjiyi (ATP) sentezler.", i:"Enerji üretim merkezi" },
     { s:"Güneş'ten gelen zararlı ultraviyole (UV) ışınlarını süzen atmosfer katmanı hangisidir?", o:["A) Troposfer","B) Ozon Tabakası","C) Termosfer","D) Mezosfer"], d:"B", a:"Stratosfer tabakasında bulunan ozon katmanı UV ışınlarına karşı kalkan olur.", i:"O3 gazından oluşur" },
     { s:"Bir çözeltinin pH değerinin '7' olması neyi ifade eder?", o:["A) Asidik","B) Bazik","C) Nötr","D) Akışkan"], d:"C", a:"pH cetvelinde 7 değeri ne asit ne baz olan nötr maddeleri temsil eder.", i:"Saf suyun pH derecesi" },
-    { s:"Genetik biliminin kurucusu kabul edilen ve bezelyelerle deneyler yapan bilim insanı kimdir?", o:["A) Charles Darwin","B) Gregor Mendel","C) Louis Pasteur","D) Alexander Fleming"], d:"B", a:"Gregor Mendel, kalıtım kanunlarını bezelye bitkileri üzerinden kanıtlamıştır.", i:"Kalıtım teorisyeni" },
-    { s:"Kütle çekim yasasını ve mekanik hareket kanunlarını formüle eden ünlü fizikçi kimdir?", o:["A) Albert Einstein","B) Isaac Newton","C) Nikola Tesla","D) Stephen Hawking"], d:"B", a:"Sir Isaac Newton yerçekimi ve evrensel kütle çekim teorisini geliştirmiştir.", i:"Başına elma düşen bilim insanı" },
-    { s:"Sıvıların kaldırma kuvvetini keşfeden ve hamamdan 'Evreka!' diyerek fırlayan antik çağ bilgini kimdir?", o:["A) Arşimet","B) Pisagor","C) Öklid","D) Aristoteles"], d:"A", a:"Arşimet, sıvıların hidrostatik kaldırma kuvveti kanununu bulmuştur.", i:"Hidrostatik kurucusu" }
+    { s:"Genetik biliminin kurucusu kabul edilen ve bezelyelerle deneyler yapan bilim insanı kimdir?", o:["A) Charles Darwin","B) Gregor Mendel","C) Louis Pasteur","D) Alexander Fleming"], d:"B", a:"Gregor Mendel, kalıtım kanunlarını bezelye bitkileri üzerinden kanıtlamıştır.", i:"Kalıtım teorisyeni" }
   ],
   matematik: [
     { s:"Bir dik üçgende dik kenarların karelerinin toplamı hipotenüsün karesine eşittir diyen teorem hangisidir?", o:["A) Thales","B) Pisagor","C) Öklid","D) Pascal"], d:"B", a:"a² + b² = c² bağıntısı Pisagor teoremidir.", i:"Dik üçgen bağıntısı" },
@@ -813,9 +806,7 @@ const DB = {
     { s:"Sadece 1'e ve kendisine tam bölünebilen 1'den büyük sayılara ne ad verilir?", o:["A) Çift Sayılar","B) Rasyonel Sayılar","C) Asal Sayılar","D) Tam Kare Sayılar"], d:"C", a:"2, 3, 5, 7, 11 gibi sadece 1 ve kendisine bölünen sayılar asaldır.", i:"En küçüğü 2 sayısıdır" },
     { s:"Bir olayın gerçekleşme olasılığı teorik olarak en fazla kaç olabilir?", o:["A) 0.5","B) 1 (%100)","C) 10","D) Sonsuz"], d:"B", a:"Olasılık 0 (imkansız) ile 1 (kesin olay) arasında değer alır.", i:"Kesin olay üst limiti" },
     { s:"Logaritma fonksiyonu hangi fonksiyonun tersidir?", o:["A) Trigonometrik","B) Üstel Fonksiyon","C) Polinom","D) Doğrusal"], d:"B", a:"Logaritma, üstel fonksiyonların ters işlemidir.", i:"Taban ve üs yer değişimi" },
-    { s:"Kesişimleri boş küme olan kümelere ne ad verilir?", o:["A) Eşit Kümeler","B) Ayrık Kümeler","C) Alt Kümeler","D) Evrensel Kümeler"], d:"B", a:"Hiç ortak elemanı olmayan kümelere ayrık kümeler denir.", i:"Ortak noktası olmayanlar" },
-    { s:"Sıfır (0) kavramını ve cebir bilimini ilk kez sistemleştiren İslam bilgini kimdir?", o:["A) İbn-i Sina","B) El-Harezmi","C) Ali Kuşçu","D) Ömer Hayyam"], d:"B", a:"El-Harezmi cebir biliminin temellerini atmış ve batıya tanıtmıştır.", i:"Algoritma kelimesinin kaynağı olan isim" },
-    { s:"Dairenin alanı hangi formülle hesaplanır?", o:["A) 2πr","B) πr²","C) 2π","D) πd"], d:"B", a:"Alan formülü pi sayısı ile yarıçapın karesinin çarpımıdır.", i:"Yarıçapın karesi gerekir" }
+    { s:"Kesişimleri boş küme olan kümelere ne ad verilir?", o:["A) Eşit Kümeler","B) Ayrık Kümeler","C) Alt Kümeler","D) Evrensel Kümeler"], d:"B", a:"Hiç ortak elemanı olmayan kümelere ayrık kümeler denir.", i:"Ortak noktası olmayanlar" }
   ],
   turkce: [
     { s:"Aşağıdaki cümlelerin hangisinde bir yazım hatası vardır?", o:["A) Herkes buradaydı.","B) Herşey güzel olacak.","C) Birkaç kitap aldım.","D) Hiçbir şey demedi."], d:"B", a:"Türkçede 'şey' daima ayrı yazılır. 'Her şey' olmalıdır.", i:"Şey sözcüğüne dikkat edin" },
@@ -825,9 +816,7 @@ const DB = {
     { s:"'Göz boyamak' deyimi ne anlama gelir?", o:["A) Çok değer vermek","B) Makyaj yapmak","C) Aldatmak, yanıltarak iyi göstermek","D) İncelemek"], d:"C", a:"Göz boyamak, kusurları gizleyip bir şeyi iyi göstererek kandırmaktır.", i:"Yanıltma mecazı" },
     { s:"Aşağıdaki sözcüklerden hangisi türetilirken veya ek alırken ünlü düşmesine uğramıştır?", o:["A) Kitapçık","B) Akıllanmak","C) Karnı","D) Küçücük"], d:"C", a:"Karın kelimesine ünlü eklendiğinde 'ı' harfi düşerek 'karnı' olur.", i:"Vücut organı kökenli" },
     { s:"Batılı anlamda ilk modern Türk tiyatrosu olan 'Şair Evlenmesi' yazarı kimdir?", o:["A) Namık Kemal","B) Şinasi","C) Ahmet Vefik Paşa","D) Ziya Paşa"], d:"B", a:"İbrahim Şinasi, Şair Evlenmesi isimli töre komedisini yazmıştır.", i:"İlk gazete kurucularından" },
-    { s:"'Mavi gökyüzü' tamlamasının türü nedir?", o:["A) İsim Tamlaması","B) Sıfat Tamlaması","C) Zincirleme","D) Belirtisiz İsim"], d:"B", a:"Renk bildiren kelime sıfat olduğundan bu bir sıfat tamlamasıdır.", i:"Nasıl gökyüzü?" },
-    { s:"Hangisi Türkçedeki 'Büyük Ünlü Uyumu' kuralına tamamen uymaktadır?", o:["A) Tiyatro","B) Kalemlik","C) Kelebek","D) Kitaplık"], d:"C", a:"Kelebek kelimesinin tüm ünlüleri incedir (e, e, e).", i:"Ünlülerin kalınlık-incelik uyumu" },
-    { s:"Mezopotamya kültüründen doğan, insanlık tarihinin bilinen en eski destanı hangisidir?", o:["A) İlyada","B) Oğuz Kağan","C) Gılgamış Destanı","D) Ramayana"], d:"C", a:"Sümerlerin Gılgamış Destanı tarihin en eski edebi belgelerindendir.", i:"Ölümsüzlüğü arayan Sümer kralı" }
+    { s:"'Mavi gökyüzü' tamlamasının türü nedir?", o:["A) İsim Tamlaması","B) Sıfat Tamlaması","C) Zincirleme","D) Belirtisiz İsim"], d:"B", a:"Renk bildiren kelime sıfat olduğundan bu bir sıfat tamlamasıdır.", i:"Nasıl gökyüzü?" }
   ],
   yapayzeka: [
     { s:"Yapay zekayı ifade eden 'AI' kısaltmasının açılımı nedir?", o:["A) Advanced Intelligence","B) Artificial Intelligence","C) Automated Internet","D) App Integration"], d:"B", a:"AI, Artificial Intelligence (Yapay Zeka) anlamına gelir.", i:"Yapay zeka teriminin İngilizcesi" },
@@ -837,9 +826,7 @@ const DB = {
     { s:"Yapay zeka modellerinin eğitilmesinde kullanılan, paralel işlem yeteneği yüksek donanım birimi hangisidir?", o:["A) CPU","B) GPU (Ekran Kartı)","C) RAM","D) HDD"], d:"B", a:"GPU'lar matris işlemlerini çok hızlı yürüttüğü için yapay zekada kritiktir.", i:"Grafik işlem birimi" },
     { s:"1997'de dünya satranç şampiyonu Kasparov'u yenen meşhur IBM bilgisayarı hangisidir?", o:["A) Deep Blue","B) AlphaGo","C) Watson","D) Stockfish"], d:"A", a:"Deep Blue, satranç şampiyonunu yenen ilk bilgisayar sistemidir.", i:"Derin Mavi" },
     { s:"Yapay zekanın verileri analiz ederek sıfırdan yeni içerik (resim, metin) üretmesine ne ad verilir?", o:["A) Analitik YZ","B) Üretken Yapay Zeka (Generative AI)","C) Statik YZ","D) Robotik Kodlama"], d:"B", a:"İçerik üreten sistemler Üretken (Generative) Yapay Zeka olarak tanımlanır.", i:"Yaratıcı ve yapıcı yapay zeka" },
-    { s:"İnsan beynindeki nöronların çalışma prensiplerini taklit eden matematiksel model hangisidir?", o:["A) Karar Ağaçları","B) Yapay Sinir Ağları (YSA)","C) Doğrusal Regresyon","D) Kümeleme"], d:"B", a:"Yapay Sinir Ağları biyolojik sinir sisteminin bilgisayara uyarlanmasıdır.", i:"Nöron ağları taklidi" },
-    { s:"Makinelerin dijital görüntülerdeki nesneleri veya yüzleri tanıma alanına ne denir?", o:["A) Doğal Dil İşleme","B) Bilgisayarlı Görü (Computer Vision)","C) Bulut Bilişim","D) Veri Madenciliği"], d:"B", a:"Computer Vision (Bilgisayarlı Görü) görsel verileri anlamlandırma alanıdır.", i:"Görsel algılama" },
-    { s:"Yapay zekanın insan dillerini anlama, dönüştürme ve işleme yeteneğiyle uğraşan dal hangisidir?", o:["A) NLP (Doğal Dil İşleme)","B) CNN","C) IoT","D) SaaS"], d:"A", a:"Natural Language Processing (Doğal Dil İşleme) insan dili ve bilgisayar etkileşimidir.", i:"Dil işleme kısaltması" }
+    { s:"İnsan beynindeki nöronların çalışma prensiplerini taklit eden matematiksel model hangisidir?", o:["A) Karar Ağaçları","B) Yapay Sinir Ağları (YSA)","C) Doğrusal Regresyon","D) Kümeleme"], d:"B", a:"Yapay Sinir Ağları biyolojik sinir sisteminin bilgisayara uyarlanmasıdır.", i:"Nöron ağları taklidi" }
   ],
   karisik: []
 };
@@ -851,7 +838,7 @@ let activePool = [];
 let currentIdx = 0, correctCount = 0, wrongCount = 0, answered = false;
 let clock;
 let currentTabState = 'home';
-const LIMIT = 10; 
+const LIMIT = 6; 
 
 // Diziyi Rastgele Karıştırma Fonksiyonu
 function shuffleArray(arr) {
