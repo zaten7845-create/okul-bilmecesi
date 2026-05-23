@@ -514,16 +514,6 @@
     body.light-theme .timer-fill { background: #003d80; }
 
 
-    /* 🎬 ÖNERİ MODAL STİLLERİ */
-    .oneri-type-grid {
-      <nav>
-    <a href="index.html">Ana Sayfa</a>
-    <a href="https://zaten7845-create.github.io/okul-bilmecesiii/" target="_blank">Film Önerileri</a>
-</nav>
-      
-     
-
-
     /* 🎵 VİDEO + INSTAGRAM SABİT BUTONLAR */
     .fixed-buttons {
       position: fixed;
@@ -743,7 +733,6 @@
     <div class="nav-link active" id="menuHome" onclick="switchTab('home')">🏫 Ana Sayfa</div>
     <div class="nav-link" id="menuNews" onclick="switchTab('news')">📰 Haberler</div>
     <div class="nav-link" id="menuQuiz" onclick="switchTab('quiz')">🎲 Bilmece Dünyası</div>
-    <div class="nav-link" id="menuOneri" onclick="switchTab('oneri')">🎬 Öneri</div>
   </div>
 </div>
 
@@ -874,132 +863,8 @@ function shuffleArray(arr) {
   return temp;
 }
 
-// ===== 🎬 ÖNERİ SİSTEMİ =====
-let oneriListesi = JSON.parse(localStorage.getItem('oneriListesi') || '[]');
-let seciliOneriTuru = null;
-
-function renderOneriScreen() {
-  document.getElementById('screen').innerHTML = `
-    <div>
-      <h3 style="text-align:center; margin-bottom:6px; font-size:18px;">🎬 Dizi / Film / Şarkı Öner</h3>
-      <p style="text-align:center; font-size:13px; color:#888; margin-bottom:20px;">Sınıf arkadaşlarına bir şeyler öner!</p>
-
-      <p style="font-size:13px; font-weight:700; color:#aaa; margin-bottom:10px; text-transform:uppercase; letter-spacing:1px;">Ne Öneriyorsun?</p>
-      <div class="oneri-type-grid">
-        <div class="oneri-type-card" id="tipDizi" onclick="secOneriTuru('Dizi', this)">
-          <span class="type-icon">📺</span>Dizi
-        </div>
-        <div class="oneri-type-card" id="tipFilm" onclick="secOneriTuru('Film', this)">
-          <span class="type-icon">🎥</span>Film
-        </div>
-        <div class="oneri-type-card" id="tipMuzik" onclick="secOneriTuru('Müzik', this)">
-          <span class="type-icon">🎵</span>Müzik
-        </div>
-      </div>
-
-      <div id="oneriFormAlani" style="display:none;">
-        <div class="input-group">
-          <label id="oneriAdLabel">Dizi / Film / Şarkı Adı</label>
-          <input type="text" id="oneriBaslik" placeholder="Örnek: Breaking Bad">
-        </div>
-        <div class="input-group">
-          <label>Adınız Soyadınız</label>
-          <input type="text" id="oneriAdSoyad" placeholder="Örnek: Ahmet Yılmaz">
-        </div>
-        <div style="display:flex; gap:10px;">
-          <div class="input-group" style="flex:1;">
-            <label>Sınıf</label>
-            <input type="text" id="oneriSinif" placeholder="Örnek: 11">
-          </div>
-          <div class="input-group" style="flex:1;">
-            <label>Şube</label>
-            <input type="text" id="oneriSube" placeholder="Örnek: B">
-          </div>
-        </div>
-        <button class="action-btn" onclick="oneriKaydet()">✅ Öneriyi Gönder</button>
-      </div>
-
-      <div id="oneriListeAlani">
-        ${renderOneriListeHTML()}
-      </div>
-    </div>
-  `;
-
-  // Eğer daha önce seçim yapılmışsa geri getir
-  if (seciliOneriTuru) {
-    const map = { 'Dizi':'tipDizi', 'Film':'tipFilm', 'Müzik':'tipMuzik' };
-    const el = document.getElementById(map[seciliOneriTuru]);
-    if (el) { el.classList.add('selected'); document.getElementById('oneriFormAlani').style.display='block'; }
-  }
-}
-
-function secOneriTuru(tur, el) {
-  seciliOneriTuru = tur;
-  document.querySelectorAll('.oneri-type-card').forEach(c => c.classList.remove('selected'));
-  el.classList.add('selected');
-  document.getElementById('oneriFormAlani').style.display = 'block';
-  const labelMap = { 'Dizi':'📺 Dizi Adı', 'Film':'🎥 Film Adı', 'Müzik':'🎵 Şarkı / Sanatçı Adı' };
-  document.getElementById('oneriAdLabel').textContent = labelMap[tur];
-  document.getElementById('oneriBaslik').placeholder = tur === 'Müzik' ? 'Örnek: Tarkan - Şıkıdım' : tur === 'Film' ? 'Örnek: Inception' : 'Örnek: Breaking Bad';
-}
-
-function oneriKaydet() {
-  if (!seciliOneriTuru) { alert('Lütfen önce Dizi, Film veya Müzik seç!'); return; }
-  const baslik = document.getElementById('oneriBaslik').value.trim();
-  const adSoyad = document.getElementById('oneriAdSoyad').value.trim();
-  const sinif = document.getElementById('oneriSinif').value.trim();
-  const sube = document.getElementById('oneriSube').value.trim();
-
-  if (!baslik || !adSoyad || !sinif || !sube) {
-    alert('Lütfen tüm alanları doldurun!');
-    return;
-  }
-
-  const yeniOneri = {
-    tur: seciliOneriTuru,
-    baslik,
-    adSoyad,
-    sinifSube: sinif + '-' + sube,
-    tarih: new Date().toLocaleDateString('tr-TR')
-  };
-  oneriListesi.unshift(yeniOneri);
-  localStorage.setItem('oneriListesi', JSON.stringify(oneriListesi));
-
-  // Formu sıfırla
-  document.getElementById('oneriBaslik').value = '';
-  document.getElementById('oneriAdSoyad').value = '';
-  document.getElementById('oneriSinif').value = '';
-  document.getElementById('oneriSube').value = '';
-  seciliOneriTuru = null;
-  document.querySelectorAll('.oneri-type-card').forEach(c => c.classList.remove('selected'));
-  document.getElementById('oneriFormAlani').style.display = 'none';
-
-  // Listeyi güncelle
-  document.getElementById('oneriListeAlani').innerHTML = renderOneriListeHTML();
-  alert('✅ Önerin kaydedildi!');
-}
-
-function renderOneriListeHTML() {
-  if (oneriListesi.length === 0) {
-    return `<div class="oneri-empty">Henüz öneri yok. İlk öneriyi sen yap! 🎉</div>`;
-  }
-  const ikonlar = { 'Dizi':'📺', 'Film':'🎥', 'Müzik':'🎵' };
-  let html = `<div class="oneri-section-title">📋 Tüm Öneriler (${oneriListesi.length})</div>`;
-  oneriListesi.forEach(o => {
-    html += `
-      <div class="oneri-item">
-        <div class="oneri-item-header">
-          <span class="oneri-item-title">${ikonlar[o.tur] || '🎬'} ${o.baslik}</span>
-          <span class="oneri-item-type">${o.tur}</span>
-        </div>
-        <div class="oneri-item-person">👤 ${o.adSoyad} &nbsp;|&nbsp; 🏫 ${o.sinifSube} &nbsp;|&nbsp; 📅 ${o.tarih}</div>
-      </div>`;
-  });
-  return html;
-}
-// ===== ÖNERİ SİSTEMİ SONU =====
-
-
+// Karışık Kategori Havuzunu Hazırlama
+function initKarisik() {
   let combined = [];
   ['tarih','cografya','fen','matematik','turkce','yapayzeka'].forEach(c => {
     combined = combined.concat(DB[c]);
@@ -1029,7 +894,6 @@ function switchTab(tab) {
   document.getElementById('menuHome').classList.remove('active');
   document.getElementById('menuNews').classList.remove('active');
   document.getElementById('menuQuiz').classList.remove('active');
-  document.getElementById('menuOneri').classList.remove('active');
   
   if (tab === 'home') {
     document.getElementById('menuHome').classList.add('active');
@@ -1056,12 +920,6 @@ function switchTab(tab) {
       document.getElementById('scorePanel').style.display = 'block';
       renderQuestion();
     }
-  } else if (tab === 'oneri') {
-    document.getElementById('menuOneri').classList.add('active');
-    document.getElementById('catBar').style.display = 'none';
-    document.getElementById('progressArea').style.display = 'none';
-    document.getElementById('scorePanel').style.display = 'none';
-    renderOneriScreen();
   }
 }
 
