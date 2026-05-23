@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Okul Bilmecesi - İzmit Lisesi Mobil</title>
+  <title>Okul Bilmecesi - İzmit Lisesi Portal</title>
   <style>
     * { 
       box-sizing: border-box; 
@@ -12,116 +12,145 @@
       font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; 
     }
     
+    /* Varsayılan olarak Koyu (Siyah) Tema Etkin */
     body {
-      -webkit-tap-highlight-color: transparent; /* Mobil cihazlarda tıklama anındaki mavi gölgeyi kaldırır */
-      background-color: #121212;
+      -webkit-tap-highlight-color: transparent;
+      background-color: #000000;
+      color: #ffffff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-bottom: 30px;
+      transition: background-color 0.3s, color 0.3s;
     }
 
-    .bg {
-      background-image: url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxITEhUSEhIWFRUXFxUaFhUYFhUYFRUXFRcXFxgVFRYYHiggGBolGxcXITEhJSkrLi4uFyAzODMtNygtLisBCgoKDg0OGxAQGi8fHyUtLS0tLS0tLS0tLS0uLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLf/AABEIALcBEwMBIgACEQEDEQH/xAAbAAABBQEBAAAAAAAAAAAAAAACAAEDBAUGB//EAE0QAAIBAgQCBgYFCQcCAwkAAAECEQADBBIhMQVBBhMiUWFxMoGRobHRFCNCcsEkM1JigpKywvAVQ1NzorPhY5Oj4vEWNDVEVIO0w9L/xAAaAQADAQEBAQAAAAAAAAAAAAAAAQIDBAUG/8QAKREAAgIBBAMAAQQCAw...');
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-      min-height: 100vh;
-    }
-
-    .overlay {
-      background: rgba(0,0,0,0.72);
-      min-height: 100vh;
+    /* 🎨 TEMA DEĞİŞTİRME SEÇENEKLERİ ÇUBUĞU */
+    .theme-switcher {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      gap: 12px;
       padding: 12px;
+      background: #0a0a0a;
+      border-bottom: 1px solid #222222;
+      transition: background-color 0.3s, border-color 0.3s;
     }
 
+    .theme-btn {
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: bold;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .light-btn { background: #ffffff; color: #0056b3; border-color: #0056b3; }
+    .dark-btn { background: #111111; color: #ffffff; border-color: #ffffff; }
+
+    /* 📱 ÜST NAVİGASYON ÇUBUĞU (NAVBAR) */
+    .navbar {
+      width: 100%;
+      background: #111111;
+      border-bottom: 2px solid #ffffff;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 12px rgba(255,255,255,0.05);
+      transition: background-color 0.3s, border-color 0.3s;
+    }
+
+    .nav-container {
+      max-width: 640px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-around;
+      padding: 12px 0;
+    }
+
+    .nav-link {
+      color: #aaaaaa;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 6px 12px;
+      border-radius: 20px;
+      transition: all 0.2s ease;
+    }
+
+    .nav-link.active, .nav-link:hover {
+      color: #000000;
+      background: #ffffff;
+      font-weight: 700;
+    }
+
+    /* Ana İçerik Alanı */
     .container { 
-      max-width: 540px; 
+      width: 100%;
+      max-width: 640px; 
       margin: 0 auto; 
+      padding: 20px 12px;
     }
     
-    /* Skor ve Başlık Alanı */
     .header { 
       display: flex; 
+      flex-direction: column;
       align-items: center; 
-      justify-content: space-between; 
-      margin-bottom: 12px; 
+      margin-bottom: 20px; 
       gap: 8px; 
     }
 
-    .title { 
-      font-size: 18px; 
-      font-weight: 700; 
-      color: #fff; 
+    .sub-title {
+      font-size: 16px;
+      color: #ffffff;
+      text-align: center;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      transition: color 0.3s;
     }
     
-    .score-box { 
-      display: flex; 
-      gap: 6px; 
-    }
-
-    .score-item { 
-      background: rgba(255,255,255,0.12); 
-      border-radius: 8px; 
-      padding: 4px 10px; 
-      text-align: center; 
-      border: 1px solid rgba(255,255,255,0.2); 
-    }
-
-    .score-label { 
-      font-size: 10px; 
-      color: rgba(255,255,255,0.6); 
-    }
-
-    .score-value { 
-      font-size: 15px; 
-      font-weight: 600; 
-      color: #fff; 
-    }
-
-    /* Görsel Paneli */
-    .school-card {
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.2);
-      border-radius: 12px;
-      overflow: hidden;
-      margin-bottom: 12px;
-    }
-
-    .school-img {
-      width: 100%;
-      height: 135px;
-      object-fit: cover;
-      display: block;
-    }
-
-    .school-info {
-      padding: 8px;
-      color: #fff;
-      background: rgba(0,0,0,0.4);
-      font-size: 12px;
+    .score-badge {
+      background: #111111;
+      border: 1px solid #444444;
+      border-radius: 20px;
+      padding: 6px 20px;
+      font-size: 14px;
+      color: #aaaaaa;
       font-weight: 500;
-      text-align: center;
-      letter-spacing: 0.3px;
+      transition: all 0.3s;
     }
 
-    /* Mobilde Sağa Kaydırılabilir Yatay Kategori Menüsü */
+    .score-badge span {
+      color: #ffffff;
+      font-weight: bold;
+    }
+
+    /* Kategori Menüsü */
     .category-bar { 
       display: flex; 
       gap: 8px; 
       overflow-x: auto; 
-      margin-bottom: 12px;
-      padding-bottom: 4px;
-      -webkit-overflow-scrolling: touch; /* iOS için akıcı kaydırma */
-      scrollbar-width: none; /* Firefox için kaydırma çubuğunu gizler */
+      margin-bottom: 20px;
+      padding-bottom: 6px;
+      width: 100%;
+      scrollbar-width: none;
     }
 
-    .category-bar::-webkit-scrollbar { 
-      display: none; /* Chrome ve Safari için kaydırma çubuğunu gizler */
-    }
+    .category-bar::-webkit-scrollbar { display: none; }
     
     .cat-btn { 
-      padding: 8px 14px; 
+      padding: 8px 16px; 
       border-radius: 20px; 
-      border: 1px solid rgba(255,255,255,0.25); 
-      background: rgba(255,255,255,0.1); 
-      color: rgba(255,255,255,0.9); 
+      border: 1px solid #333333; 
+      background: #111111; 
+      color: #aaaaaa; 
       font-size: 13px; 
       cursor: pointer; 
       white-space: nowrap; 
@@ -129,392 +158,1133 @@
     }
 
     .cat-btn.active { 
-      background: rgba(127,119,221,0.85); 
-      border-color: #AFA9EC; 
-      color: #fff; 
+      background: #ffffff; 
+      border-color: #ffffff; 
+      color: #000000; 
       font-weight: 600; 
     }
 
-    /* İlerleme Çubuğu */
+    /* İlerleme Çubukları */
+    .progress-container {
+      margin-bottom: 16px;
+    }
+
     .progress-bar { 
-      height: 5px; 
-      background: rgba(255,255,255,0.15); 
+      height: 6px; 
+      background: #222222; 
       border-radius: 3px; 
-      margin-bottom: 12px; 
+      margin-bottom: 6px; 
       overflow: hidden; 
     }
 
     .progress-fill { 
       height: 100%; 
-      background: #AFA9EC; 
-      border-radius: 3px; 
+      background: #ffffff; 
+      width: 0%;
       transition: width 0.3s ease; 
     }
-    
-    /* Soru Kartı Yapısı */
-    .question-card { 
-      background: rgba(255,255,255,0.12); 
-      border: 1px solid rgba(255,255,255,0.2); 
-      border-radius: 12px; 
-      padding: 16px; 
-      margin-bottom: 12px; 
+
+    .timer-bar {
+      height: 6px;
+      background: #222222;
+      border-radius: 3px;
+      overflow: hidden;
     }
 
+    .timer-fill {
+      height: 100%;
+      background: #888888;
+      width: 100%;
+      transition: width 0.1s linear;
+    }
+    
+    /* Kart Yapıları */
+    .main-card { 
+      background: #111111; 
+      border: 1px solid #333333; 
+      border-radius: 16px; 
+      padding: 24px; 
+      box-shadow: 0 8px 24px rgba(255,255,255,0.02);
+      transition: background-color 0.3s, border-color 0.3s;
+    }
+
+
+    /* Okul Görseli */
+    .school-photo {
+      width: 100%;
+      border-radius: 12px;
+      margin-bottom: 16px;
+      object-fit: cover;
+      max-height: 200px;
+      display: block;
+      border: 1px solid #333333;
+    }
+    body.light-theme .school-photo { border-color: #e5e7eb; }
+
+    /* Haber Fotoğrafları */
+    .news-photo {
+      width: 100%;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      object-fit: cover;
+      max-height: 160px;
+      display: block;
+    }
+
+    /* Okul Bilgileri Paneli */
+    .school-info-box {
+      text-align: left;
+    }
+    .school-title {
+      font-size: 20px;
+      color: #ffffff;
+      text-align: center;
+      margin-bottom: 16px;
+      font-weight: 700;
+      border-bottom: 1px solid #333333;
+      padding-bottom: 10px;
+      transition: color 0.3s, border-color 0.3s;
+    }
+    .info-paragraph {
+      font-size: 14px;
+      color: #cccccc;
+      line-height: 1.6;
+      margin-bottom: 14px;
+      transition: color 0.3s;
+    }
+
+    /* Veri Kartları */
+    .data-card {
+      background: #050505;
+      border: 1px solid #222222;
+      border-radius: 10px;
+      padding: 15px;
+      margin-top: 15px;
+      transition: background-color 0.3s, border-color 0.3s;
+    }
+    .data-card-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: color 0.3s;
+    }
+    .data-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      font-size: 13px;
+      border-bottom: 1px solid #161616;
+      transition: border-color 0.3s;
+    }
+    .data-row:last-child {
+      border-bottom: none;
+    }
+    .data-label {
+      color: #aaaaaa;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    .data-value {
+      color: #ffffff;
+      font-weight: 700;
+      transition: color 0.3s;
+    }
+    
+    /* Haber ve Duyuru Stilleri */
+    .news-section-title {
+      font-size: 15px;
+      color: #ffffff;
+      margin: 25px 0 12px 0;
+      font-weight: 700;
+      border-bottom: 1px solid #333333;
+      padding-bottom: 6px;
+      text-transform: uppercase;
+      transition: color 0.3s, border-color 0.3s;
+    }
+    .news-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .achievement-card {
+      background: #050505;
+      border-left: 4px solid #ffffff;
+      padding: 16px;
+      border-radius: 0 10px 10px 0;
+      border-top: 1px solid #222222;
+      border-right: 1px solid #222222;
+      border-bottom: 1px solid #222222;
+      transition: all 0.3s;
+    }
+    .achievement-card h5 {
+      color: #ffffff;
+      font-size: 14px;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: color 0.3s;
+    }
+    .achievement-card h5 .date-badge {
+      font-size: 10px;
+      color: #ffffff;
+      background: #333333;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-weight: 600;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .achievement-card p {
+      font-size: 13px;
+      color: #aaaaaa;
+      line-height: 1.5;
+      transition: color 0.3s;
+    }
+
+    /* Oyun içi Alanlar */
     .q-meta { 
       font-size: 11px; 
-      color: rgba(255,255,255,0.5); 
-      margin-bottom: 6px; 
+      color: #888888; 
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 14px; 
+      font-weight: 700;
+      transition: color 0.3s;
     }
 
     .q-text { 
-      font-size: 16px; 
-      font-weight: 500; 
-      color: #fff; 
+      font-size: 17px; 
+      font-weight: 600; 
+      color: #ffffff; 
       line-height: 1.5; 
-      margin-bottom: 16px; 
+      margin-bottom: 24px; 
+      transition: color 0.3s;
     }
     
-    /* Dokunmatik Ekranlar için Büyük Butonlu Şıklar */
-    .options { 
-      display: flex; 
-      flex-direction: column; 
-      gap: 10px; 
-    }
-
+    .options { display: flex; flex-direction: column; gap: 10px; }
+    
     .opt-btn { 
-      width: 100%;
+      width: 100%; 
       padding: 14px; 
-      border-radius: 10px; 
-      border: 1px solid rgba(255,255,255,0.25); 
-      background: rgba(255,255,255,0.08); 
-      color: #fff; 
+      border-radius: 12px; 
+      border: 1px solid #333333; 
+      background: #111111; 
+      color: #ffffff; 
       font-size: 14px; 
       cursor: pointer; 
       text-align: left; 
-      transition: background 0.15s ease; 
-    }
-
-    .opt-btn:hover:not(:disabled) { 
-      background: rgba(255,255,255,0.15); 
-    }
-
-    .opt-btn.correct { 
-      background: rgba(99,153,34,0.8); 
-      border-color: #97C459; 
-      color: #fff; 
-    }
-
-    .opt-btn.wrong { 
-      background: rgba(226,75,74,0.8); 
-      border-color: #F09595; 
-      color: #fff; 
+      transition: all 0.15s ease; 
     }
     
-    /* Bilgi ve Geri Bildirim Kutusu */
+    .opt-btn:hover:not(:disabled) { 
+      background: #222222; 
+      border-color: #ffffff;
+    }
+    
+    .opt-btn.correct { 
+      background: #ffffff !important; 
+      border-color: #ffffff !important; 
+      color: #000000 !important; 
+      font-weight: 700;
+    }
+    
+    .opt-btn.wrong { 
+      background: #444444 !important; 
+      border-color: #555555 !important; 
+      color: #ffffff !important; 
+      text-decoration: line-through;
+    }
+    
+    .hint-area {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 18px;
+      color: #aaaaaa;
+      font-size: 13px;
+      transition: color 0.3s;
+    }
+
     .feedback { 
-      margin-top: 12px; 
-      padding: 12px; 
+      margin-top: 16px; 
+      padding: 14px; 
       border-radius: 10px; 
       font-size: 14px; 
       line-height: 1.5; 
+      border: 1px solid #333333;
     }
-
-    .feedback.correct { 
-      background: rgba(99,153,34,0.35); 
-      color: #d4ffaa; 
-      border: 1px solid #97C459; 
-    }
-
-    .feedback.wrong { 
-      background: rgba(226,75,74,0.35); 
-      color: #ffd0d0; 
-      border: 1px solid #F09595; 
-    }
+    .feedback.correct { background: #111111; color: #ffffff; border-color: #ffffff; }
+    .feedback.wrong { background: #111111; color: #aaaaaa; border-color: #444444; }
     
-    /* İleri / Tekrar Butonları */
-    .next-btn { 
+    .action-btn { 
       width: 100%; 
-      margin-top: 4px; 
+      margin-top: 16px; 
+      padding: 14px; 
+      border-radius: 12px; 
+      border: none; 
+      background: #ffffff; 
+      color: #000000; 
+      font-size: 14px; 
+      font-weight: 700; 
+      cursor: pointer; 
+      transition: all 0.2s;
+    }
+    .action-btn:hover { background: #cccccc; }
+    
+    .input-group { margin-bottom: 16px; text-align: left; }
+    .input-group label { display: block; font-size: 13px; color: #aaaaaa; margin-bottom: 6px; transition: color 0.3s; }
+    .input-group input { 
+      width: 100%; 
       padding: 14px; 
       border-radius: 10px; 
-      border: 1px solid rgba(255,255,255,0.3); 
-      background: rgba(255,255,255,0.15); 
-      color: #fff; 
-      font-size: 15px; 
-      font-weight: 600; 
-      cursor: pointer; 
-    }
-    
-    /* Sonuç Ekranı */
-    .result-card { 
-      text-align: center; 
-      padding: 32px 16px; 
-      background: rgba(255,255,255,0.12); 
-      border: 1px solid rgba(255,255,255,0.2); 
-      border-radius: 12px; 
-    }
-
-    .result-emoji { 
-      font-size: 48px; 
-      margin-bottom: 8px; 
-    }
-
-    .result-score { 
-      font-size: 30px; 
-      font-weight: 700; 
-      color: #fff; 
-      margin-bottom: 6px; 
-    }
-
-    .result-label { 
+      border: 1px solid #333333; 
+      background: #000000; 
+      color: white; 
       font-size: 14px; 
-      color: rgba(255,255,255,0.8); 
-      margin-bottom: 20px; 
+      transition: all 0.3s;
     }
+    .input-group input:focus { border-color: #ffffff; outline: none; }
+
+    .leaderboard { margin-top: 20px; text-align: left; }
+    .leaderboard h4 { margin-bottom: 10px; border-bottom: 1px solid #333333; padding-bottom: 6px; font-size: 14px; color: #ffffff; transition: color 0.3s, border-color 0.3s;}
+    .leader-row { display: flex; justify-content: space-between; padding: 8px 10px; font-size: 13px; background: #050505; margin-bottom: 6px; border-radius: 6px; border-left: 3px solid #444444; transition: all 0.3s; }
+    .leader-row:nth-child(2) { border-left-color: #ffffff; background: #161616; }
+
+    .result-card { text-align: center; padding: 16px 0; }
+    .result-emoji { font-size: 54px; margin-bottom: 10px; filter: grayscale(100%); }
+    .result-score { font-size: 32px; font-weight: 700; margin-bottom: 6px; color: #ffffff; transition: color 0.3s; }
+
+    .confetti {
+      position: fixed; width: 8px; height: 8px; 
+      top: -10px; z-index: 999; border-radius: 2px;
+      animation: fall 3s linear forwards;
+    }
+    @keyframes fall { to { transform: translateY(105vh) rotate(360deg); } }
+
+
+    /* ⚪ BEYAZ TEMA DİNAMİK SINIF KURALLARI: Mavi ve Beyaz Kombinasyonu */
+    body.light-theme {
+      background-color: #f4f6f9;
+      color: #333333;
+    }
+    body.light-theme .theme-switcher { background: #e9ecef; border-color: #ced4da; }
+    body.light-theme .navbar { background: #0056b3; border-bottom: 2px solid #003d80; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    body.light-theme .nav-link { color: #d0e1fd; }
+    body.light-theme .nav-link.active, body.light-theme .nav-link:hover { background: #003d80; color: #ffffff; }
+    body.light-theme .sub-title { color: #333333; }
+    body.light-theme .main-card { background: #ffffff; color: #333333; border: 1px solid #d1d5db; box-shadow: 0 4px 16px rgba(0,0,0,0.06); }
+    body.light-theme .school-title { color: #0056b3; border-color: #e5e7eb; }
+    body.light-theme .info-paragraph { color: #4b5563; }
+    body.light-theme .data-card { background: #f8f9fa; border-color: #e5e7eb; }
+    body.light-theme .data-card-title { color: #0056b3; }
+    body.light-theme .data-row { border-color: #e5e7eb; }
+    body.light-theme .data-label { color: #6b7280; }
+    body.light-theme .data-value { color: #111827; }
+    body.light-theme .news-section-title { color: #0056b3; border-color: #e5e7eb; }
+    body.light-theme .achievement-card { background: #f8f9fa; border-color: #e5e7eb; border-left-color: #0056b3; }
+    body.light-theme .achievement-card h5 { color: #111827; }
+    body.light-theme .achievement-card h5 .date-badge { background: #0056b3; color: #ffffff; }
+    body.light-theme .achievement-card p { color: #4b5563; }
+    body.light-theme .action-btn { background: #0056b3; color: #ffffff; }
+    body.light-theme .action-btn:hover { background: #003d80; }
+    body.light-theme .score-badge { background: #ffffff; border-color: #0056b3; color: #0056b3; }
+    body.light-theme .score-badge span { color: #003d80; }
+    body.light-theme .cat-btn { background: #ffffff; border-color: #0056b3; color: #0056b3; }
+    body.light-theme .cat-btn.active { background: #0056b3; color: #ffffff; border-color: #0056b3; }
+    body.light-theme .q-meta { color: #0056b3; }
+    body.light-theme .q-text { color: #111827; }
+    body.light-theme .opt-btn { background: #ffffff; color: #333333; border-color: #ced4da; }
+    body.light-theme .opt-btn:hover:not(:disabled) { background: #f3f4f6; border-color: #0056b3; }
+    body.light-theme .opt-btn.correct { background: #0056b3 !important; border-color: #0056b3 !important; color: #ffffff !important; }
+    body.light-theme .opt-btn.wrong { background: #e5e7eb !important; border-color: #d1d5db !important; color: #9ca3af !important; }
+    body.light-theme .hint-area { color: #6b7280; }
+    body.light-theme .input-group label { color: #4b5563; }
+    body.light-theme .input-group input { background: #ffffff; color: #333333; border-color: #ced4da; }
+    body.light-theme .input-group input:focus { border-color: #0056b3; }
+    body.light-theme .leaderboard h4 { color: #0056b3; border-color: #e5e7eb; }
+    body.light-theme .leader-row { background: #f8f9fa; border-left-color: #ced4da; color: #333333; }
+    body.light-theme .leader-row:nth-child(2) { background: #e9ecef; border-left-color: #0056b3; }
+    body.light-theme .result-score { color: #0056b3; }
+    body.light-theme .progress-bar { background: #e5e7eb; }
+    body.light-theme .progress-fill { background: #0056b3; }
+    body.light-theme .timer-bar { background: #e5e7eb; }
+    body.light-theme .timer-fill { background: #003d80; }
+
+
+    /* 🎵 VİDEO + INSTAGRAM SABİT BUTONLAR */
+    .fixed-buttons {
+      position: fixed;
+      bottom: 16px;
+      right: 16px;
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: flex-end;
+    }
+    .fab-btn {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: 50px;
+      border: none;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 700;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+      transition: all 0.2s;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+    .fab-btn:hover { transform: scale(1.05); }
+    .fab-music {
+      background: #ffffff;
+      color: #000000;
+    }
+    body.light-theme .fab-music { background: #111111; color: #ffffff; }
+    .fab-instagram {
+      background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+      color: #ffffff;
+    }
+    .fab-instagram svg { width: 18px; height: 18px; flex-shrink: 0; }
+
+    /* Video Modal */
+    .video-modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.85);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+    }
+    .video-modal-overlay.active { display: flex; }
+    .video-modal-box {
+      position: relative;
+      width: 90%;
+      max-width: 560px;
+      background: #000;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.8);
+    }
+    .video-modal-close {
+      position: absolute;
+      top: 8px;
+      right: 10px;
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      font-size: 18px;
+      cursor: pointer;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+    }
+    .video-modal-iframe {
+      width: 100%;
+      aspect-ratio: 16/9;
+      display: block;
+      border: none;
+    }
+
   </style>
 </head>
 <body>
 
-<div class="bg">
-  <div class="overlay">
-    <div class="container">
-      
-      <div class="header">
-        <div class="title">🏫 Okul Bilmecesi</div>
-        <div class="score-box">
-          <div class="score-item"><div class="score-label">Doğru</div><div class="score-value" id="sc" style="color:#b5f07a;">0</div></div>
-          <div class="score-item"><div class="score-label">Yanlış</div><div class="score-value" id="sw" style="color:#f88;">0</div></div>
-          <div class="score-item"><div class="score-label">Soru</div><div class="score-value" id="sq">0</div></div>
-        </div>
-      </div>
+<!-- 🎨 TEMA DEĞİŞTİRME SEÇENEKLERİ ÇUBUĞU -->
+<div class="theme-switcher">
+  <button class="theme-btn light-btn" onclick="setTheme('light')">☀️ Açık Tema (Mavi/Beyaz)</button>
+  <button class="theme-btn dark-btn" onclick="setTheme('dark')">🌙 Koyu Tema (Siyah/Beyaz)</button>
+</div>
 
-      <div class="school-card">
-        <img src="images.jpg" alt="İzmit Lisesi" class="school-img">
-        <div class="school-info">📍 İzmit Lisesi Yarışma Dünyası</div>
-      </div>
-
-      <div class="category-bar">
-        <button class="cat-btn active" onclick="selectCat('tarih',this)">📚 Tarih</button>
-        <button class="cat-btn" onclick="selectCat('cografya',this)">🌍 Coğrafya</button>
-        <button class="cat-btn" onclick="selectCat('fen',this)">🔬 Fen</button>
-        <button class="cat-btn" onclick="selectCat('matematik',this)">🔢 Matematik</button>
-        <button class="cat-btn" onclick="selectCat('turkce',this)">📖 Türkçe</button>
-        <button class="cat-btn" onclick="selectCat('yapayzeka',this)">🤖 Yapay Zeka</button>
-        <button class="cat-btn" onclick="selectCat('karisik',this)">🎲 Karışık</button>
-      </div>
-      
-      <div class="progress-bar"><div class="progress-fill" id="pgr" style="width:0%"></div></div>
-      
-      <div id="game"></div>
-
-    </div>
+<!-- 📱 ÜST NAVİGASYON ÇUBUĞU -->
+<div class="navbar">
+  <div class="nav-container">
+    <div class="nav-link active" id="menuHome" onclick="switchTab('home')">🏫 Ana Sayfa</div>
+    <div class="nav-link" id="menuNews" onclick="switchTab('news')">📰 Haberler</div>
+    <div class="nav-link" id="menuQuiz" onclick="switchTab('quiz')">🎲 Bilmece Dünyası</div>
   </div>
 </div>
 
+<div class="container">
+  
+  <div class="header">
+    <div class="sub-title" id="mainTitle">İzmit Lisesi Mobil Portal</div>
+    <div class="score-badge" id="scorePanel" style="display:none;">Skor: <span id="displayScore">0 / 0</span></div>
+  </div>
+
+  <!-- Kategori Menüsü -->
+  <div class="category-bar" id="catBar" style="display:none;">
+    <button class="cat-btn active" onclick="selectCat('tarih',this)">📚 Tarih</button>
+    <button class="cat-btn" onclick="selectCat('cografya',this)">🌍 Coğrafya</button>
+    <button class="cat-btn" onclick="selectCat('fen',this)">🔬 Fen</button>
+    <button class="cat-btn" onclick="selectCat('matematik',this)">🔢 Matematik</button>
+    <button class="cat-btn" onclick="selectCat('turkce',this)">📖 Türkçe</button>
+    <button class="cat-btn" onclick="selectCat('yapayzeka',this)">🤖 Yapay Zeka</button>
+    <button class="cat-btn" onclick="selectCat('karisik',this)">🎲 Karışık (10 Soru)</button>
+  </div>
+  
+  <div class="progress-container" id="progressArea" style="display:none;">
+    <div class="progress-bar"><div class="progress-fill" id="pgr"></div></div>
+    <div class="timer-bar"><div class="timer-fill" id="tmr"></div></div>
+  </div>
+  
+  <!-- Merkez Değişken Ekran Kartı -->
+  <div class="main-card" id="screen">
+    <!-- İçerik JS dinamik kontrolü ile yüklenecektir -->
+  </div>
+
+</div>
+
 <script>
+// 70 Soru Havuzu Kütüphanesi
 const DB = {
   tarih: [
-    { s:"Fatih Sultan Mehmet İstanbul'u kaç yaşında fethetti?", o:["A) 19","B) 21","C) 25","D) 30"], d:"B", a:"Fatih Sultan Mehmet, 1453 yılında İstanbul'u fethettiğinde 21 yaşındaydı." },
-    { s:"Kurtuluş Savaşı hangi antlaşmayla sona erdi?", o:["A) Sevr","B) Mondros","C) Lozan","D) Paris"], d:"C", a:"Lozan Antlaşması (1923) Kurtuluş Savaşı'nı hukuken sona erdirdi." },
-    { s:"Türkiye Cumhuriyeti hangi yılda kuruldu?", o:["A) 1920","B) 1921","C) 1923","D) 1925"], d:"C", a:"29 Ekim 1923'te Türkiye Cumhuriyeti ilan edildi." },
-    { s:"Osmanlı Devleti'ni kuran kişi kimdir?", o:["A) Orhan Bey","B) Osman Bey","C) Ertuğrul Gazi","D) Yıldırım Bayezit"], d:"B", a:"Osmanlı Devleti'nin kurucusu Osman Bey'dir (1299)." },
-    { s:"Atatürk hangi şehirde doğmuştur?", o:["A) Ankara","B) İstanbul","C) Selanik","D) İzmir"], d:"C", a:"Mustafa Kemal Atatürk 1881 yılında Selanik'te doğmuştur." },
-    { s:"Malazgirt Savaşı hangi yılda yapıldı?", o:["A) 1071","B) 1096","C) 1204","D) 1453"], d:"A", a:"Malazgirt Savaşı 1071 yılında Selçuklu Sultanı Alparslan ile Bizans arasında yapıldı." },
-    { s:"Kanuni Sultan Süleyman'ın tahta çıktığı yıl hangisidir?", o:["A) 1481","B) 1512","C) 1520","D) 1566"], d:"C", a:"Kanuni Sultan Süleyman 1520 yılında Osmanlı tahtına çıktı." },
-    { s:"İstanbul'un fethi hangi yılda gerçekleşmiştir?", o:["A) 1389","B) 1402","C) 1453","D) 1492"], d:"C", a:"İstanbul 29 Mayıs 1453'te Fatih Sultan Mehmet tarafından fethedildi." }
+    { s:"Fatih Sultan Mehmet İstanbul'u kaç yaşında fethetti?", o:["A) 19","B) 21","C) 25","D) 30"], d:"B", a:"Fatih Sultan Mehmet, 1453 yılında İstanbul'u fethettiğinde 21 yaşındaydı.", i:"Sultan'ın gençlik yılları" },
+    { s:"Kurtuluş Savaşı hangi antlaşmayla resmen ve hukuken sona erdi?", o:["A) Sevr","B) Mondros","C) Lozan","D) Mudanya"], d:"C", a:"24 Temmuz 1923'te imzalanan Lozan Antlaşması ile Kurtuluş Savaşı hukuken sona ermiştir.", i:"İsviçre'de bir şehir" },
+    { s:"Türkiye Cumhuriyeti'nin ilk Başbakanı kimdir?", o:["A) Mustafa Kemal Atatürk","B) İsmet İnönü","C) Fethi Okyar","D) Celal Bayar"], d:"B", a:"Cumhuriyetin ilanından sonra ilk başbakanlık görevini İsmet İnönü üstlenmiştir.", i:"Lozan kahramanı" },
+    { s:"Osmanlı Devleti'nin kurucusu kimdir ve devlet hangi yıl kurulmuştur?", o:["A) Orhan Bey - 1326","B) Osman Bey - 1299","C) Ertuğrul Gazi - 1281","D) Birinci Murat - 1362"], d:"B", a:"Osmanlı Devleti, 1299 yılında Osman Bey tarafından kurulmuştur.", i:"Devlet kurucusunun adı" },
+    { s:"Tarihte ilk yazılı antlaşma olarak bilinen 'Kadeş Antlaşması' hangi iki devlet arasında imzalanmıştır?", o:["A) Sümer - Akad","B) Mısır - Hitit","C) Asur - Babil","D) Pers - Yunan"], d:"B", a:"MÖ 1280 civarında Mısır Firavunu II. Ramses ile Hitit Kralı III. Hattuşili arasında imzalanmıştır.", i:"Anadolu ve Mısır medeniyetleri" },
+    { s:"Mustafa Kemal Atatürk'ün nüfusa kayıtlı olduğu il hangisidir?", o:["A) Selanik","B) Ankara","C) İstanbul","D) Gaziantep"], d:"D", a:"Mustafa Kemal Atatürk, Gaziantep'in Şahinbey ilçesi nüfusuna kaydedilmiştir.", i:"Güneydoğu'nun Gazi unvanlı şehri" },
+    { s:"Orhun Kitabeleri (Göktürk Yazıtları) günümüzde hangi ülkenin sınırları içerisinde yer almaktadır?", o:["A) Kazakistan","B) Moğolistan","C) Özbekistan","D) Kırgızistan"], d:"B", a:"Türk tarihinin ilk yazılı belgeleri olan Orhun Yazıtları Moğolistan sınırları içindedir.", i:"Ötüken bölgesi" },
+    { s:"Osmanlı Devleti'nde matbaayı ilk getiren ve ilk basımevini kuran kişiler kimlerdir?", o:["A) İbrahim Müteferrika - Sait Efendi","B) Katip Çelebi - Evliya Çelebi","C) Namık Kemal - Şinasi","D) Lagari Hasan - Hezarfen"], d:"A", a:"Lale Devri'nde (1727) İbrahim Müteferrika ve Sait Efendi tarafından kurulmuştur.", i:"Lale Devri yenilikçileri" },
+    { s:"Mısır'ı Osmanlı topraklarına katarak Halifeliğin Osmanlı'ya geçmesini sağlayan padişah kimdir?", o:["A) Fatih Sultan Mehmet","B) Yavuz Sultan Selim","C) Kanuni Sultan Süleyman","D) II. Abdülhamid"], d:"B", a:"Yavuz Sultan Selim 1516 Mercidabık ve 1517 Ridaniye seferleriyle Mısır'ı fethetmiştir.", i:"8 yıla 80 yıllık iş sığdıran padişah" },
+    { s:"İstiklal Marşı'mız hangi yıl meclis tarafından milli marş olarak kabul edilmiştir?", o:["A) 1920","B) 1921","C) 1922","D) 1923"], d:"B", a:"Mehmet Akif Ersoy'un yazdığı İstiklal Marşı, 12 Mart 1921'de kabul edilmiştir.", i:"Cumhuriyetin ilanından 2 yıl önce" }
   ],
   cografya: [
-    { s:"Türkiye'nin başkenti neresidir?", o:["A) İstanbul","B) İzmir","C) Ankara","D) Bursa"], d:"C", a:"Ankara, 13 Ekim 1923'ten bu yana Türkiye'nin başkentidir." },
-    { s:"Dünyanın en uzun nehri hangisidir?", o:["A) Amazon","B) Nil","C) Mississippi","D) Yangtze"], d:"B", a:"Nil nehri yaklaşık 6.650 km uzunluğuyla dünyanın en uzun nehridir." },
-    { s:"Türkiye kaç ile bölünmüştür?", o:["A) 73","B) 79","C) 81","D) 85"], d:"C", a:"Türkiye 81 ile bölünmüştür." },
-    { s:"Dünyanın en büyük okyanusu hangisidir?", o:["A) Atlantik","B) Hint","C) Arktik","D) Pasifik"], d:"D", a:"Pasifik Okyanusu yaklaşık 165 milyon km² ile dünyanın en büyük okyanusudur." },
-    { s:"Türkiye'nin en uzun nehri hangisidir?", o:["A) Sakarya","B) Fırat","C) Kızılırmak","D) Dicle"], d:"C", a:"Kızılırmak yaklaşık 1.355 km ile Türkiye'nin en uzun nehridir." },
-    { s:"Afrika'nın en yüksek dağı hangisidir?", o:["A) Kenya","B) Kilimanjaro","C) Atlas","D) Ruwenzori"], d:"B", a:"Kilimanjaro (5.895 m) Afrika'nın en yüksek dağıdır ve Tanzanya'dadır." },
-    { s:"Karadeniz'e kıyısı olmayan il hangisidir?", o:["A) Trabzon","B) Samsun","C) Ankara","D) Rize"], d:"C", a:"Ankara iç bölgede yer alır ve Karadeniz'e kıyısı yoktur." },
-    { s:"Dünyanın en büyük çölü hangisidir?", o:["A) Gobi","B) Arabistan","C) Sahra","D) Antarktika"], d:"D", a:"Antarktika dünyanın en büyük çölüdür. Sahra en büyük sıcak çöldür." }
+    { s:"Türkiye'nin en yüksek dağı hangisidir ve yüksekliği kaç metredir?", o:["A) Erciyes Dağı - 3917m","B) Süphan Dağı - 4058m","C) Ağrı Dağı - 5137m","D) Kaçkar Dağı - 3937m"], d:"C", a:"Türkiye'nin en yüksek noktası 5137 metre ile Ağrı Dağı'dır.", i:"Doğu Anadolu'nun zirvesi" },
+    { s:"Dünyanın en derin noktası olan 'Mariana Çukuru' hangi okyanusta yer alır?", o:["A) Atlas Okyanusu","B) Hint Okyanusu","C) Büyük Okyanus (Pasifik)","D) Arktik Okyanusu"], d:"C", a:"Mariana Çukuru, Pasifik (Büyük) Okyanusu'nda yer almaktadır.", i:"En büyük okyanus" },
+    { s:"Türkiye'de rüzgar enerjisi üretiminde öncü ve rüzgar santralleriyle ünlü ilimiz hangisidir?", o:["A) Şanlıurfa","B) İzmir","C) Antalya","D) Konya"], d:"B", a:"Ege Bölgesi, özellikle İzmir ve Balıkesir rüzgar enerjisinde öncüdür.", i:"Ege'nin incisi" },
+    { s:"Dünyanın en büyük yüzölçümüne sahip ülkesi hangisidir?", o:["A) Kanada","B) Çin","C) Amerika Birleşik Devletleri","D) Rusya"], d:"D", a:"Rusya Federasyonu, dünyanın en geniş yüzölçümüne sahip ülkesidir.", i:"Kuzey Asya ve Avrupa" },
+    { s:"Türkiye'de karstik şekillerin ve obrukların en yaygın görüldüğü coğrafi bölge hangisidir?", o:["A) Karadeniz Bölgesi","B) Akdeniz Bölgesi","C) Doğu Anadolu Bölgesi","D) Marmara Bölgesi"], d:"B", a:"Kireçtaşının yaygın olduğu Akdeniz Bölgesi karstik oluşumlarda ilk sıradadır.", i:"Teke ve Taşeli çevresi" },
+    { s:"Aşağıdaki akarsulardan hangisi Türkiye sınırları içinde doğup, sınır dışına dökülmektedir?", o:["A) Kızılırmak","B) Yeşilırmak","C) Fırat","D) Sakarya"], d:"C", a:"Fırat ve Dicle nehirleri Türkiye'den doğup Basra Körfezi'ne dökülür.", i:"Mezopotamya'ya yönelen akarsu" },
+    { s:"Ülkemizde çay tarımının Doğu Karadeniz'de yoğunlaşmasının temel sebebi nedir?", o:["A) Toprak yapısı","B) Her mevsim yağışlı ve nemli mikroklimal iklim","C) Makineleşme kolaylığı","D) İş gücü potansiyeli"], d:"B", a:"Çay bitkisi her mevsim düzenli yağış ve yüksek nem oranı ister.", i:"Hava durumu ve yağış rejimi" },
+    { s:"Dünyanın en büyük sıcak çölü hangisidir?", o:["A) Gobi Çölü","B) Sahra Çölü","C) Kalahari Çölü","D) Atacama Çölü"], d:"B", a:"Afrika'nın kuzeyindeki Büyük Sahra Çölü en büyük sıcak çöldür.", i:"Kuzey Afrika" },
+    { s:"Türkiye'nin en doğusu ile en batısı arasında kaç dakikalık yerel saat farkı vardır?", o:["A) 40 dakika","B) 76 dakika","C) 19 dakika","D) 26 dakika"], d:"B", a:"Türkiye 26-45 doğu meridyenlerindedir. 19 x 4 = 76 dakika fark oluşur.", i:"Meridyen farkını 4 ile çarpın" },
+    { s:"Dünyanın oksijen deposu olarak bilinen en büyük yağmur ormanları hangisidir?", o:["A) Kongo Ormanları","B) Amazon Ormanları","C) Sibirya Taygası","D) Borneo Ormanları"], d:"B", a:"Güney Amerika'daki Amazon ormanları dünya oksijen dengesinde çok mühimdir.", i:"Güney Amerika kıtası" }
   ],
   fen: [
-    { s:"Suyun kimyasal formülü nedir?", o:["A) CO2","B) H2O","C) NaCl","D) O2"], d:"B", a:"Su, iki hidrojen ve bir oksijen atomundan oluşur; kimyasal formülü H₂O'dur." },
-    { s:"Güneş sisteminde kaç gezegen vardır?", o:["A) 7","B) 8","C) 9","D) 10"], d:"B", a:"2006'dan bu yana resmi olarak 8 gezegen kabul edilmektedir." },
-    { s:"Işığın havadaki hızı yaklaşık ne kadardır?", o:["A) 300.000 km/s","B) 150.000 km/s","C) 30.000 km/s","D) 1.500 km/s"], d:"A", a:"Işık boşlukta ve havada yaklaşık 300.000 km/sn hızla ilerler." },
-    { s:"Fotosentez için gerekli olmayan hangisidir?", o:["A) Güneş ışığı","B) Su","C) Azot","D) Karbondioksit"], d:"C", a:"Fotosentez için güneş ışığı, su ve karbondioksit gereklidir; azot değil." },
-    { s:"İnsan vücudundaki en uzun kemik hangisidir?", o:["A) Tibia","B) Humerus","C) Femur","D) Fibula"], d:"C", a:"Uyluk kemiği (femur) insan vücudunun en uzun ve en güçlü kemiğidir." },
-    { s:"Güneş sistemindeki en büyük gezegen hangisidir?", o:["A) Satürn","B) Jüpiter","C) Neptün","D) Uranüs"], d:"B", a:"Jüpiter güneş sistemindeki en büyük gezegendir." },
-    { s:"İnsan vücudunda kaç kemik bulunur?", o:["A) 186","B) 206","C) 226","D) 246"], d:"B", a:"Yetişkin bir insanın vücudunda 206 kemik bulunur." },
-    { s:"Hangi gaz atmosferin en büyük bölümünü oluşturur?", o:["A) Oksijen","B) Karbondioksit","C) Azot","D) Argon"], d:"C", a:"Atmosferin yaklaşık %78'i azot gazından oluşur." }
+    { s:"Kimyada elementleri atom kütlelerine göre sıralayarak ilk Periyodik Cetveli oluşturan bilim insanı kimdir?", o:["A) Marie Curie","B) Dmitri Mendeleyev","C) John Dalton","D) Antoine Lavoisier"], d:"B", a:"Rus kimyager Mendeleyev, elementlerin özelliklerinin periyodik tekrarlandığını keşfetmiştir.", i:"Rus kimyager" },
+    { s:"İnsan vücudunda oksijen taşımakla görevli, kana kırmızı rengini veren hücre elemanı hangisidir?", o:["A) Alyuvar (Hemoglobin)","B) Akyuvar","C) Kan Pulcukları","D) Plazma"], d:"A", a:"Alyuvar yapısındaki hemoglobin proteini oksijen bağlar ve kanı kırmızı yapar.", i:"Eritrositler" },
+    { s:"Işığın bir yılda katettiği mesafe neyi ifade eder?", o:["A) Zaman birimi","B) Uzaklık (Mesafe) birimi","C) Sürat birimi","D) Kütle birimi"], d:"B", a:"Işık yılı astronomide çok büyük mesafeleri ölçmek için kullanılan uzaklık birimidir.", i:"Adında yıl geçse de mesafe ölçer" },
+    { s:"Suyun kaynama noktası dış basınç azaldıkça (örneğin yüksek bir dağa çıkıldıkça) nasıl değişir?", o:["A) Değişmez","B) Yükselir","C) Düşer","D) Önce yükselir, sonra düşer"], d:"C", a:"Açık hava basıncı düştükçe sıvıların kaynama noktası düşer.", i:"Yükseklerde su daha çabuk kaynar" },
+    { s:"Hücrenin enerji santrali olarak bilinen ve ATP üretiminden sorumlu olan organel hangisidir?", o:["A) Ribozom","B) Lizozom","C) Mitokondri","D) Golgi cisimciği"], d:"C", a:"Mitokondri, hücre için gerekli biyokimyasal enerjiyi (ATP) sentezler.", i:"Enerji üretim merkezi" },
+    { s:"Güneş'ten gelen zararlı ultraviyole (UV) ışınlarını süzen atmosfer katmanı hangisidir?", o:["A) Troposfer","B) Ozon Tabakası","C) Termosfer","D) Mezosfer"], d:"B", a:"Stratosfer tabakasında bulunan ozon katmanı UV ışınlarına karşı kalkan olur.", i:"O3 gazından oluşur" },
+    { s:"Bir çözeltinin pH değerinin '7' olması neyi ifade eder?", o:["A) Asidik","B) Bazik","C) Nötr","D) Akışkan"], d:"C", a:"pH cetvelinde 7 değeri ne asit ne baz olan nötr maddeleri temsil eder.", i:"Saf suyun pH derecesi" },
+    { s:"Genetik biliminin kurucusu kabul edilen ve bezelyelerle deneyler yapan bilim insanı kimdir?", o:["A) Charles Darwin","B) Gregor Mendel","C) Louis Pasteur","D) Alexander Fleming"], d:"B", a:"Gregor Mendel, kalıtım kanunlarını bezelye bitkileri üzerinden kanıtlamıştır.", i:"Kalıtım teorisyeni" },
+    { s:"Kütle çekim yasasını ve mekanik hareket kanunlarını formüle eden ünlü fizikçi kimdir?", o:["A) Albert Einstein","B) Isaac Newton","C) Nikola Tesla","D) Stephen Hawking"], d:"B", a:"Sir Isaac Newton yerçekimi ve evrensel kütle çekim teorisini geliştirmiştir.", i:"Başına elma düşen bilim insanı" },
+    { s:"Sıvıların kaldırma kuvvetini keşfeden ve hamamdan 'Evreka!' diyerek fırlayan antik çağ bilgini kimdir?", o:["A) Arşimet","B) Pisagor","C) Öklid","D) Aristoteles"], d:"A", a:"Arşimet, sıvıların hidrostatik kaldırma kuvveti kanununu bulmuştur.", i:"Hidrostatik kurucusu" }
   ],
   matematik: [
-    { s:"2³ × 3² kaçtır?", o:["A) 54","B) 72","C) 48","D) 36"], d:"B", a:"2³ = 8 ve 3² = 9 olduğundan 8 × 9 = 72'dir." },
-    { s:"Bir üçgenin iç açıları toplamı kaç derecedir?", o:["A) 90°","B) 270°","C) 180°","D) 360°"], d:"C", a:"Her üçgenin iç açıları toplamı 180°'dir." },
-    { s:"√144 kaçtır?", o:["A) 11","B) 12","C) 13","D) 14"], d:"B", a:"12 × 12 = 144 olduğundan √144 = 12'dir." },
-    { s:"Bir dairenin çevresi hangi formülle bulunur?", o:["A) πr²","B) 2πr","C) πr","D) 4πr"], d:"B", a:"Dairenin çevresi = 2πr formülüyle hesaplanır (r = yarıçap)." },
-    { s:"15'in %40'ı kaçtır?", o:["A) 4","B) 5","C) 6","D) 7"], d:"C", a:"15 × 40/100 = 6'dır." },
-    { s:"Asal sayı olmayan hangisidir?", o:["A) 7","B) 11","C) 15","D) 13"], d:"C", a:"15 = 3 × 5 olduğundan asal sayı değildir." },
-    { s:"Bir karenin alanı 64 cm² ise kenar uzunluğu kaç cm'dir?", o:["A) 6","B) 7","C) 8","D) 9"], d:"C", a:"Kenar = √64 = 8 cm'dir." },
-    { s:"0,25 kesrinin yüzde karşılığı nedir?", o:["A) %2,5","B) %25","C) %0,25","D) %250"], d:"B", a:"0,25 × 100 = 25 → %25'tir." }
+    { s:"Bir dik üçgende dik kenarların karelerinin toplamı hipotenüsün karesine eşittir diyen teorem hangisidir?", o:["A) Thales","B) Pisagor","C) Öklid","D) Pascal"], d:"B", a:"a² + b² = c² bağıntısı Pisagor teoremidir.", i:"Dik üçgen bağıntısı" },
+    { s:"Her terimi kendinden önceki iki terimin toplamı olan (0, 1, 1, 2, 3, 5, 8...) ünlü dizi hangisidir?", o:["A) Asal Sayılar","B) Gauss Dizisi","C) Fibonacci Dizisi","D) Geometrik Seri"], d:"C", a:"Fibonacci dizisinde ardışık sayılar altın orana yaklaşır.", i:"İtalyan matematikçi" },
+    { s:"Çemberin çevresinin çapına oranından elde edilen irrasyonel sayı hangisidir?", o:["A) Euler sayısı","B) Pi Sayısı","C) Altın Oran","D) Kök 2"], d:"B", a:"Pi sayısı (π) yaklaşık 3.14 değerine sahip sabit bir sayıdır.", i:"14 Mart günü kutlanır" },
+    { s:"f(x) = x² fonksiyonunun türevi nedir?", o:["A) x","B) 2x","C) 2","D) x³"], d:"B", a:"Üs kuralına göre kuvvet başa gelir ve üs bir azaltılır: 2x.", i:"Kuvveti başa indirin" },
+    { s:"Sadece 1'e ve kendisine tam bölünebilen 1'den büyük sayılara ne ad verilir?", o:["A) Çift Sayılar","B) Rasyonel Sayılar","C) Asal Sayılar","D) Tam Kare Sayılar"], d:"C", a:"2, 3, 5, 7, 11 gibi sadece 1 ve kendisine bölünen sayılar asaldır.", i:"En küçüğü 2 sayısıdır" },
+    { s:"Bir olayın gerçekleşme olasılığı teorik olarak en fazla kaç olabilir?", o:["A) 0.5","B) 1 (%100)","C) 10","D) Sonsuz"], d:"B", a:"Olasılık 0 (imkansız) ile 1 (kesin olay) arasında değer alır.", i:"Kesin olay üst limiti" },
+    { s:"Logaritma fonksiyonu hangi fonksiyonun tersidir?", o:["A) Trigonometrik","B) Üstel Fonksiyon","C) Polinom","D) Doğrusal"], d:"B", a:"Logaritma, üstel fonksiyonların ters işlemidir.", i:"Taban ve üs yer değişimi" },
+    { s:"Kesişimleri boş küme olan kümelere ne ad verilir?", o:["A) Eşit Kümeler","B) Ayrık Kümeler","C) Alt Kümeler","D) Evrensel Kümeler"], d:"B", a:"Hiç ortak elemanı olmayan kümelere ayrık kümeler denir.", i:"Ortak noktası olmayanlar" },
+    { s:"Sıfır (0) kavramını ve cebir bilimini ilk kez sistemleştiren İslam bilgini kimdir?", o:["A) İbn-i Sina","B) El-Harezmi","C) Ali Kuşçu","D) Ömer Hayyam"], d:"B", a:"El-Harezmi cebir biliminin temellerini atmış ve batıya tanıtmıştır.", i:"Algoritma kelimesinin kaynağı olan isim" },
+    { s:"Dairenin alanı hangi formülle hesaplanır?", o:["A) 2πr","B) πr²","C) 2π","D) πd"], d:"B", a:"Alan formülü pi sayısı ile yarıçapın karesinin çarpımıdır.", i:"Yarıçapın karesi gerekir" }
   ],
   turkce: [
-    { s:"'Kitap' kelimesinin çoğulu nedir?", o:["A) Kitaplar","B) Kitapları","C) Kitaplara","D) Kitaplarda"], d:"A", a:"Türkçede çoğul eki '-lar/-ler' eklenir: kitap → kitaplar." },
-    { s:"Aşağıdakilerden hangisi eylem (fiil) değildir?", o:["A) Koşmak","B) Güzel","C) Yazmak","D) Okumak"], d:"B", a:"'Güzel' bir sıfat olup eylem değildir." },
-    { s:"'Mavi gökyüzü' ifadesinde 'mavi' hangi sözcük türüdür?", o:["A) Eylem","B) Ad","C) Sıfat","D) Zarf"], d:"C", a:"'Mavi' ismi nitelediği için sıfat görevindedir." },
-    { s:"Türk alfabesinde kaç harf vardır?", o:["A) 26","B) 28","C) 29","D) 30"], d:"C", a:"Türk alfabesi 29 harften oluşur (8 sesli + 21 sessiz)." },
-    { s:"'Hızlı koştu' cümlesinde 'hızlı' hangi sözcük türüdür?", o:["A) Sıfat","B) Zarf","C) Ad","D) Bağlaç"], d:"B", a:"'Hızlı' eylemi nitelediği için zarf görevindedir." },
-    { s:"Türkçede ünlü harflerin sayısı kaçtır?", o:["A) 6","B) 7","C) 8","D) 9"], d:"C", a:"Türkçede a,e,ı,i,o,ö,u,ü olmak üzere 8 ünlü harf vardır." },
-    { s:"'Ahmet bahçede top oynuyor.' cümlesinde özne hangisidir?", o:["A) Bahçede","B) Top","C) Oynuyor","D) Ahmet"], d:"D", a:"Özne eylemi gerçekleştiren kişidir; burada 'Ahmet' öznedir." },
-    { s:"Türkçede kaç sessiz harf vardır?", o:["A) 19","B) 20","C) 21","D) 22"], d:"C", a:"Türk alfabesinde 21 sessiz (ünsüz) harf bulunur." }
+    { s:"Aşağıdaki cümlelerin hangisinde bir yazım hatası vardır?", o:["A) Herkes buradaydı.","B) Herşey güzel olacak.","C) Birkaç kitap aldım.","D) Hiçbir şey demedi."], d:"B", a:"Türkçede 'şey' daima ayrı yazılır. 'Her şey' olmalıdır.", i:"Şey sözcüğüne dikkat edin" },
+    { s:"'Yol' kelimesi aşağıdaki hangi dilbilgisi özelliğine örnektir?", o:["A) Eş Anlamlı","B) Eş Sesli (Sesteş)","C) Zıt Anlamlı","D) Soyut Ad"], d:"B", a:"Yol hem yürütülen zemin hem de yolmak eylemi olarak sesteştir.", i:"Yazılışları aynı, anlamları farklı" },
+    { s:"Türk edebiyatının ilk yerli romanı olan 'Taaşşuk-ı Talat ve Fitnat' kimin eseridir?", o:["A) Namık Kemal","B) Şemsettin Sami","C) Recaizade Mahmut Ekrem","D) Halit Ziya"], d:"B", a:"İlk yerli romanımız Şemsettin Sami tarafından kaleme alınmıştır.", i:"İlk sözlükçülerimizden biri" },
+    { s:"Sıralı cümleleri veya eş görevli kelimeleri ayırmak için hangi işaret konur?", o:["A) Noktalı Virgül","B) İki Nokta","C) Virgül","D) Kısa Çizgi"], d:"C", a:"Eş görevli ögeleri ayırmada öncelikli görev virgüle aittir.", i:"En yaygın noktalama işareti" },
+    { s:"'Göz boyamak' deyimi ne anlama gelir?", o:["A) Çok değer vermek","B) Makyaj yapmak","C) Aldatmak, yanıltarak iyi göstermek","D) İncelemek"], d:"C", a:"Göz boyamak, kusurları gizleyip bir şeyi iyi göstererek kandırmaktır.", i:"Yanıltma mecazı" },
+    { s:"Aşağıdaki sözcüklerden hangisi türetilirken veya ek alırken ünlü düşmesine uğramıştır?", o:["A) Kitapçık","B) Akıllanmak","C) Karnı","D) Küçücük"], d:"C", a:"Karın kelimesine ünlü eklendiğinde 'ı' harfi düşerek 'karnı' olur.", i:"Vücut organı kökenli" },
+    { s:"Batılı anlamda ilk modern Türk tiyatrosu olan 'Şair Evlenmesi' yazarı kimdir?", o:["A) Namık Kemal","B) Şinasi","C) Ahmet Vefik Paşa","D) Ziya Paşa"], d:"B", a:"İbrahim Şinasi, Şair Evlenmesi isimli töre komedisini yazmıştır.", i:"İlk gazete kurucularından" },
+    { s:"'Mavi gökyüzü' tamlamasının türü nedir?", o:["A) İsim Tamlaması","B) Sıfat Tamlaması","C) Zincirleme","D) Belirtisiz İsim"], d:"B", a:"Renk bildiren kelime sıfat olduğundan bu bir sıfat tamlamasıdır.", i:"Nasıl gökyüzü?" },
+    { s:"Hangisi Türkçedeki 'Büyük Ünlü Uyumu' kuralına tamamen uymaktadır?", o:["A) Tiyatro","B) Kalemlik","C) Kelebek","D) Kitaplık"], d:"C", a:"Kelebek kelimesinin tüm ünlüleri incedir (e, e, e).", i:"Ünlülerin kalınlık-incelik uyumu" },
+    { s:"Mezopotamya kültüründen doğan, insanlık tarihinin bilinen en eski destanı hangisidir?", o:["A) İlyada","B) Oğuz Kağan","C) Gılgamış Destanı","D) Ramayana"], d:"C", a:"Sümerlerin Gılgamış Destanı tarihin en eski edebi belgelerindendir.", i:"Ölümsüzlüğü arayan Sümer kralı" }
   ],
   yapayzeka: [
-    { s:"'AI' kısaltmasının açılımı nedir?", o:["A) Advanced Intelligence","B) Artificial Intelligence","C) Automated Internet","D) App Integration"], d:"B", a:"AI, İngilizce 'Artificial Intelligence' (Yapay Zeka) kelimelerinin baş harflerinden oluşur." },
-    { s:"Yapay zekanın insanı taklit edip edemediğini ölçen ünlü test hangisidir?", o:["A) Turing Testi","B) Einstein Testi","C) Tesla Deneyi","D) Pascal Analizi"], d:"A", a:"Alan Turing tarafından 1950'de önerilen Turing Testi, bir makinenin insan benzeri zeka sergileme yeteneğini ölçer." },
-    { s:"Yapay zekanın verilerden öğrenmesini sağlayan alt dala ne ad verilir?", o:["A) Kriptografi","B) Blokzincir","C) Makine Öğrenmesi","D) Siber Güvenlik"], d:"C", a:"Makine Öğrenmesi (Machine Learning), sistemlerin verilerden öğrenip kendini geliştirmesini sağlayan bir yapay zeka dalıdır." },
-    { s:"Satrançta dünya şampiyonu Kasparov'u yenen ilk IBM yapay zekası hangisidir?", o:["A) Watson","B) Deep Blue","C) AlphaGo","D) Siri"], d:"B", a:"IBM tarafından geliştirilen Deep Blue, 1997 yılında dünya satranç şampiyonu Garry Kasparov'u yenmiştir." },
-    { s:"Go oyununda dünya şampiyonunu yenerek devrim yaratan yapay zeka hangisidir?", o:["A) AlphaGo","B) ChatGPT","C) Midjourney","D) Stockfish"], d:"A", a:"Google DeepMind tarafından geliştirilen AlphaGo, 2016 yılında Go şampiyonu Lee Sedol'u yenerek tarihi bir başarı yakalamıştır." },
-    { s:"Yapay zekanın insan beynindeki nöronları taklit eden yapısına ne denir?", o:["A) Karar Ağaçları","B) Yapay Sinir Ağları","C) Algoritma Blokları","D) Kod Matrisi"], d:"B", a:"Yapay Sinir Ağları (Artificial Neural Networks), insan beynindeki biyolojik nöronların çalışma şeklini model alır." },
-    { s:"Aşağıdakilerden hangisi bir 'Görsel Üretim' yapay zekasıdır?", o:["A) ChatGPT","B) Midjourney","C) Google Translate","D) GitHub Copilot"], d:"B", a:"Midjourney, yazılı metin komutlarını (prompt) sanatsal ve gerçekçi görsellere dönüştüren popüler bir yapay zekadır." },
-    { s:"Yapay zekaya ne yapması gerektiğini söylediğimiz yönlendirici metinlere ne denir?", o:["A) Script","B) Prompt","C) Tag","D) Syntax"], d:"B", a:"Yapay zeka modellerine verilen girdilere veya talimat metinlerine 'Prompt' denir." },
-    { s:"Kendi kendine giden araçların çevreyi algılamak için kullandığı lazer tabanlı teknoloji nedir?", o:["A) Sonar","B) LiDAR","C) Bluetooth","D) GPS"], d:"B", a:"LiDAR teknolojisi, lazer ışınları fırlatarak otonom araçların çevresindeki nesneleri 3 boyutlu haritalandırmasını sağlar." },
-    { s:"Yapay zekanın insan zekasını her alanda geride bıraktığı varsayılan teorik aşamaya ne denir?", o:["A) Dar Yapay Zeka","B) Yapay Genel Zeka (AGI)","C) Doğal Dil İşleme","D) Robotik Otomasyon"], d:"B", a:"Yapay Genel Zeka (AGI), bir insanın yapabileceği her türlü zihinsel görevvi başarıyla yerine getirebilen yapay zekadır." }
+    { s:"Yapay zekayı ifade eden 'AI' kısaltmasının açılımı nedir?", o:["A) Advanced Intelligence","B) Artificial Intelligence","C) Automated Internet","D) App Integration"], d:"B", a:"AI, Artificial Intelligence (Yapay Zeka) anlamına gelir.", i:"Yapay zeka teriminin İngilizcesi" },
+    { s:"Makinelerin insan benzeri zeka sergileyip sergileyemediğini ölçen ünlü test hangisidir?", o:["A) Turing Testi","B) Einstein Testi","C) Tesla Deneyi","D) Pascal Analizi"], d:"A", a:"Alan Turing tarafından geliştirilen bu test yapay zeka felsefesinin temelidir.", i:"Alan Turing bulmuştur" },
+    { s:"Geniş dil modellerini ve metin üretim altyapısını ifade eden kısaltma hangisidir?", o:["A) Blockchain","B) LLM (Large Language Model)","C) GPU","D) API"], d:"B", a:"Büyük Dil Modelleri (Large Language Models) metinsel yapay zekaların temelidir.", i:"Dil modeli kısaltması" },
+    { s:"Algoritmaların doğrudan programlanmadan veriden kalıplar öğrenmesine ne ad verilir?", o:["A) Web Tasarımı","B) Makine Öğrenmesi (Machine Learning)","C) Veri Tabanı","D) Kriptografi"], d:"B", a:"Makine öğrenmesi, sistemlerin deneyim yoluyla gelişimini sağlar.", i:"Makinelerin öğrenme süreci" },
+    { s:"Yapay zeka modellerinin eğitilmesinde kullanılan, paralel işlem yeteneği yüksek donanım birimi hangisidir?", o:["A) CPU","B) GPU (Ekran Kartı)","C) RAM","D) HDD"], d:"B", a:"GPU'lar matris işlemlerini çok hızlı yürüttüğü için yapay zekada kritiktir.", i:"Grafik işlem birimi" },
+    { s:"1997'de dünya satranç şampiyonu Kasparov'u yenen meşhur IBM bilgisayarı hangisidir?", o:["A) Deep Blue","B) AlphaGo","C) Watson","D) Stockfish"], d:"A", a:"Deep Blue, satranç şampiyonunu yenen ilk bilgisayar sistemidir.", i:"Derin Mavi" },
+    { s:"Yapay zekanın verileri analiz ederek sıfırdan yeni içerik (resim, metin) üretmesine ne ad verilir?", o:["A) Analitik YZ","B) Üretken Yapay Zeka (Generative AI)","C) Statik YZ","D) Robotik Kodlama"], d:"B", a:"İçerik üreten sistemler Üretken (Generative) Yapay Zeka olarak tanımlanır.", i:"Yaratıcı ve yapıcı yapay zeka" },
+    { s:"İnsan beynindeki nöronların çalışma prensiplerini taklit eden matematiksel model hangisidir?", o:["A) Karar Ağaçları","B) Yapay Sinir Ağları (YSA)","C) Doğrusal Regresyon","D) Kümeleme"], d:"B", a:"Yapay Sinir Ağları biyolojik sinir sisteminin bilgisayara uyarlanmasıdır.", i:"Nöron ağları taklidi" },
+    { s:"Makinelerin dijital görüntülerdeki nesneleri veya yüzleri tanıma alanına ne denir?", o:["A) Doğal Dil İşleme","B) Bilgisayarlı Görü (Computer Vision)","C) Bulut Bilişim","D) Veri Madenciliği"], d:"B", a:"Computer Vision (Bilgisayarlı Görü) görsel verileri anlamlandırma alanıdır.", i:"Görsel algılama" },
+    { s:"Yapay zekanın insan dillerini anlama, dönüştürme ve işleme yeteneğiyle uğraşan dal hangisidir?", o:["A) NLP (Doğal Dil İşleme)","B) CNN","C) IoT","D) SaaS"], d:"A", a:"Natural Language Processing (Doğal Dil İşleme) insan dili ve bilgisayar etkileşimidir.", i:"Dil işleme kısaltması" }
   ],
   karisik: []
 };
 
-// Karıştırma Algoritması
-function shuffle(arr) {
-  let newArr = [...arr];
-  for (let i = newArr.length - 1; i > 0; i--) {
+// Global Uygulama Kontrol Değişkenleri
+let userProfile = { name: '', class: '', no: '' };
+let currentCat = 'tarih';
+let activePool = [];
+let currentIdx = 0, correctCount = 0, wrongCount = 0, answered = false;
+let clock;
+let currentTabState = 'home';
+const LIMIT = 10; 
+
+// Diziyi Rastgele Karıştırma Fonksiyonu
+function shuffleArray(arr) {
+  let temp = [...arr];
+  for (let i = temp.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-    [newArr[i], newArr[j]] = [newArr[j], newArr[i]];
+    [temp[i], temp[j]] = [temp[j], temp[i]];
   }
-  return newArr;
+  return temp;
 }
 
-// Karışık Havuzunu İnşa Etme
-function buildKarisik() {
-  let allQuestions = [];
+// Karışık Kategori Havuzunu Hazırlama
+function initKarisik() {
+  let combined = [];
   ['tarih','cografya','fen','matematik','turkce','yapayzeka'].forEach(c => {
-    allQuestions = allQuestions.concat(DB[c]);
+    combined = combined.concat(DB[c]);
   });
-  DB.karisik = shuffle(allQuestions).slice(0, 10);
+  DB.karisik = shuffleArray(combined).slice(0, 10);
 }
-buildKarisik();
+initKarisik();
 
-let cat = 'tarih';
-let pool = shuffle([...DB.tarih]);
-let idx = 0, correct = 0, wrong = 0, total = 0, answered = false;
-
-// Kategori Seçim Fonksiyonu
-function selectCat(c, btn) {
-  cat = c;
-  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  correct = 0; wrong = 0; total = 0;
-  ['sc','sw','sq'].forEach(id => document.getElementById(id).textContent = 0);
-  document.getElementById('pgr').style.width = '0%';
-  
-  if (c === 'karisik') {
-    buildKarisik();
-    pool = DB.karisik;
-  } else {
-    pool = shuffle([...DB[c]]);
+// 🎨 DİNAMİK TEMA GEÇİŞ MOTORU
+function setTheme(theme) {
+  if (theme === 'light') {
+    document.body.classList.remove('dark-theme');
+    document.body.classList.add('light-theme');
+    localStorage.setItem('selected_theme', 'light');
+  } else if (theme === 'dark') {
+    document.body.classList.remove('light-theme');
+    document.body.classList.add('dark-theme');
+    localStorage.setItem('selected_theme', 'dark');
   }
-  idx = 0; 
-  showQ();
 }
 
-// Soru Gösterme Yapısı
-function showQ() {
-  answered = false;
-  if (idx >= pool.length) { showResult(); return; }
-  const q = pool[idx]; 
-  total++;
+// 📱 SEKME DEĞİŞTİRME MOTORU
+function switchTab(tab) {
+  currentTabState = tab;
+  clearInterval(clock);
   
-  document.getElementById('sq').textContent = total;
-  document.getElementById('pgr').style.width = Math.round((idx / pool.length) * 100) + '%';
+  document.getElementById('menuHome').classList.remove('active');
+  document.getElementById('menuNews').classList.remove('active');
+  document.getElementById('menuQuiz').classList.remove('active');
   
-  // Şık havuzunu ve buton atamalarını karıştırır
-  let randomizedOptions = q.o.map((opt, i) => ({ text: opt, key: ['A','B','C','D'][i] }));
-  randomizedOptions = shuffle(randomizedOptions);
+  if (tab === 'home') {
+    document.getElementById('menuHome').classList.add('active');
+    document.getElementById('catBar').style.display = 'none';
+    document.getElementById('progressArea').style.display = 'none';
+    document.getElementById('scorePanel').style.display = 'none';
+    renderSchoolInfo();
+  } else if (tab === 'news') {
+    document.getElementById('menuNews').classList.add('active');
+    document.getElementById('catBar').style.display = 'none';
+    document.getElementById('progressArea').style.display = 'none';
+    document.getElementById('scorePanel').style.display = 'none';
+    renderNewsAndAnnouncements();
+  } else if (tab === 'quiz') {
+    document.getElementById('menuQuiz').classList.add('active');
+    if (!userProfile.name) {
+      document.getElementById('catBar').style.display = 'none';
+      document.getElementById('progressArea').style.display = 'none';
+      document.getElementById('scorePanel').style.display = 'none';
+      renderLoginScreen();
+    } else {
+      document.getElementById('catBar').style.display = 'flex';
+      document.getElementById('progressArea').style.display = 'block';
+      document.getElementById('scorePanel').style.display = 'block';
+      renderQuestion();
+    }
+  }
+}
 
-  document.getElementById('game').innerHTML = `
-    <div class="question-card">
-      <div class="q-meta">Soru ${total} / ${pool.length}</div>
-      <div class="q-text">${q.s}</div>
-      <div class="options">
-        ${randomizedOptions.map((opt) => {
-          return `<button class="opt-btn" id="o${opt.key}" onclick="pick('${opt.key}')">${opt.text}</button>`;
-        }).join('')}
+// 🏫 ANA SAYFA - OKUL BİLGİLERİ VE RESMİ MEB İSTATİSTİKLERİ
+function renderSchoolInfo() {
+  document.getElementById('screen').innerHTML = `
+    <div class="school-info-box">
+      <img src="data:image/jpeg;base64,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" class="school-photo" alt="İzmit Lisesi Binası">
+      <h3 class="school-title">Kocaeli İzmit Lisesi</h3>
+      <p class="info-paragraph">
+        Kocaeli'nin en köklü eğitim kurumlarından biri olan <b>İzmit Lisesi</b>, kurulduğu günden bu yana akademik, kültürel ve sportif alanlarda şehre öncülük etmektedir.
+      </p>
+      
+      <!-- 📊 İSTATİSTİKLER PANELİ -->
+      <div class="data-card">
+        <div class="data-card-title">📊 Okul İstatistikleri</div>
+        <div class="data-row">
+          <span class="data-label">Derslik Sayısı</span>
+          <span class="data-value">40</span>
+        </div>
+        <div class="data-row">
+          <span class="data-label">Öğretmen Sayısı</span>
+          <span class="data-value">74</span>
+        </div>
+        <div class="data-row">
+          <span class="data-label">Öğrenci Sayısı</span>
+          <span class="data-value">1160</span>
+        </div>
       </div>
-      <div id="fb"></div>
+
+      <!-- 📞 İLETİŞİM PANELİ -->
+      <div class="data-card">
+        <div class="data-card-title">📞 İletişim Bilgileri</div>
+        <div class="data-row">
+          <span class="data-label">Telefon</span>
+          <span class="data-value">(262) 321 65 17</span>
+        </div>
+        <div class="data-row">
+          <span class="data-label">E-Posta</span>
+          <span class="data-value">izmitlisesi@meb.k12.tr</span>
+        </div>
+        <div class="data-row" style="flex-direction: column; gap: 4px; align-items: flex-start;">
+          <span class="data-label">Adres</span>
+          <span class="data-value" style="font-weight: normal; font-size:12px; margin-top:2px;">SERDAR MAH. İSMAİL AKYILDIZ HOCA SOK. NO:2/3 İZMİT KOCAELİ</span>
+        </div>
+        <button class="action-btn" style="margin-top: 10px; padding: 10px;" onclick="goToLocation()">📍 Haritada Göster (Konuma Git)</button>
+      </div>
+
+      <div class="achievement-card" style="margin-top: 15px;">
+        <div class="news-content">
+          <img src="https://izmitlisesi.meb.k12.tr/meb_iys_dosyalar/41/01/964128/resimler/2026_05/k_d557b2e960f4d20d278363d494088252.jpg" class="news-photo" alt="Kick Boks Dünya Şampiyonu" onerror="this.style.display='none'">
+          <h5>🥊 Kick Boks Dünya Şampiyonu! <span class="date-badge">Mayıs 2026</span></h5>
+          <p>Sporcumuz <b>Mert Ali ARĞUN</b>, Antalya'da düzenlenen <b>Turkish Open World Cup</b> Kick Boks Şampiyonası'nda 94 kg şikletinde <b>Dünya Şampiyonu</b> olmuştur. (13-17 Mayıs 2026)</p>
+        </div>
+      </div>
+
+      <div class="achievement-card" style="margin-top: 10px;">
+        <div class="news-content">
+          <img src="https://izmitlisesi.meb.k12.tr/meb_iys_dosyalar/41/01/964128/resimler/2026_05/k_f66e8ae55dbb3c3c9c3ea819c3eb05ae.jpg" class="news-photo" alt="Artistik Buz Pateni" onerror="this.style.display='none'">
+          <h5>⛸️ Artistik Buz Pateni — Kocaeli 2.si <span class="date-badge">Mayıs 2026</span></h5>
+          <p>Sporcumuz <b>Muhammed Ali BOZKURT</b>, Kocaeli Okullararası Artistik Buz Pateni Şampiyonası'nda <b>Kocaeli 2.si</b> olmuştur.</p>
+        </div>
+      </div>
+
+      <div class="achievement-card" style="margin-top: 10px;">
+        <div class="news-content">
+          <h5>🏊 Türkiye Şampiyonası Başarısı <span class="date-badge">Mayıs 2026</span></h5>
+          <p>Sporcumuz <b>Asya Su DEMİR</b>, Türkiye Şampiyonası'nda okulumuzun adını başarıyla temsil etmiştir.</p>
+        </div>
+      </div>
+
+      <!-- Hızlı Bağlantılar -->
+      <div class="data-card" style="margin-top:16px;">
+        <div class="data-card-title">🔗 Hızlı Bağlantılar</div>
+        <div class="data-row">
+          <span class="data-label">Okul Randevusu</span>
+          <span class="data-value"><a href="https://okulrandevu.meb.gov.tr" target="_blank" style="color:inherit;">Randevu Al →</a></span>
+        </div>
+        <div class="data-row">
+          <span class="data-label">e-Okul Veli Sistemi</span>
+          <span class="data-value"><a href="https://e-okul.meb.gov.tr" target="_blank" style="color:inherit;">Giriş Yap →</a></span>
+        </div>
+        <div class="data-row">
+          <span class="data-label">Resmi Okul Sitesi</span>
+          <span class="data-value"><a href="https://izmitlisesi.meb.k12.tr" target="_blank" style="color:inherit;">izmitlisesi.meb.k12.tr →</a></span>
+        </div>
+        <div class="data-row">
+          <span class="data-label">MEBBİS</span>
+          <span class="data-value"><a href="https://mebbis.meb.gov.tr" target="_blank" style="color:inherit;">Giriş Yap →</a></span>
+        </div>
+      </div>
+
+      <button class="action-btn" style="margin-top:24px;" onclick="switchTab('news')">Haberler ve Duyuruları Gör 📰</button>
     </div>
-    <button class="next-btn" id="nb" style="display:none" onclick="next()">Sonraki Soru →</button>
   `;
 }
 
-// Tıklama Algılama
-function pick(l) {
+// 📍 HARİTADA GÖSTERME (KONUMA GİT) FONKSİYONU
+function goToLocation() {
+  window.open("https://www.google.com/maps?q=Serdar+Mah.+İsmail+Akyıldız+Hoca+Sok.+No:2/3+İzmit+Kocaeli", "_blank");
+}
+
+// 📰 RESMİ HABERLER VE DUYURULAR EKRANI
+function renderNewsAndAnnouncements() {
+  document.getElementById('screen').innerHTML = `
+    <div class="school-info-box">
+      <h3 class="school-title" style="margin-bottom:8px;">Resmi Gündem & Akış</h3>
+      <p style="font-size:12px; color:#aaaaaa; text-align:center; margin-bottom:15px;">Güncel Veriler</p>
+      
+      <div class="news-section-title">📢 Son Duyurular</div>
+      
+      <div class="news-grid">
+        <div class="achievement-card">
+          <div class="news-content">
+            <h5>👨‍👩‍👧 Veli Toplantısı <span class="date-badge">Güncel</span></h5>
+            <p>Veli toplantısı duyurusu yayınlanmıştır. Detaylar ve tarih bilgisi için okul ilan panosunu ve resmi okul sitesini takip ediniz.</p>
+          </div>
+        </div>
+
+        <div class="achievement-card">
+          <div class="news-content">
+            <h5>📋 2. Dönem 1. Sınav Telafi Takvimi <span class="date-badge">Önemli</span></h5>
+            <p>2025-2026 Eğitim-Öğretim Yılı 2. Dönem 1. Sınav Telafi Takvimi açıklanmıştır. Öğrencilerin tarih ve program bilgisine dikkat etmesi gerekmektedir.</p>
+          </div>
+        </div>
+
+        <div class="achievement-card">
+          <div class="news-content">
+            <h5>📝 2. Dönem 1. Sınav Takvimi <span class="date-badge">Bilgi</span></h5>
+            <p>2025-2026 Eğitim-Öğretim Yılı 2. Dönem 1. Yazılı sınav takvimi okul ilan panoları ile resmi sitede yayımlanmıştır.</p>
+          </div>
+        </div>
+
+        <div class="achievement-card">
+          <div class="news-content">
+            <h5>🎓 Bursluluk Sınavı Başvuru Duyurusu <span class="date-badge">Bilgi</span></h5>
+            <p>İlgili öğrenciler bursluluk sınavı başvurusu için resmi okul sitesindeki duyuruyu ve MEB yönlendirmelerini takip etmelidir.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="news-section-title">📰 Son Okul Haberleri</div>
+
+      <div class="news-grid">
+        <div class="achievement-card">
+          <div class="news-content">
+            <img src="https://izmitlisesi.meb.k12.tr/meb_iys_dosyalar/41/01/964128/resimler/2026_05/k_d557b2e960f4d20d278363d494088252.jpg" class="news-photo" alt="Kick Boks Dünya Şampiyonu" onerror="this.style.display='none'">
+            <h5>🥊 Kick Boks Dünya Şampiyonu İzmit Lisesi Sporcusu <span class="date-badge">22 Mayıs 2026</span></h5>
+            <p>Sporcumuz <b>Mert Ali ARĞUN</b>, Antalya'da gerçekleştirilen Turkish Open World Cup Kick Boks Şampiyonası'nda 94 kg şikletinde Dünya Şampiyonu olarak okulumuzun adını zirveye taşımıştır.</p>
+          </div>
+        </div>
+
+        <div class="achievement-card">
+          <div class="news-content">
+            <img src="https://izmitlisesi.meb.k12.tr/meb_iys_dosyalar/41/01/964128/resimler/2026_05/k_f66e8ae55dbb3c3c9c3ea819c3eb05ae.jpg" class="news-photo" alt="Buzdaki Gururu" onerror="this.style.display='none'">
+            <h5>⛸️ İzmit Lisesi'nin Buzdaki Gururu <span class="date-badge">22 Mayıs 2026</span></h5>
+            <p>Artistik Buz Pateni sporcumuz <b>Muhammed Ali BOZKURT</b>, Kocaeli Okullararası Artistik Buz Pateni Şampiyonası'nda Kocaeli 2.si olmuştur.</p>
+          </div>
+        </div>
+
+        <div class="achievement-card">
+          <div class="news-content">
+            <img src="https://izmitlisesi.meb.k12.tr/meb_iys_dosyalar/41/01/964128/resimler/2026_05/k_7d5ebef5058dabe6e9201ee665ca8a64.jpg" class="news-photo" alt="Asya Su Demir" onerror="this.style.display='none'">
+            <h5>🏅 Sporcumuz Asya Su Demir Türkiye Şampiyonasında <span class="date-badge">Mayıs 2026</span></h5>
+            <p>Sporcumuz Asya Su DEMİR, Türkiye Şampiyonası'nda başarıyla yarışarak okulumuzun gururu olmuştur.</p>
+          </div>
+        </div>
+
+        <div class="achievement-card">
+          <div class="news-content">
+            <img src="https://izmitlisesi.meb.k12.tr/meb_iys_dosyalar/41/01/964128/resimler/2026_05/k_e8c454ee57c3357c206418b0cbd6b5b0.jpg" class="news-photo" alt="19 Mayıs Arkeoloji Gezisi" onerror="this.style.display='none'">
+            <h5>🏛️ 19 Mayıs — Arkeoloji Müzesi Gezisi <span class="date-badge">Mayıs 2026</span></h5>
+            <p>19 Mayıs Gençlik ve Spor Bayramı etkinlikleri kapsamında öğrencilerimiz Arkeoloji Müzesi gezisine katılmıştır.</p>
+          </div>
+        </div>
+
+        <div class="achievement-card">
+          <div class="news-content">
+            <img src="https://izmitlisesi.meb.k12.tr/meb_iys_dosyalar/41/01/964128/resimler/2026_05/k_56de1e2d4d911d1172b8796da9431ca0.jpg" class="news-photo" alt="19 Mayıs Pano" onerror="this.style.display='none'">
+            <h5>🎨 Spor Kulübü 19 Mayıs Pano Çalışmaları <span class="date-badge">Mayıs 2026</span></h5>
+            <p>Spor Kulübümüz, 19 Mayıs Atatürk'ü Anma, Gençlik ve Spor Bayramı Haftası kapsamında anlamlı pano çalışmaları hazırlamıştır.</p>
+          </div>
+        </div>
+      </div>
+
+      <a href="https://izmitlisesi.meb.k12.tr" target="_blank">
+        <button class="action-btn" style="margin-top:20px;">Tüm Haberler — Resmi Site 🌐</button>
+      </a>
+    </div>
+  `;
+}
+
+// 🏁 YARIŞMACI GİRİŞ EKRANI ÇİZİMİ
+function renderLoginScreen() {
+  document.getElementById('screen').innerHTML = `
+    <div style="text-align: center;">
+      <h3 style="margin-bottom: 16px;">Yarışmacı Kayıt Paneli</h3>
+      <div class="input-group">
+        <label>Ad Soyad</label>
+        <input type="text" id="pName" placeholder="Örnek: Ahmet Yılmaz" required>
+      </div>
+      <div class="input-group">
+        <label>Sınıf / Şube</label>
+        <input type="text" id="pClass" placeholder="Örnek: 11-B" required>
+      </div>
+      <div class="input-group">
+        <label>Okul Numarası</label>
+        <input type="number" id="pNo" placeholder="Örnek: 725" required>
+      </div>
+      <button class="action-btn" onclick="startGame()">Yarışmaya Katıl ve Başla 🚀</button>
+    </div>
+  `;
+}
+
+function startGame() {
+  const n = document.getElementById('pName').value.trim();
+  const c = document.getElementById('pClass').value.trim();
+  const no = document.getElementById('pNo').value.trim();
+
+  if(!n || !c || !no) {
+    alert("Lütfen sıralama listesine kaydolmak için tüm alanları doldurun!");
+    return;
+  }
+
+  userProfile = { name: n, class: c, no: no };
+  
+  document.getElementById('catBar').style.display = 'flex';
+  document.getElementById('progressArea').style.display = 'block';
+  document.getElementById('scorePanel').style.display = 'block';
+  
+  selectCat('tarih', document.querySelector('.cat-btn'));
+}
+
+function selectCat(catName, buttonElement) {
+  currentCat = catName;
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  buttonElement.classList.add('active');
+  
+  correctCount = 0; wrongCount = 0;
+  updateBadge();
+  document.getElementById('pgr').style.width = '0%';
+  
+  if (catName === 'karisik') {
+    initKarisik();
+    activePool = DB.karisik;
+  } else {
+    activePool = shuffleArray([...DB[catName]]);
+  }
+  currentIdx = 0; 
+  renderQuestion();
+}
+
+function updateBadge() {
+  document.getElementById('displayScore').innerHTML = `<span>${correctCount}</span> / ${activePool.length}`;
+}
+
+function launchClock() {
+  clearInterval(clock);
+  let remaining = LIMIT;
+  const bar = document.getElementById('tmr');
+  bar.style.width = '100%';
+
+  clock = setInterval(() => {
+    remaining -= 0.1;
+    let percent = (remaining / LIMIT) * 100;
+    bar.style.width = percent + '%';
+
+    if(remaining <= 0) {
+      clearInterval(clock);
+      triggerTimeout();
+    }
+  }, 100);
+}
+
+function renderQuestion() {
+  if (currentTabState !== 'quiz') return;
+  answered = false;
+  clearInterval(clock);
+  
+  if (currentIdx >= activePool.length) { renderResults(); return; }
+  const item = activePool[currentIdx]; 
+  updateBadge();
+  
+  document.getElementById('pgr').style.width = Math.round((currentIdx / activePool.length) * 100) + '%';
+  
+  let randomizedOpts = item.o.map((o, i) => ({ text: o, id: ['A','B','C','D'][i] }));
+  randomizedOpts = shuffleArray(randomizedOpts);
+
+  document.getElementById('screen').innerHTML = `
+    <div class="q-meta">BİLMECE ${currentIdx + 1} / ${activePool.length}</div>
+    <div class="q-text">${item.s}</div>
+    <div class="options">
+      ${randomizedOpts.map(o => `<button class="opt-btn" id="btn_${o.id}" onclick="evaluateChoice('${o.id}')">${o.text}</button>`).join('')}
+    </div>
+    <div class="hint-area">💡 İpucu: ${item.i || 'Okul portalı gizemi'}</div>
+    <div id="feedbackBox"></div>
+    <button class="action-btn" id="nextAction" style="display:none" onclick="proceedNext()">Sonraki Bilmece ▷</button>
+  `;
+  launchClock();
+}
+
+function evaluateChoice(selected) {
   if (answered) return; 
   answered = true;
-  const q = pool[idx];
-  const ok = l === q.d;
+  clearInterval(clock);
   
-  if (ok) { 
-    correct++; 
-    document.getElementById('sc').textContent = correct; 
-  } else { 
-    wrong++; 
-    document.getElementById('sw').textContent = wrong; 
-  }
+  const item = activePool[currentIdx];
+  const isCorrect = selected === item.d;
   
+  if (isCorrect) { correctCount++; } 
+  else { wrongCount++; }
+  
+  updateBadge();
+  exposeAnswers(selected, item);
+}
+
+function triggerTimeout() {
+  if (answered) return;
+  answered = true;
+  wrongCount++;
+  updateBadge();
+  
+  exposeAnswers('', activePool[currentIdx], true);
+}
+
+function exposeAnswers(selected, item, timedOut = false) {
   ['A','B','C','D'].forEach(x => {
-    const b = document.getElementById('o' + x); 
-    if (!b) return;
-    b.disabled = true;
-    if (x === q.d) b.classList.add('correct');
-    else if (x === l) b.classList.add('wrong');
+    const btn = document.getElementById('btn_' + x);
+    if (!btn) return;
+    btn.disabled = true;
+    if (x === item.d) btn.classList.add('correct');
+    else if (x === selected) btn.classList.add('wrong');
   });
   
-  const dogru = q.o[['A','B','C','D'].indexOf(q.d)];
-  document.getElementById('fb').innerHTML = `
-    <div class="feedback ${ok ? 'correct' : 'wrong'}">
-      ${ok ? '✅ Doğru!' : '❌ Yanlış! Doğru Cevap: ' + dogru}<br>
-      <span style="font-size:13px; opacity:0.95; display:block; margin-top:4px;">${q.a}</span>
-    </div>`;
-  document.getElementById('nb').style.display = 'block';
-}
-
-function next() { 
-  idx++; 
-  showQ(); 
-}
-
-// Sonuç Ekranı
-function showResult() {
-  const pct = Math.round((correct / pool.length) * 100);
-  const emoji = pct >= 80 ? '🏆' : pct >= 60 ? '👏' : pct >= 40 ? '📚' : '💪';
-  const msg = pct >= 80 ? 'Harika!' : pct >= 60 ? 'İyi iş!' : pct >= 40 ? 'Biraz daha çalış!' : 'Daha fazla pratik yap!';
+  const correctOptionText = item.o[['A','B','C','D'].indexOf(item.d)];
+  let heading = timedOut ? '⏰ Süre Doldu!' : (selected === item.d ? '✅ Harika, Doğru!' : '❌ Yanlış Cevap!');
   
-  document.getElementById('pgr').style.width = '100%';
-  document.getElementById('game').innerHTML = `
+  document.getElementById('feedbackBox').innerHTML = `
+    <div class="feedback ${(selected === item.d && !timedOut) ? 'correct' : 'wrong'}">
+      <b>${heading}</b> Doğru: ${correctOptionText}<br>
+      <span style="font-size:13px; opacity:0.9; display:block; margin-top:6px;">${item.a}</span>
+    </div>`;
+  document.getElementById('nextAction').style.display = 'block';
+}
+
+function proceedNext() { 
+  currentIdx++; 
+  renderQuestion(); 
+}
+
+function popConfetti() {
+  const colors = ['#ffffff', '#aaaaaa', '#ffffff', '#444444', '#0056b3'];
+  for (let i = 0; i < 80; i++) {
+    const div = document.createElement('div');
+    div.classList.add('confetti');
+    div.style.left = Math.random() * 100 + 'vw';
+    div.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+    div.style.animationDelay = Math.random() * 1.5 + 's';
+    div.style.transform = `scale(${Math.random() * 0.7 + 0.4})`;
+    document.body.appendChild(div);
+    setTimeout(() => div.remove(), 4000);
+  }
+}
+
+function archiveScore() {
+  let register = JSON.parse(localStorage.getItem('izmit_leaderboard')) || [];
+  register.push({
+    name: userProfile.name,
+    class: userProfile.class,
+    no: userProfile.no,
+    points: correctCount,
+    max: activePool.length,
+    category: currentCat
+  });
+  register.sort((x, y) => y.points - x.points);
+  localStorage.setItem('izmit_leaderboard', JSON.stringify(register));
+}
+
+function drawLeaderboard() {
+  let register = JSON.parse(localStorage.getItem('izmit_leaderboard')) || [];
+  let html = `<div class="leaderboard"><h4>🏆 En Yüksek Skor Listesi (Top 5)</h4>`;
+  if(register.length === 0) {
+    html += `<div style="font-size:12px; color:#aaaaaa; padding:4px;">Henüz yarışma kaydı yok.</div>`;
+  } else {
+    register.slice(0, 5).forEach((player, i) => {
+      html += `
+        <div class="leader-row">
+          <span>${i+1}. <b>${player.name}</b> (${player.class} - No: ${player.no})</span>
+          <span><b>${player.points}/${player.max}</b> [${player.category.toUpperCase()}]</span>
+        </div>`;
+    });
+  }
+  html += `</div>`;
+  return html;
+}
+
+function renderResults() {
+  clearInterval(clock);
+  document.getElementById('progressArea').style.display = 'none';
+  
+  if (correctCount === activePool.length && activePool.length > 0) {
+    popConfetti();
+  }
+
+  archiveScore();
+  
+  document.getElementById('screen').innerHTML = `
     <div class="result-card">
-      <div class="result-emoji">${emoji}</div>
-      <div class="result-score">${correct} / ${pool.length}</div>
-      <div class="result-label">${msg}<br>Başarı Oranın: %${pct}</div>
-      <button class="next-btn" style="max-width:220px; margin:0 auto; display:block;" onclick="restart()">Tekrar Oyna</button>
+      <div class="result-emoji">${correctCount === activePool.length ? '🏆' : '👏'}</div>
+      <div class="result-score">${correctCount} / ${activePool.length}</div>
+      <div style="color:#aaaaaa; font-size:14px; margin-bottom:18px;">Tebrikler yarışmayı tamamladınız!</div>
+      <button class="action-btn" style="max-width:200px; margin:0 auto; display:block;" onclick="resetGame()">Yeniden Başla</button>
+      ${drawLeaderboard()}
     </div>`;
 }
 
-function restart() {
-  correct = 0; wrong = 0; total = 0;
-  ['sc','sw','sq'].forEach(id => document.getElementById(id).textContent = 0);
-  document.getElementById('pgr').style.width = '0%';
-  if (cat === 'karisik') buildKarisik();
-  pool = shuffle([...DB[cat]]); 
-  idx = 0; 
-  showQ();
+function resetGame() {
+  document.getElementById('progressArea').style.display = 'block';
+  correctCount = 0; wrongCount = 0;
+  if (currentCat === 'karisik') initKarisik();
+  activePool = shuffleArray([...DB[currentCat]]); 
+  currentIdx = 0; 
+  renderQuestion();
 }
 
-// İlk Çalıştırma
-showQ();
+// Sayfa ilk yüklendiğinde hafızadaki temayı kontrol et ve ana sayfayı yükle
+window.onload = function() {
+  const savedTheme = localStorage.getItem('selected_theme') || 'dark';
+  setTheme(savedTheme);
+  switchTab('home');
+};
 </script>
+
+
+<!-- 🎵 VİDEO MODAL -->
+<div class="video-modal-overlay" id="videoModal" onclick="closeVideoModal(event)">
+  <div class="video-modal-box">
+    <button class="video-modal-close" onclick="closeVideoModalBtn()">✕</button>
+    <iframe id="videoIframe" class="video-modal-iframe"
+      src=""
+      allow="autoplay; encrypted-media"
+      allowfullscreen
+      frameborder="0"></iframe>
+  </div>
+</div>
+
+<!-- SABİT BUTONLAR -->
+<div class="fixed-buttons">
+  <a class="fab-btn fab-instagram" href="https://www.instagram.com/izmitlisesi1945" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="2" y="2" width="20" height="20" rx="6" ry="6" stroke="white" stroke-width="2" fill="none"/>
+      <circle cx="12" cy="12" r="4" stroke="white" stroke-width="2" fill="none"/>
+      <circle cx="17.5" cy="6.5" r="1.2" fill="white"/>
+    </svg>
+    @izmitlisesi1945
+  </a>
+  <a class="fab-btn fab-instagram" href="https://www.instagram.com/izmit_lise_tasarim/" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="2" y="2" width="20" height="20" rx="6" ry="6" stroke="white" stroke-width="2" fill="none"/>
+      <circle cx="12" cy="12" r="4" stroke="white" stroke-width="2" fill="none"/>
+      <circle cx="17.5" cy="6.5" r="1.2" fill="white"/>
+    </svg>
+    @izmit_lise_tasarim
+  </a>
+  <button class="fab-btn fab-music" onclick="openVideoModal()">
+    🎵 Okul Şarkısı
+  </button>
+</div>
+
+<script>
+  function openVideoModal() {
+    document.getElementById('videoIframe').src = 'https://www.youtube.com/embed/vnPgoxguzmw?autoplay=1';
+    document.getElementById('videoModal').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeVideoModal(e) {
+    if (e.target === document.getElementById('videoModal')) closeVideoModalBtn();
+  }
+  function closeVideoModalBtn() {
+    document.getElementById('videoIframe').src = '';
+    document.getElementById('videoModal').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+</script>
+
 </body>
 </html>
