@@ -731,7 +731,7 @@
 <div class="navbar">
   <div class="nav-container">
     <div class="nav-link active" id="menuHome" onclick="switchTab('home')">🏫 Ana Sayfa</div>
-    <div class="nav-link" id="menuNews" onclick="switchTab('news')">📰 Haberler</div>
+    <div class="nav-link" id="menuOneri" onclick="switchTab('oneri')">🎬 Öneri Yap</div>
     <div class="nav-link" id="menuQuiz" onclick="switchTab('quiz')">🎲 Bilmece Dünyası</div>
   </div>
 </div>
@@ -889,10 +889,12 @@ function setTheme(theme) {
 // 📱 SEKME DEĞİŞTİRME MOTORU
 function switchTab(tab) {
   currentTabState = tab;
+  // URL hash güncelle (GitHub Pages uyumlu)
+  history.replaceState(null, '', '#' + tab);
   clearInterval(clock);
   
   document.getElementById('menuHome').classList.remove('active');
-  document.getElementById('menuNews').classList.remove('active');
+  document.getElementById('menuOneri').classList.remove('active');
   document.getElementById('menuQuiz').classList.remove('active');
   
   if (tab === 'home') {
@@ -901,12 +903,12 @@ function switchTab(tab) {
     document.getElementById('progressArea').style.display = 'none';
     document.getElementById('scorePanel').style.display = 'none';
     renderSchoolInfo();
-  } else if (tab === 'news') {
-    document.getElementById('menuNews').classList.add('active');
+  } else if (tab === 'oneri') {
+    document.getElementById('menuOneri').classList.add('active');
     document.getElementById('catBar').style.display = 'none';
     document.getElementById('progressArea').style.display = 'none';
     document.getElementById('scorePanel').style.display = 'none';
-    renderNewsAndAnnouncements();
+    renderOneriMenu();
   } else if (tab === 'quiz') {
     document.getElementById('menuQuiz').classList.add('active');
     if (!userProfile.name) {
@@ -1012,7 +1014,7 @@ function renderSchoolInfo() {
         </div>
       </div>
 
-      <button class="action-btn" style="margin-top:24px;" onclick="switchTab('news')">Haberler ve Duyuruları Gör 📰</button>
+      <button class="action-btn" style="margin-top:24px;" onclick="switchTab('oneri')">🎬 Dizi, Film veya Müzik Öner!</button>
     </div>
   `;
 }
@@ -1022,95 +1024,192 @@ function goToLocation() {
   window.open("https://www.google.com/maps?q=Serdar+Mah.+İsmail+Akyıldız+Hoca+Sok.+No:2/3+İzmit+Kocaeli", "_blank");
 }
 
-// 📰 RESMİ HABERLER VE DUYURULAR EKRANI
-function renderNewsAndAnnouncements() {
+// 🎬 ÖNERİ SİSTEMİ - ANA MENÜ
+function renderOneriMenu() {
   document.getElementById('screen').innerHTML = `
-    <div class="school-info-box">
-      <h3 class="school-title" style="margin-bottom:8px;">Resmi Gündem & Akış</h3>
-      <p style="font-size:12px; color:#aaaaaa; text-align:center; margin-bottom:15px;">Güncel Veriler</p>
+    <div style="text-align:center;">
+      <h3 style="margin-bottom:8px; font-size:20px;">🎬 Öneri Sistemi</h3>
+      <p style="font-size:13px; color:#aaaaaa; margin-bottom:24px;">Ne önermek istersin?</p>
       
-      <div class="news-section-title">📢 Son Duyurular</div>
-      
-      <div class="news-grid">
-        <div class="achievement-card">
-          <div class="news-content">
-            <h5>👨‍👩‍👧 Veli Toplantısı <span class="date-badge">Güncel</span></h5>
-            <p>Veli toplantısı duyurusu yayınlanmıştır. Detaylar ve tarih bilgisi için okul ilan panosunu ve resmi okul sitesini takip ediniz.</p>
-          </div>
-        </div>
-
-        <div class="achievement-card">
-          <div class="news-content">
-            <h5>📋 2. Dönem 1. Sınav Telafi Takvimi <span class="date-badge">Önemli</span></h5>
-            <p>2025-2026 Eğitim-Öğretim Yılı 2. Dönem 1. Sınav Telafi Takvimi açıklanmıştır. Öğrencilerin tarih ve program bilgisine dikkat etmesi gerekmektedir.</p>
-          </div>
-        </div>
-
-        <div class="achievement-card">
-          <div class="news-content">
-            <h5>📝 2. Dönem 1. Sınav Takvimi <span class="date-badge">Bilgi</span></h5>
-            <p>2025-2026 Eğitim-Öğretim Yılı 2. Dönem 1. Yazılı sınav takvimi okul ilan panoları ile resmi sitede yayımlanmıştır.</p>
-          </div>
-        </div>
-
-        <div class="achievement-card">
-          <div class="news-content">
-            <h5>🎓 Bursluluk Sınavı Başvuru Duyurusu <span class="date-badge">Bilgi</span></h5>
-            <p>İlgili öğrenciler bursluluk sınavı başvurusu için resmi okul sitesindeki duyuruyu ve MEB yönlendirmelerini takip etmelidir.</p>
-          </div>
-        </div>
+      <div style="display:flex; flex-direction:column; gap:14px; max-width:340px; margin:0 auto;">
+        
+        <button class="action-btn" style="padding:20px 16px; font-size:16px; border-radius:16px; display:flex; align-items:center; gap:12px; justify-content:center;"
+          onclick="renderOneriForm('dizi')">
+          📺 <span>Dizi Öner</span>
+        </button>
+        
+        <button class="action-btn" style="padding:20px 16px; font-size:16px; border-radius:16px; display:flex; align-items:center; gap:12px; justify-content:center;"
+          onclick="renderOneriForm('film')">
+          🎥 <span>Film Öner</span>
+        </button>
+        
+        <button class="action-btn" style="padding:20px 16px; font-size:16px; border-radius:16px; display:flex; align-items:center; gap:12px; justify-content:center;"
+          onclick="renderOneriForm('muzik')">
+          🎵 <span>Müzik Öner</span>
+        </button>
+        
       </div>
-
-      <div class="news-section-title">📰 Son Okul Haberleri</div>
-
-      <div class="news-grid">
-        <div class="achievement-card">
-          <div class="news-content">
-            <img src="https://izmitlisesi.meb.k12.tr/meb_iys_dosyalar/41/01/964128/resimler/2026_05/k_d557b2e960f4d20d278363d494088252.jpg" class="news-photo" alt="Kick Boks Dünya Şampiyonu" onerror="this.style.display='none'">
-            <h5>🥊 Kick Boks Dünya Şampiyonu İzmit Lisesi Sporcusu <span class="date-badge">22 Mayıs 2026</span></h5>
-            <p>Sporcumuz <b>Mert Ali ARĞUN</b>, Antalya'da gerçekleştirilen Turkish Open World Cup Kick Boks Şampiyonası'nda 94 kg şikletinde Dünya Şampiyonu olarak okulumuzun adını zirveye taşımıştır.</p>
-          </div>
-        </div>
-
-        <div class="achievement-card">
-          <div class="news-content">
-            <img src="https://izmitlisesi.meb.k12.tr/meb_iys_dosyalar/41/01/964128/resimler/2026_05/k_f66e8ae55dbb3c3c9c3ea819c3eb05ae.jpg" class="news-photo" alt="Buzdaki Gururu" onerror="this.style.display='none'">
-            <h5>⛸️ İzmit Lisesi'nin Buzdaki Gururu <span class="date-badge">22 Mayıs 2026</span></h5>
-            <p>Artistik Buz Pateni sporcumuz <b>Muhammed Ali BOZKURT</b>, Kocaeli Okullararası Artistik Buz Pateni Şampiyonası'nda Kocaeli 2.si olmuştur.</p>
-          </div>
-        </div>
-
-        <div class="achievement-card">
-          <div class="news-content">
-            <img src="https://izmitlisesi.meb.k12.tr/meb_iys_dosyalar/41/01/964128/resimler/2026_05/k_7d5ebef5058dabe6e9201ee665ca8a64.jpg" class="news-photo" alt="Asya Su Demir" onerror="this.style.display='none'">
-            <h5>🏅 Sporcumuz Asya Su Demir Türkiye Şampiyonasında <span class="date-badge">Mayıs 2026</span></h5>
-            <p>Sporcumuz Asya Su DEMİR, Türkiye Şampiyonası'nda başarıyla yarışarak okulumuzun gururu olmuştur.</p>
-          </div>
-        </div>
-
-        <div class="achievement-card">
-          <div class="news-content">
-            <img src="https://izmitlisesi.meb.k12.tr/meb_iys_dosyalar/41/01/964128/resimler/2026_05/k_e8c454ee57c3357c206418b0cbd6b5b0.jpg" class="news-photo" alt="19 Mayıs Arkeoloji Gezisi" onerror="this.style.display='none'">
-            <h5>🏛️ 19 Mayıs — Arkeoloji Müzesi Gezisi <span class="date-badge">Mayıs 2026</span></h5>
-            <p>19 Mayıs Gençlik ve Spor Bayramı etkinlikleri kapsamında öğrencilerimiz Arkeoloji Müzesi gezisine katılmıştır.</p>
-          </div>
-        </div>
-
-        <div class="achievement-card">
-          <div class="news-content">
-            <img src="https://izmitlisesi.meb.k12.tr/meb_iys_dosyalar/41/01/964128/resimler/2026_05/k_56de1e2d4d911d1172b8796da9431ca0.jpg" class="news-photo" alt="19 Mayıs Pano" onerror="this.style.display='none'">
-            <h5>🎨 Spor Kulübü 19 Mayıs Pano Çalışmaları <span class="date-badge">Mayıs 2026</span></h5>
-            <p>Spor Kulübümüz, 19 Mayıs Atatürk'ü Anma, Gençlik ve Spor Bayramı Haftası kapsamında anlamlı pano çalışmaları hazırlamıştır.</p>
-          </div>
-        </div>
-      </div>
-
-      <a href="https://izmitlisesi.meb.k12.tr" target="_blank">
-        <button class="action-btn" style="margin-top:20px;">Tüm Haberler — Resmi Site 🌐</button>
-      </a>
     </div>
   `;
 }
+
+// 📝 ÖNERİ FORMU
+function renderOneriForm(tur) {
+  const turBilgi = {
+    dizi: { emoji: '📺', ad: 'Dizi', placeholder: 'Örnek: Breaking Bad, Squid Game...' },
+    film: { emoji: '🎥', ad: 'Film', placeholder: 'Örnek: Inception, Interstellar...' },
+    muzik: { emoji: '🎵', ad: 'Şarkı / Müzik', placeholder: 'Örnek: Tarkan - Şımarık, Sertab Erener...' }
+  };
+  const info = turBilgi[tur];
+
+  const isDark = !document.body.classList.contains('light-theme');
+  const cardBg   = isDark ? '#111111' : '#ffffff';
+  const cardBrd  = isDark ? '#2a2a2a' : '#d1d5db';
+  const inputBg  = isDark ? '#000000' : '#f8f9fa';
+  const inputClr = isDark ? '#ffffff' : '#111827';
+  const inputBrd = isDark ? '#333333' : '#ced4da';
+  const labelClr = isDark ? '#aaaaaa' : '#6b7280';
+  const subClr   = isDark ? '#888888' : '#6b7280';
+  const accentClr= document.body.classList.contains('light-theme') ? '#0056b3' : '#ffffff';
+  const btn2Bg   = isDark ? '#1a1a1a' : '#f0f0f0';
+  const btn2Clr  = isDark ? '#cccccc' : '#555555';
+  const btn2Brd  = isDark ? '#444444' : '#cccccc';
+
+  document.getElementById('screen').innerHTML = `
+    <div style="max-width:420px; margin:0 auto;">
+
+      <!-- Başlık -->
+      <div style="text-align:center; margin-bottom:24px;">
+        <div style="font-size:36px; margin-bottom:8px;">${info.emoji}</div>
+        <h3 style="font-size:18px; font-weight:700; margin-bottom:4px;">${info.ad} Önerisi</h3>
+        <p style="font-size:12px; color:${subClr};">Bilgilerini gir ve öneri yap!</p>
+      </div>
+
+      <!-- Form Kartı -->
+      <div style="background:${cardBg}; border:1px solid ${cardBrd}; border-radius:16px; padding:24px;">
+
+        <!-- Ad Soyad -->
+        <div style="margin-bottom:14px; text-align:left;">
+          <label style="display:block; font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:${labelClr}; margin-bottom:6px;">Ad Soyad</label>
+          <input type="text" id="oneriAd" placeholder="Örnek: Ahmet Yılmaz"
+            style="width:100%; padding:12px 14px; border-radius:10px; border:1px solid ${inputBrd}; background:${inputBg}; color:${inputClr}; font-size:14px; outline:none; transition:border-color 0.2s;"
+            onfocus="this.style.borderColor='${accentClr}'" onblur="this.style.borderColor='${inputBrd}'">
+        </div>
+
+        <!-- Sınıf + Şube -->
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:14px;">
+          <div style="text-align:left;">
+            <label style="display:block; font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:${labelClr}; margin-bottom:6px;">Sınıf</label>
+            <input type="text" id="oneriSinif" placeholder="Örnek: 11"
+              style="width:100%; padding:12px 14px; border-radius:10px; border:1px solid ${inputBrd}; background:${inputBg}; color:${inputClr}; font-size:14px; outline:none; transition:border-color 0.2s;"
+              onfocus="this.style.borderColor='${accentClr}'" onblur="this.style.borderColor='${inputBrd}'">
+          </div>
+          <div style="text-align:left;">
+            <label style="display:block; font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:${labelClr}; margin-bottom:6px;">Şube</label>
+            <input type="text" id="oneriSube" placeholder="Örnek: B"
+              style="width:100%; padding:12px 14px; border-radius:10px; border:1px solid ${inputBrd}; background:${inputBg}; color:${inputClr}; font-size:14px; outline:none; transition:border-color 0.2s;"
+              onfocus="this.style.borderColor='${accentClr}'" onblur="this.style.borderColor='${inputBrd}'">
+          </div>
+        </div>
+
+        <!-- İçerik Adı -->
+        <div style="margin-bottom:14px; text-align:left;">
+          <label style="display:block; font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:${labelClr}; margin-bottom:6px;">${info.ad} Adı</label>
+          <input type="text" id="oneriIcerik" placeholder="${info.placeholder}"
+            style="width:100%; padding:12px 14px; border-radius:10px; border:1px solid ${inputBrd}; background:${inputBg}; color:${inputClr}; font-size:14px; outline:none; transition:border-color 0.2s;"
+            onfocus="this.style.borderColor='${accentClr}'" onblur="this.style.borderColor='${inputBrd}'">
+        </div>
+
+        <!-- Neden -->
+        <div style="margin-bottom:0; text-align:left;">
+          <label style="display:block; font-size:11px; font-weight:700; letter-spacing:1px; text-transform:uppercase; color:${labelClr}; margin-bottom:6px;">Neden öneriyorsun? <span style="font-weight:400; text-transform:none; letter-spacing:0;">(İsteğe bağlı)</span></label>
+          <textarea id="oneriNeden" placeholder="Kısaca açıkla..." rows="3"
+            style="width:100%; padding:12px 14px; border-radius:10px; border:1px solid ${inputBrd}; background:${inputBg}; color:${inputClr}; font-size:14px; outline:none; resize:none; font-family:inherit; transition:border-color 0.2s;"
+            onfocus="this.style.borderColor='${accentClr}'" onblur="this.style.borderColor='${inputBrd}'"></textarea>
+        </div>
+
+      </div>
+
+      <!-- Butonlar -->
+      <button class="action-btn" style="margin-top:14px;" onclick="gonderiOneri('${tur}')">Öneriyi Gönder ✅</button>
+      <button onclick="renderOneriMenu()"
+        style="width:100%; margin-top:10px; padding:13px; border-radius:12px; border:1px solid ${btn2Brd}; background:${btn2Bg}; color:${btn2Clr}; font-size:14px; font-weight:600; cursor:pointer;">
+        ← Geri Dön
+      </button>
+    </div>
+  `;
+}
+
+// ✅ ÖNERİ GÖNDER
+function gonderiOneri(tur) {
+  const ad = document.getElementById('oneriAd').value.trim();
+  const sinif = document.getElementById('oneriSinif').value.trim();
+  const sube = document.getElementById('oneriSube').value.trim();
+  const icerik = document.getElementById('oneriIcerik').value.trim();
+  const neden = document.getElementById('oneriNeden').value.trim();
+
+  if (!ad || !sinif || !sube || !icerik) {
+    alert('Lütfen Ad Soyad, Sınıf, Şube ve öneri adını doldur!');
+    return;
+  }
+
+  const turEmojiMap = { dizi: '📺', film: '🎥', muzik: '🎵' };
+  const turAdMap = { dizi: 'Dizi', film: 'Film', muzik: 'Müzik' };
+
+  // Öneriyi listeye kaydet
+  if (!window.oneriListesi) window.oneriListesi = [];
+  window.oneriListesi.push({ tur, ad, sinif, sube, icerik, neden, zaman: new Date().toLocaleTimeString('tr-TR') });
+
+  document.getElementById('screen').innerHTML = `
+    <div style="text-align:center; padding:20px 0;">
+      <div style="font-size:50px; margin-bottom:16px;">🎉</div>
+      <h3 style="margin-bottom:10px; color:#fff;">Önerin Alındı!</h3>
+      <div style="background:#111; border:1px solid #333; border-radius:14px; padding:18px; text-align:left; margin:16px 0;">
+        <div style="font-size:13px; color:#aaa; margin-bottom:8px; text-transform:uppercase; letter-spacing:1px;">${turEmojiMap[tur]} ${turAdMap[tur]} Önerisi</div>
+        <div style="font-size:16px; font-weight:700; color:#fff; margin-bottom:8px;">${icerik}</div>
+        ${neden ? `<div style="font-size:13px; color:#aaaaaa; margin-bottom:8px;">💬 "${neden}"</div>` : ''}
+        <div style="font-size:12px; color:#666; border-top:1px solid #222; padding-top:8px; margin-top:8px;">
+          👤 ${ad} &nbsp;|&nbsp; ${sinif}-${sube.toUpperCase()}
+        </div>
+      </div>
+      <button class="action-btn" onclick="renderOnerilerListesi()">📋 Tüm Önerileri Gör</button>
+      <button class="action-btn" style="background:#222; color:#fff; border:1px solid #444; margin-top:8px;" onclick="renderOneriMenu()">← Yeni Öneri Yap</button>
+    </div>
+  `;
+}
+
+// 📋 TÜM ÖNERİLERİ LİSTELE
+function renderOnerilerListesi() {
+  if (!window.oneriListesi || window.oneriListesi.length === 0) {
+    alert('Henüz hiç öneri yok!');
+    renderOneriMenu();
+    return;
+  }
+  const turEmojiMap = { dizi: '📺', film: '🎥', muzik: '🎵' };
+  const turAdMap = { dizi: 'Dizi', film: 'Film', muzik: 'Müzik' };
+
+  const kartlar = window.oneriListesi.map(o => `
+    <div class="achievement-card" style="margin-bottom:10px;">
+      <h5>${turEmojiMap[o.tur]} ${o.icerik} <span class="date-badge">${turAdMap[o.tur]}</span></h5>
+      ${o.neden ? `<p style="margin-bottom:6px;">💬 ${o.neden}</p>` : ''}
+      <p style="font-size:11px; color:#666;">👤 ${o.ad} — ${o.sinif}-${o.sube.toUpperCase()} — ${o.zaman}</p>
+    </div>
+  `).join('');
+
+  document.getElementById('screen').innerHTML = `
+    <div>
+      <h3 class="school-title">📋 Tüm Öneriler (${window.oneriListesi.length})</h3>
+      <div class="news-grid">${kartlar}</div>
+      <button class="action-btn" style="margin-top:16px;" onclick="renderOneriMenu()">← Geri Dön</button>
+    </div>
+  `;
+}
+
+// 📰 RESMİ HABERLER VE DUYURULAR EKRANI (artık kullanılmıyor ama kalabilir)
+function renderNewsAndAnnouncements() {
+  renderOneriMenu();
+}
+
 
 // 🏁 YARIŞMACI GİRİŞ EKRANI ÇİZİMİ
 function renderLoginScreen() {
@@ -1416,6 +1515,30 @@ window.onload = function() {
   function onAudioPause() {
     document.getElementById('audioModalIcon').classList.remove('spinning');
   }
+
+  // 🔗 URL HASH → SEKME YÖNLENDIRME
+  // Sayfa açılışında URL hash'ine göre doğru sekmeyi göster
+  // Örnek: portal.html#oneri → Öneri sekmesi açılır
+  //        portal.html#quiz  → Quiz sekmesi açılır
+  //        portal.html#home  → Ana sayfa açılır
+  (function() {
+    var hash = window.location.hash.replace('#', '');
+    var gecerli = ['home', 'oneri', 'quiz'];
+    if (hash && gecerli.indexOf(hash) !== -1) {
+      // switchTab zaten sayfa yüklendikten sonra çağrılıyor,
+      // küçük bir gecikmeyle çağırıyoruz ki DOM hazır olsun
+      setTimeout(function() { switchTab(hash); }, 50);
+    }
+  })();
+
+  // Geri/ileri tuşu (browser history) desteği
+  window.addEventListener('popstate', function() {
+    var hash = window.location.hash.replace('#', '');
+    var gecerli = ['home', 'oneri', 'quiz'];
+    if (hash && gecerli.indexOf(hash) !== -1) {
+      switchTab(hash);
+    }
+  });
 </script>
 
 </body>
