@@ -514,6 +514,16 @@
     body.light-theme .timer-fill { background: #003d80; }
 
 
+    /* 🎬 ÖNERİ MODAL STİLLERİ */
+    .oneri-type-grid {
+      <nav>
+    <a href="index.html">Ana Sayfa</a>
+    <a href="https://zaten7845-create.github.io/okul-bilmecesiii/" target="_blank">Film Önerileri</a>
+</nav>
+      
+     
+
+
     /* 🎵 VİDEO + INSTAGRAM SABİT BUTONLAR */
     .fixed-buttons {
       position: fixed;
@@ -731,8 +741,9 @@
 <div class="navbar">
   <div class="nav-container">
     <div class="nav-link active" id="menuHome" onclick="switchTab('home')">🏫 Ana Sayfa</div>
-    <div class="nav-link" id="menuOneri" onclick="switchTab('oneri')">🎬 Öneri Yap</div>
+    <div class="nav-link" id="menuNews" onclick="switchTab('news')">📰 Haberler</div>
     <div class="nav-link" id="menuQuiz" onclick="switchTab('quiz')">🎲 Bilmece Dünyası</div>
+    <div class="nav-link" id="menuOneri" onclick="switchTab('oneri')">🎬 Öneri</div>
   </div>
 </div>
 
@@ -751,7 +762,7 @@
     <button class="cat-btn" onclick="selectCat('matematik',this)">🔢 Matematik</button>
     <button class="cat-btn" onclick="selectCat('turkce',this)">📖 Türkçe</button>
     <button class="cat-btn" onclick="selectCat('yapayzeka',this)">🤖 Yapay Zeka</button>
-    <button class="cat-btn" onclick="selectCat('karisik',this)">🎲 Karışık (6 Soru)</button>
+    <button class="cat-btn" onclick="selectCat('karisik',this)">🎲 Karışık (10 Soru)</button>
   </div>
   
   <div class="progress-container" id="progressArea" style="display:none;">
@@ -776,7 +787,10 @@ const DB = {
     { s:"Osmanlı Devleti'nin kurucusu kimdir ve devlet hangi yıl kurulmuştur?", o:["A) Orhan Bey - 1326","B) Osman Bey - 1299","C) Ertuğrul Gazi - 1281","D) Birinci Murat - 1362"], d:"B", a:"Osmanlı Devleti, 1299 yılında Osman Bey tarafından kurulmuştur.", i:"Devlet kurucusunun adı" },
     { s:"Tarihte ilk yazılı antlaşma olarak bilinen 'Kadeş Antlaşması' hangi iki devlet arasında imzalanmıştır?", o:["A) Sümer - Akad","B) Mısır - Hitit","C) Asur - Babil","D) Pers - Yunan"], d:"B", a:"MÖ 1280 civarında Mısır Firavunu II. Ramses ile Hitit Kralı III. Hattuşili arasında imzalanmıştır.", i:"Anadolu ve Mısır medeniyetleri" },
     { s:"Mustafa Kemal Atatürk'ün nüfusa kayıtlı olduğu il hangisidir?", o:["A) Selanik","B) Ankara","C) İstanbul","D) Gaziantep"], d:"D", a:"Mustafa Kemal Atatürk, Gaziantep'in Şahinbey ilçesi nüfusuna kaydedilmiştir.", i:"Güneydoğu'nun Gazi unvanlı şehri" },
-    { s:"Orhun Kitabeleri (Göktürk Yazıtları) günümüzde hangi ülkenin sınırları içerisinde yer almaktadır?", o:["A) Kazakistan","B) Moğolistan","C) Özbekistan","D) Kırgızistan"], d:"B", a:"Türk tarihinin ilk yazılı belgeleri olan Orhun Yazıtları Moğolistan sınırları içindedir.", i:"Ötüken bölgesi" }
+    { s:"Orhun Kitabeleri (Göktürk Yazıtları) günümüzde hangi ülkenin sınırları içerisinde yer almaktadır?", o:["A) Kazakistan","B) Moğolistan","C) Özbekistan","D) Kırgızistan"], d:"B", a:"Türk tarihinin ilk yazılı belgeleri olan Orhun Yazıtları Moğolistan sınırları içindedir.", i:"Ötüken bölgesi" },
+    { s:"Osmanlı Devleti'nde matbaayı ilk getiren ve ilk basımevini kuran kişiler kimlerdir?", o:["A) İbrahim Müteferrika - Sait Efendi","B) Katip Çelebi - Evliya Çelebi","C) Namık Kemal - Şinasi","D) Lagari Hasan - Hezarfen"], d:"A", a:"Lale Devri'nde (1727) İbrahim Müteferrika ve Sait Efendi tarafından kurulmuştur.", i:"Lale Devri yenilikçileri" },
+    { s:"Mısır'ı Osmanlı topraklarına katarak Halifeliğin Osmanlı'ya geçmesini sağlayan padişah kimdir?", o:["A) Fatih Sultan Mehmet","B) Yavuz Sultan Selim","C) Kanuni Sultan Süleyman","D) II. Abdülhamid"], d:"B", a:"Yavuz Sultan Selim 1516 Mercidabık ve 1517 Ridaniye seferleriyle Mısır'ı fethetmiştir.", i:"8 yıla 80 yıllık iş sığdıran padişah" },
+    { s:"İstiklal Marşı'mız hangi yıl meclis tarafından milli marş olarak kabul edilmiştir?", o:["A) 1920","B) 1921","C) 1922","D) 1923"], d:"B", a:"Mehmet Akif Ersoy'un yazdığı İstiklal Marşı, 12 Mart 1921'de kabul edilmiştir.", i:"Cumhuriyetin ilanından 2 yıl önce" }
   ],
   cografya: [
     { s:"Türkiye'nin en yüksek dağı hangisidir ve yüksekliği kaç metredir?", o:["A) Erciyes Dağı - 3917m","B) Süphan Dağı - 4058m","C) Ağrı Dağı - 5137m","D) Kaçkar Dağı - 3937m"], d:"C", a:"Türkiye'nin en yüksek noktası 5137 metre ile Ağrı Dağı'dır.", i:"Doğu Anadolu'nun zirvesi" },
@@ -786,7 +800,9 @@ const DB = {
     { s:"Türkiye'de karstik şekillerin ve obrukların en yaygın görüldüğü coğrafi bölge hangisidir?", o:["A) Karadeniz Bölgesi","B) Akdeniz Bölgesi","C) Doğu Anadolu Bölgesi","D) Marmara Bölgesi"], d:"B", a:"Kireçtaşının yaygın olduğu Akdeniz Bölgesi karstik oluşumlarda ilk sıradadır.", i:"Teke ve Taşeli çevresi" },
     { s:"Aşağıdaki akarsulardan hangisi Türkiye sınırları içinde doğup, sınır dışına dökülmektedir?", o:["A) Kızılırmak","B) Yeşilırmak","C) Fırat","D) Sakarya"], d:"C", a:"Fırat ve Dicle nehirleri Türkiye'den doğup Basra Körfezi'ne dökülür.", i:"Mezopotamya'ya yönelen akarsu" },
     { s:"Ülkemizde çay tarımının Doğu Karadeniz'de yoğunlaşmasının temel sebebi nedir?", o:["A) Toprak yapısı","B) Her mevsim yağışlı ve nemli mikroklimal iklim","C) Makineleşme kolaylığı","D) İş gücü potansiyeli"], d:"B", a:"Çay bitkisi her mevsim düzenli yağış ve yüksek nem oranı ister.", i:"Hava durumu ve yağış rejimi" },
-    { s:"Dünyanın en büyük sıcak çölü hangisidir?", o:["A) Gobi Çölü","B) Sahra Çölü","C) Kalahari Çölü","D) Atacama Çölü"], d:"B", a:"Afrika'nın kuzeyindeki Büyük Sahra Çölü en büyük sıcak çöldür.", i:"Kuzey Afrika" }
+    { s:"Dünyanın en büyük sıcak çölü hangisidir?", o:["A) Gobi Çölü","B) Sahra Çölü","C) Kalahari Çölü","D) Atacama Çölü"], d:"B", a:"Afrika'nın kuzeyindeki Büyük Sahra Çölü en büyük sıcak çöldür.", i:"Kuzey Afrika" },
+    { s:"Türkiye'nin en doğusu ile en batısı arasında kaç dakikalık yerel saat farkı vardır?", o:["A) 40 dakika","B) 76 dakika","C) 19 dakika","D) 26 dakika"], d:"B", a:"Türkiye 26-45 doğu meridyenlerindedir. 19 x 4 = 76 dakika fark oluşur.", i:"Meridyen farkını 4 ile çarpın" },
+    { s:"Dünyanın oksijen deposu olarak bilinen en büyük yağmur ormanları hangisidir?", o:["A) Kongo Ormanları","B) Amazon Ormanları","C) Sibirya Taygası","D) Borneo Ormanları"], d:"B", a:"Güney Amerika'daki Amazon ormanları dünya oksijen dengesinde çok mühimdir.", i:"Güney Amerika kıtası" }
   ],
   fen: [
     { s:"Kimyada elementleri atom kütlelerine göre sıralayarak ilk Periyodik Cetveli oluşturan bilim insanı kimdir?", o:["A) Marie Curie","B) Dmitri Mendeleyev","C) John Dalton","D) Antoine Lavoisier"], d:"B", a:"Rus kimyager Mendeleyev, elementlerin özelliklerinin periyodik tekrarlandığını keşfetmiştir.", i:"Rus kimyager" },
@@ -796,7 +812,9 @@ const DB = {
     { s:"Hücrenin enerji santrali olarak bilinen ve ATP üretiminden sorumlu olan organel hangisidir?", o:["A) Ribozom","B) Lizozom","C) Mitokondri","D) Golgi cisimciği"], d:"C", a:"Mitokondri, hücre için gerekli biyokimyasal enerjiyi (ATP) sentezler.", i:"Enerji üretim merkezi" },
     { s:"Güneş'ten gelen zararlı ultraviyole (UV) ışınlarını süzen atmosfer katmanı hangisidir?", o:["A) Troposfer","B) Ozon Tabakası","C) Termosfer","D) Mezosfer"], d:"B", a:"Stratosfer tabakasında bulunan ozon katmanı UV ışınlarına karşı kalkan olur.", i:"O3 gazından oluşur" },
     { s:"Bir çözeltinin pH değerinin '7' olması neyi ifade eder?", o:["A) Asidik","B) Bazik","C) Nötr","D) Akışkan"], d:"C", a:"pH cetvelinde 7 değeri ne asit ne baz olan nötr maddeleri temsil eder.", i:"Saf suyun pH derecesi" },
-    { s:"Genetik biliminin kurucusu kabul edilen ve bezelyelerle deneyler yapan bilim insanı kimdir?", o:["A) Charles Darwin","B) Gregor Mendel","C) Louis Pasteur","D) Alexander Fleming"], d:"B", a:"Gregor Mendel, kalıtım kanunlarını bezelye bitkileri üzerinden kanıtlamıştır.", i:"Kalıtım teorisyeni" }
+    { s:"Genetik biliminin kurucusu kabul edilen ve bezelyelerle deneyler yapan bilim insanı kimdir?", o:["A) Charles Darwin","B) Gregor Mendel","C) Louis Pasteur","D) Alexander Fleming"], d:"B", a:"Gregor Mendel, kalıtım kanunlarını bezelye bitkileri üzerinden kanıtlamıştır.", i:"Kalıtım teorisyeni" },
+    { s:"Kütle çekim yasasını ve mekanik hareket kanunlarını formüle eden ünlü fizikçi kimdir?", o:["A) Albert Einstein","B) Isaac Newton","C) Nikola Tesla","D) Stephen Hawking"], d:"B", a:"Sir Isaac Newton yerçekimi ve evrensel kütle çekim teorisini geliştirmiştir.", i:"Başına elma düşen bilim insanı" },
+    { s:"Sıvıların kaldırma kuvvetini keşfeden ve hamamdan 'Evreka!' diyerek fırlayan antik çağ bilgini kimdir?", o:["A) Arşimet","B) Pisagor","C) Öklid","D) Aristoteles"], d:"A", a:"Arşimet, sıvıların hidrostatik kaldırma kuvveti kanununu bulmuştur.", i:"Hidrostatik kurucusu" }
   ],
   matematik: [
     { s:"Bir dik üçgende dik kenarların karelerinin toplamı hipotenüsün karesine eşittir diyen teorem hangisidir?", o:["A) Thales","B) Pisagor","C) Öklid","D) Pascal"], d:"B", a:"a² + b² = c² bağıntısı Pisagor teoremidir.", i:"Dik üçgen bağıntısı" },
@@ -806,7 +824,9 @@ const DB = {
     { s:"Sadece 1'e ve kendisine tam bölünebilen 1'den büyük sayılara ne ad verilir?", o:["A) Çift Sayılar","B) Rasyonel Sayılar","C) Asal Sayılar","D) Tam Kare Sayılar"], d:"C", a:"2, 3, 5, 7, 11 gibi sadece 1 ve kendisine bölünen sayılar asaldır.", i:"En küçüğü 2 sayısıdır" },
     { s:"Bir olayın gerçekleşme olasılığı teorik olarak en fazla kaç olabilir?", o:["A) 0.5","B) 1 (%100)","C) 10","D) Sonsuz"], d:"B", a:"Olasılık 0 (imkansız) ile 1 (kesin olay) arasında değer alır.", i:"Kesin olay üst limiti" },
     { s:"Logaritma fonksiyonu hangi fonksiyonun tersidir?", o:["A) Trigonometrik","B) Üstel Fonksiyon","C) Polinom","D) Doğrusal"], d:"B", a:"Logaritma, üstel fonksiyonların ters işlemidir.", i:"Taban ve üs yer değişimi" },
-    { s:"Kesişimleri boş küme olan kümelere ne ad verilir?", o:["A) Eşit Kümeler","B) Ayrık Kümeler","C) Alt Kümeler","D) Evrensel Kümeler"], d:"B", a:"Hiç ortak elemanı olmayan kümelere ayrık kümeler denir.", i:"Ortak noktası olmayanlar" }
+    { s:"Kesişimleri boş küme olan kümelere ne ad verilir?", o:["A) Eşit Kümeler","B) Ayrık Kümeler","C) Alt Kümeler","D) Evrensel Kümeler"], d:"B", a:"Hiç ortak elemanı olmayan kümelere ayrık kümeler denir.", i:"Ortak noktası olmayanlar" },
+    { s:"Sıfır (0) kavramını ve cebir bilimini ilk kez sistemleştiren İslam bilgini kimdir?", o:["A) İbn-i Sina","B) El-Harezmi","C) Ali Kuşçu","D) Ömer Hayyam"], d:"B", a:"El-Harezmi cebir biliminin temellerini atmış ve batıya tanıtmıştır.", i:"Algoritma kelimesinin kaynağı olan isim" },
+    { s:"Dairenin alanı hangi formülle hesaplanır?", o:["A) 2πr","B) πr²","C) 2π","D) πd"], d:"B", a:"Alan formülü pi sayısı ile yarıçapın karesinin çarpımıdır.", i:"Yarıçapın karesi gerekir" }
   ],
   turkce: [
     { s:"Aşağıdaki cümlelerin hangisinde bir yazım hatası vardır?", o:["A) Herkes buradaydı.","B) Herşey güzel olacak.","C) Birkaç kitap aldım.","D) Hiçbir şey demedi."], d:"B", a:"Türkçede 'şey' daima ayrı yazılır. 'Her şey' olmalıdır.", i:"Şey sözcüğüne dikkat edin" },
@@ -816,7 +836,9 @@ const DB = {
     { s:"'Göz boyamak' deyimi ne anlama gelir?", o:["A) Çok değer vermek","B) Makyaj yapmak","C) Aldatmak, yanıltarak iyi göstermek","D) İncelemek"], d:"C", a:"Göz boyamak, kusurları gizleyip bir şeyi iyi göstererek kandırmaktır.", i:"Yanıltma mecazı" },
     { s:"Aşağıdaki sözcüklerden hangisi türetilirken veya ek alırken ünlü düşmesine uğramıştır?", o:["A) Kitapçık","B) Akıllanmak","C) Karnı","D) Küçücük"], d:"C", a:"Karın kelimesine ünlü eklendiğinde 'ı' harfi düşerek 'karnı' olur.", i:"Vücut organı kökenli" },
     { s:"Batılı anlamda ilk modern Türk tiyatrosu olan 'Şair Evlenmesi' yazarı kimdir?", o:["A) Namık Kemal","B) Şinasi","C) Ahmet Vefik Paşa","D) Ziya Paşa"], d:"B", a:"İbrahim Şinasi, Şair Evlenmesi isimli töre komedisini yazmıştır.", i:"İlk gazete kurucularından" },
-    { s:"'Mavi gökyüzü' tamlamasının türü nedir?", o:["A) İsim Tamlaması","B) Sıfat Tamlaması","C) Zincirleme","D) Belirtisiz İsim"], d:"B", a:"Renk bildiren kelime sıfat olduğundan bu bir sıfat tamlamasıdır.", i:"Nasıl gökyüzü?" }
+    { s:"'Mavi gökyüzü' tamlamasının türü nedir?", o:["A) İsim Tamlaması","B) Sıfat Tamlaması","C) Zincirleme","D) Belirtisiz İsim"], d:"B", a:"Renk bildiren kelime sıfat olduğundan bu bir sıfat tamlamasıdır.", i:"Nasıl gökyüzü?" },
+    { s:"Hangisi Türkçedeki 'Büyük Ünlü Uyumu' kuralına tamamen uymaktadır?", o:["A) Tiyatro","B) Kalemlik","C) Kelebek","D) Kitaplık"], d:"C", a:"Kelebek kelimesinin tüm ünlüleri incedir (e, e, e).", i:"Ünlülerin kalınlık-incelik uyumu" },
+    { s:"Mezopotamya kültüründen doğan, insanlık tarihinin bilinen en eski destanı hangisidir?", o:["A) İlyada","B) Oğuz Kağan","C) Gılgamış Destanı","D) Ramayana"], d:"C", a:"Sümerlerin Gılgamış Destanı tarihin en eski edebi belgelerindendir.", i:"Ölümsüzlüğü arayan Sümer kralı" }
   ],
   yapayzeka: [
     { s:"Yapay zekayı ifade eden 'AI' kısaltmasının açılımı nedir?", o:["A) Advanced Intelligence","B) Artificial Intelligence","C) Automated Internet","D) App Integration"], d:"B", a:"AI, Artificial Intelligence (Yapay Zeka) anlamına gelir.", i:"Yapay zeka teriminin İngilizcesi" },
@@ -826,7 +848,9 @@ const DB = {
     { s:"Yapay zeka modellerinin eğitilmesinde kullanılan, paralel işlem yeteneği yüksek donanım birimi hangisidir?", o:["A) CPU","B) GPU (Ekran Kartı)","C) RAM","D) HDD"], d:"B", a:"GPU'lar matris işlemlerini çok hızlı yürüttüğü için yapay zekada kritiktir.", i:"Grafik işlem birimi" },
     { s:"1997'de dünya satranç şampiyonu Kasparov'u yenen meşhur IBM bilgisayarı hangisidir?", o:["A) Deep Blue","B) AlphaGo","C) Watson","D) Stockfish"], d:"A", a:"Deep Blue, satranç şampiyonunu yenen ilk bilgisayar sistemidir.", i:"Derin Mavi" },
     { s:"Yapay zekanın verileri analiz ederek sıfırdan yeni içerik (resim, metin) üretmesine ne ad verilir?", o:["A) Analitik YZ","B) Üretken Yapay Zeka (Generative AI)","C) Statik YZ","D) Robotik Kodlama"], d:"B", a:"İçerik üreten sistemler Üretken (Generative) Yapay Zeka olarak tanımlanır.", i:"Yaratıcı ve yapıcı yapay zeka" },
-    { s:"İnsan beynindeki nöronların çalışma prensiplerini taklit eden matematiksel model hangisidir?", o:["A) Karar Ağaçları","B) Yapay Sinir Ağları (YSA)","C) Doğrusal Regresyon","D) Kümeleme"], d:"B", a:"Yapay Sinir Ağları biyolojik sinir sisteminin bilgisayara uyarlanmasıdır.", i:"Nöron ağları taklidi" }
+    { s:"İnsan beynindeki nöronların çalışma prensiplerini taklit eden matematiksel model hangisidir?", o:["A) Karar Ağaçları","B) Yapay Sinir Ağları (YSA)","C) Doğrusal Regresyon","D) Kümeleme"], d:"B", a:"Yapay Sinir Ağları biyolojik sinir sisteminin bilgisayara uyarlanmasıdır.", i:"Nöron ağları taklidi" },
+    { s:"Makinelerin dijital görüntülerdeki nesneleri veya yüzleri tanıma alanına ne denir?", o:["A) Doğal Dil İşleme","B) Bilgisayarlı Görü (Computer Vision)","C) Bulut Bilişim","D) Veri Madenciliği"], d:"B", a:"Computer Vision (Bilgisayarlı Görü) görsel verileri anlamlandırma alanıdır.", i:"Görsel algılama" },
+    { s:"Yapay zekanın insan dillerini anlama, dönüştürme ve işleme yeteneğiyle uğraşan dal hangisidir?", o:["A) NLP (Doğal Dil İşleme)","B) CNN","C) IoT","D) SaaS"], d:"A", a:"Natural Language Processing (Doğal Dil İşleme) insan dili ve bilgisayar etkileşimidir.", i:"Dil işleme kısaltması" }
   ],
   karisik: []
 };
@@ -838,7 +862,7 @@ let activePool = [];
 let currentIdx = 0, correctCount = 0, wrongCount = 0, answered = false;
 let clock;
 let currentTabState = 'home';
-const LIMIT = 6; 
+const LIMIT = 10; 
 
 // Diziyi Rastgele Karıştırma Fonksiyonu
 function shuffleArray(arr) {
@@ -850,8 +874,132 @@ function shuffleArray(arr) {
   return temp;
 }
 
-// Karışık Kategori Havuzunu Hazırlama
-function initKarisik() {
+// ===== 🎬 ÖNERİ SİSTEMİ =====
+let oneriListesi = JSON.parse(localStorage.getItem('oneriListesi') || '[]');
+let seciliOneriTuru = null;
+
+function renderOneriScreen() {
+  document.getElementById('screen').innerHTML = `
+    <div>
+      <h3 style="text-align:center; margin-bottom:6px; font-size:18px;">🎬 Dizi / Film / Şarkı Öner</h3>
+      <p style="text-align:center; font-size:13px; color:#888; margin-bottom:20px;">Sınıf arkadaşlarına bir şeyler öner!</p>
+
+      <p style="font-size:13px; font-weight:700; color:#aaa; margin-bottom:10px; text-transform:uppercase; letter-spacing:1px;">Ne Öneriyorsun?</p>
+      <div class="oneri-type-grid">
+        <div class="oneri-type-card" id="tipDizi" onclick="secOneriTuru('Dizi', this)">
+          <span class="type-icon">📺</span>Dizi
+        </div>
+        <div class="oneri-type-card" id="tipFilm" onclick="secOneriTuru('Film', this)">
+          <span class="type-icon">🎥</span>Film
+        </div>
+        <div class="oneri-type-card" id="tipMuzik" onclick="secOneriTuru('Müzik', this)">
+          <span class="type-icon">🎵</span>Müzik
+        </div>
+      </div>
+
+      <div id="oneriFormAlani" style="display:none;">
+        <div class="input-group">
+          <label id="oneriAdLabel">Dizi / Film / Şarkı Adı</label>
+          <input type="text" id="oneriBaslik" placeholder="Örnek: Breaking Bad">
+        </div>
+        <div class="input-group">
+          <label>Adınız Soyadınız</label>
+          <input type="text" id="oneriAdSoyad" placeholder="Örnek: Ahmet Yılmaz">
+        </div>
+        <div style="display:flex; gap:10px;">
+          <div class="input-group" style="flex:1;">
+            <label>Sınıf</label>
+            <input type="text" id="oneriSinif" placeholder="Örnek: 11">
+          </div>
+          <div class="input-group" style="flex:1;">
+            <label>Şube</label>
+            <input type="text" id="oneriSube" placeholder="Örnek: B">
+          </div>
+        </div>
+        <button class="action-btn" onclick="oneriKaydet()">✅ Öneriyi Gönder</button>
+      </div>
+
+      <div id="oneriListeAlani">
+        ${renderOneriListeHTML()}
+      </div>
+    </div>
+  `;
+
+  // Eğer daha önce seçim yapılmışsa geri getir
+  if (seciliOneriTuru) {
+    const map = { 'Dizi':'tipDizi', 'Film':'tipFilm', 'Müzik':'tipMuzik' };
+    const el = document.getElementById(map[seciliOneriTuru]);
+    if (el) { el.classList.add('selected'); document.getElementById('oneriFormAlani').style.display='block'; }
+  }
+}
+
+function secOneriTuru(tur, el) {
+  seciliOneriTuru = tur;
+  document.querySelectorAll('.oneri-type-card').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  document.getElementById('oneriFormAlani').style.display = 'block';
+  const labelMap = { 'Dizi':'📺 Dizi Adı', 'Film':'🎥 Film Adı', 'Müzik':'🎵 Şarkı / Sanatçı Adı' };
+  document.getElementById('oneriAdLabel').textContent = labelMap[tur];
+  document.getElementById('oneriBaslik').placeholder = tur === 'Müzik' ? 'Örnek: Tarkan - Şıkıdım' : tur === 'Film' ? 'Örnek: Inception' : 'Örnek: Breaking Bad';
+}
+
+function oneriKaydet() {
+  if (!seciliOneriTuru) { alert('Lütfen önce Dizi, Film veya Müzik seç!'); return; }
+  const baslik = document.getElementById('oneriBaslik').value.trim();
+  const adSoyad = document.getElementById('oneriAdSoyad').value.trim();
+  const sinif = document.getElementById('oneriSinif').value.trim();
+  const sube = document.getElementById('oneriSube').value.trim();
+
+  if (!baslik || !adSoyad || !sinif || !sube) {
+    alert('Lütfen tüm alanları doldurun!');
+    return;
+  }
+
+  const yeniOneri = {
+    tur: seciliOneriTuru,
+    baslik,
+    adSoyad,
+    sinifSube: sinif + '-' + sube,
+    tarih: new Date().toLocaleDateString('tr-TR')
+  };
+  oneriListesi.unshift(yeniOneri);
+  localStorage.setItem('oneriListesi', JSON.stringify(oneriListesi));
+
+  // Formu sıfırla
+  document.getElementById('oneriBaslik').value = '';
+  document.getElementById('oneriAdSoyad').value = '';
+  document.getElementById('oneriSinif').value = '';
+  document.getElementById('oneriSube').value = '';
+  seciliOneriTuru = null;
+  document.querySelectorAll('.oneri-type-card').forEach(c => c.classList.remove('selected'));
+  document.getElementById('oneriFormAlani').style.display = 'none';
+
+  // Listeyi güncelle
+  document.getElementById('oneriListeAlani').innerHTML = renderOneriListeHTML();
+  alert('✅ Önerin kaydedildi!');
+}
+
+function renderOneriListeHTML() {
+  if (oneriListesi.length === 0) {
+    return `<div class="oneri-empty">Henüz öneri yok. İlk öneriyi sen yap! 🎉</div>`;
+  }
+  const ikonlar = { 'Dizi':'📺', 'Film':'🎥', 'Müzik':'🎵' };
+  let html = `<div class="oneri-section-title">📋 Tüm Öneriler (${oneriListesi.length})</div>`;
+  oneriListesi.forEach(o => {
+    html += `
+      <div class="oneri-item">
+        <div class="oneri-item-header">
+          <span class="oneri-item-title">${ikonlar[o.tur] || '🎬'} ${o.baslik}</span>
+          <span class="oneri-item-type">${o.tur}</span>
+        </div>
+        <div class="oneri-item-person">👤 ${o.adSoyad} &nbsp;|&nbsp; 🏫 ${o.sinifSube} &nbsp;|&nbsp; 📅 ${o.tarih}</div>
+      </div>`;
+  });
+  return html;
+}
+// ===== ÖNERİ SİSTEMİ SONU =====
+
+
   let combined = [];
   ['tarih','cografya','fen','matematik','turkce','yapayzeka'].forEach(c => {
     combined = combined.concat(DB[c]);
@@ -879,8 +1027,9 @@ function switchTab(tab) {
   clearInterval(clock);
   
   document.getElementById('menuHome').classList.remove('active');
-  document.getElementById('menuOneri').classList.remove('active');
+  document.getElementById('menuNews').classList.remove('active');
   document.getElementById('menuQuiz').classList.remove('active');
+  document.getElementById('menuOneri').classList.remove('active');
   
   if (tab === 'home') {
     document.getElementById('menuHome').classList.add('active');
@@ -888,12 +1037,12 @@ function switchTab(tab) {
     document.getElementById('progressArea').style.display = 'none';
     document.getElementById('scorePanel').style.display = 'none';
     renderSchoolInfo();
-  } else if (tab === 'oneri') {
-    document.getElementById('menuOneri').classList.add('active');
+  } else if (tab === 'news') {
+    document.getElementById('menuNews').classList.add('active');
     document.getElementById('catBar').style.display = 'none';
     document.getElementById('progressArea').style.display = 'none';
     document.getElementById('scorePanel').style.display = 'none';
-    renderOneriMenu();
+    renderNewsAndAnnouncements();
   } else if (tab === 'quiz') {
     document.getElementById('menuQuiz').classList.add('active');
     if (!userProfile.name) {
@@ -907,6 +1056,12 @@ function switchTab(tab) {
       document.getElementById('scorePanel').style.display = 'block';
       renderQuestion();
     }
+  } else if (tab === 'oneri') {
+    document.getElementById('menuOneri').classList.add('active');
+    document.getElementById('catBar').style.display = 'none';
+    document.getElementById('progressArea').style.display = 'none';
+    document.getElementById('scorePanel').style.display = 'none';
+    renderOneriScreen();
   }
 }
 
@@ -999,7 +1154,7 @@ function renderSchoolInfo() {
         </div>
       </div>
 
-      <button class="action-btn" style="margin-top:24px;" onclick="switchTab('oneri')">🎬 Dizi, Film veya Müzik Öner!</button>
+      <button class="action-btn" style="margin-top:24px;" onclick="switchTab('news')">Haberler ve Duyuruları Gör 📰</button>
     </div>
   `;
 }
@@ -1009,147 +1164,95 @@ function goToLocation() {
   window.open("https://www.google.com/maps?q=Serdar+Mah.+İsmail+Akyıldız+Hoca+Sok.+No:2/3+İzmit+Kocaeli", "_blank");
 }
 
-// 🎬 ÖNERİ SİSTEMİ - ANA MENÜ
-function renderOneriMenu() {
+// 📰 RESMİ HABERLER VE DUYURULAR EKRANI
+function renderNewsAndAnnouncements() {
   document.getElementById('screen').innerHTML = `
-    <div style="text-align:center;">
-      <h3 style="margin-bottom:8px; font-size:20px;">🎬 Öneri Sistemi</h3>
-      <p style="font-size:13px; color:#aaaaaa; margin-bottom:24px;">Ne önermek istersin?</p>
+    <div class="school-info-box">
+      <h3 class="school-title" style="margin-bottom:8px;">Resmi Gündem & Akış</h3>
+      <p style="font-size:12px; color:#aaaaaa; text-align:center; margin-bottom:15px;">Güncel Veriler</p>
       
-      <div style="display:flex; flex-direction:column; gap:14px; max-width:340px; margin:0 auto;">
-        
-        <button class="action-btn" style="padding:20px 16px; font-size:16px; border-radius:16px; display:flex; align-items:center; gap:12px; justify-content:center;"
-          onclick="renderOneriForm('dizi')">
-          📺 <span>Dizi Öner</span>
-        </button>
-        
-        <button class="action-btn" style="padding:20px 16px; font-size:16px; border-radius:16px; display:flex; align-items:center; gap:12px; justify-content:center;"
-          onclick="renderOneriForm('film')">
-          🎥 <span>Film Öner</span>
-        </button>
-        
-        <button class="action-btn" style="padding:20px 16px; font-size:16px; border-radius:16px; display:flex; align-items:center; gap:12px; justify-content:center;"
-          onclick="renderOneriForm('muzik')">
-          🎵 <span>Müzik Öner</span>
-        </button>
-        
-      </div>
-    </div>
-  `;
-}
+      <div class="news-section-title">📢 Son Duyurular</div>
+      
+      <div class="news-grid">
+        <div class="achievement-card">
+          <div class="news-content">
+            <h5>👨‍👩‍👧 Veli Toplantısı <span class="date-badge">Güncel</span></h5>
+            <p>Veli toplantısı duyurusu yayınlanmıştır. Detaylar ve tarih bilgisi için okul ilan panosunu ve resmi okul sitesini takip ediniz.</p>
+          </div>
+        </div>
 
-// 📝 ÖNERİ FORMU
-function renderOneriForm(tur) {
-  const turBilgi = {
-    dizi: { emoji: '📺', ad: 'Dizi', placeholder: 'Örnek: Breaking Bad, Squid Game...' },
-    film: { emoji: '🎥', ad: 'Film', placeholder: 'Örnek: Inception, Interstellar...' },
-    muzik: { emoji: '🎵', ad: 'Şarkı / Müzik', placeholder: 'Örnek: Tarkan - Şımarık, Sertab Erener...' }
-  };
-  const info = turBilgi[tur];
+        <div class="achievement-card">
+          <div class="news-content">
+            <h5>📋 2. Dönem 1. Sınav Telafi Takvimi <span class="date-badge">Önemli</span></h5>
+            <p>2025-2026 Eğitim-Öğretim Yılı 2. Dönem 1. Sınav Telafi Takvimi açıklanmıştır. Öğrencilerin tarih ve program bilgisine dikkat etmesi gerekmektedir.</p>
+          </div>
+        </div>
 
-  document.getElementById('screen').innerHTML = `
-    <div style="text-align:center;">
-      <div style="margin-bottom:6px; font-size:28px;">${info.emoji}</div>
-      <h3 style="margin-bottom:4px;">${info.ad} Önerisi</h3>
-      <p style="font-size:12px; color:#aaaaaa; margin-bottom:20px;">Bilgilerini gir ve öneri yap!</p>
+        <div class="achievement-card">
+          <div class="news-content">
+            <h5>📝 2. Dönem 1. Sınav Takvimi <span class="date-badge">Bilgi</span></h5>
+            <p>2025-2026 Eğitim-Öğretim Yılı 2. Dönem 1. Yazılı sınav takvimi okul ilan panoları ile resmi sitede yayımlanmıştır.</p>
+          </div>
+        </div>
 
-      <div class="input-group">
-        <label>Ad Soyad</label>
-        <input type="text" id="oneriAd" placeholder="Örnek: Ahmet Yılmaz">
-      </div>
-      <div class="input-group">
-        <label>Sınıf</label>
-        <input type="text" id="oneriSinif" placeholder="Örnek: 11">
-      </div>
-      <div class="input-group">
-        <label>Şube</label>
-        <input type="text" id="oneriSube" placeholder="Örnek: B">
-      </div>
-      <div class="input-group">
-        <label>${info.ad} Adı</label>
-        <input type="text" id="oneriIcerik" placeholder="${info.placeholder}">
-      </div>
-      <div class="input-group">
-        <label>Neden öneriyorsun? (İsteğe bağlı)</label>
-        <input type="text" id="oneriNeden" placeholder="Kısaca açıkla...">
-      </div>
-
-      <button class="action-btn" onclick="gonderiOneri('${tur}')">Öneriyi Gönder ✅</button>
-      <button class="action-btn" style="background:#222; color:#fff; border:1px solid #444; margin-top:8px;" onclick="renderOneriMenu()">← Geri Dön</button>
-    </div>
-  `;
-}
-
-// ✅ ÖNERİ GÖNDER
-function gonderiOneri(tur) {
-  const ad = document.getElementById('oneriAd').value.trim();
-  const sinif = document.getElementById('oneriSinif').value.trim();
-  const sube = document.getElementById('oneriSube').value.trim();
-  const icerik = document.getElementById('oneriIcerik').value.trim();
-  const neden = document.getElementById('oneriNeden').value.trim();
-
-  if (!ad || !sinif || !sube || !icerik) {
-    alert('Lütfen Ad Soyad, Sınıf, Şube ve öneri adını doldur!');
-    return;
-  }
-
-  const turEmojiMap = { dizi: '📺', film: '🎥', muzik: '🎵' };
-  const turAdMap = { dizi: 'Dizi', film: 'Film', muzik: 'Müzik' };
-
-  // Öneriyi listeye kaydet
-  if (!window.oneriListesi) window.oneriListesi = [];
-  window.oneriListesi.push({ tur, ad, sinif, sube, icerik, neden, zaman: new Date().toLocaleTimeString('tr-TR') });
-
-  document.getElementById('screen').innerHTML = `
-    <div style="text-align:center; padding:20px 0;">
-      <div style="font-size:50px; margin-bottom:16px;">🎉</div>
-      <h3 style="margin-bottom:10px; color:#fff;">Önerin Alındı!</h3>
-      <div style="background:#111; border:1px solid #333; border-radius:14px; padding:18px; text-align:left; margin:16px 0;">
-        <div style="font-size:13px; color:#aaa; margin-bottom:8px; text-transform:uppercase; letter-spacing:1px;">${turEmojiMap[tur]} ${turAdMap[tur]} Önerisi</div>
-        <div style="font-size:16px; font-weight:700; color:#fff; margin-bottom:8px;">${icerik}</div>
-        ${neden ? `<div style="font-size:13px; color:#aaaaaa; margin-bottom:8px;">💬 "${neden}"</div>` : ''}
-        <div style="font-size:12px; color:#666; border-top:1px solid #222; padding-top:8px; margin-top:8px;">
-          👤 ${ad} &nbsp;|&nbsp; ${sinif}-${sube.toUpperCase()}
+        <div class="achievement-card">
+          <div class="news-content">
+            <h5>🎓 Bursluluk Sınavı Başvuru Duyurusu <span class="date-badge">Bilgi</span></h5>
+            <p>İlgili öğrenciler bursluluk sınavı başvurusu için resmi okul sitesindeki duyuruyu ve MEB yönlendirmelerini takip etmelidir.</p>
+          </div>
         </div>
       </div>
-      <button class="action-btn" onclick="renderOnerilerListesi()">📋 Tüm Önerileri Gör</button>
-      <button class="action-btn" style="background:#222; color:#fff; border:1px solid #444; margin-top:8px;" onclick="renderOneriMenu()">← Yeni Öneri Yap</button>
+
+      <div class="news-section-title">📰 Son Okul Haberleri</div>
+
+      <div class="news-grid">
+        <div class="achievement-card">
+          <div class="news-content">
+            <img src="https://izmitlisesi.meb.k12.tr/meb_iys_dosyalar/41/01/964128/resimler/2026_05/k_d557b2e960f4d20d278363d494088252.jpg" class="news-photo" alt="Kick Boks Dünya Şampiyonu" onerror="this.style.display='none'">
+            <h5>🥊 Kick Boks Dünya Şampiyonu İzmit Lisesi Sporcusu <span class="date-badge">22 Mayıs 2026</span></h5>
+            <p>Sporcumuz <b>Mert Ali ARĞUN</b>, Antalya'da gerçekleştirilen Turkish Open World Cup Kick Boks Şampiyonası'nda 94 kg şikletinde Dünya Şampiyonu olarak okulumuzun adını zirveye taşımıştır.</p>
+          </div>
+        </div>
+
+        <div class="achievement-card">
+          <div class="news-content">
+            <img src="https://izmitlisesi.meb.k12.tr/meb_iys_dosyalar/41/01/964128/resimler/2026_05/k_f66e8ae55dbb3c3c9c3ea819c3eb05ae.jpg" class="news-photo" alt="Buzdaki Gururu" onerror="this.style.display='none'">
+            <h5>⛸️ İzmit Lisesi'nin Buzdaki Gururu <span class="date-badge">22 Mayıs 2026</span></h5>
+            <p>Artistik Buz Pateni sporcumuz <b>Muhammed Ali BOZKURT</b>, Kocaeli Okullararası Artistik Buz Pateni Şampiyonası'nda Kocaeli 2.si olmuştur.</p>
+          </div>
+        </div>
+
+        <div class="achievement-card">
+          <div class="news-content">
+            <img src="https://izmitlisesi.meb.k12.tr/meb_iys_dosyalar/41/01/964128/resimler/2026_05/k_7d5ebef5058dabe6e9201ee665ca8a64.jpg" class="news-photo" alt="Asya Su Demir" onerror="this.style.display='none'">
+            <h5>🏅 Sporcumuz Asya Su Demir Türkiye Şampiyonasında <span class="date-badge">Mayıs 2026</span></h5>
+            <p>Sporcumuz Asya Su DEMİR, Türkiye Şampiyonası'nda başarıyla yarışarak okulumuzun gururu olmuştur.</p>
+          </div>
+        </div>
+
+        <div class="achievement-card">
+          <div class="news-content">
+            <img src="https://izmitlisesi.meb.k12.tr/meb_iys_dosyalar/41/01/964128/resimler/2026_05/k_e8c454ee57c3357c206418b0cbd6b5b0.jpg" class="news-photo" alt="19 Mayıs Arkeoloji Gezisi" onerror="this.style.display='none'">
+            <h5>🏛️ 19 Mayıs — Arkeoloji Müzesi Gezisi <span class="date-badge">Mayıs 2026</span></h5>
+            <p>19 Mayıs Gençlik ve Spor Bayramı etkinlikleri kapsamında öğrencilerimiz Arkeoloji Müzesi gezisine katılmıştır.</p>
+          </div>
+        </div>
+
+        <div class="achievement-card">
+          <div class="news-content">
+            <img src="https://izmitlisesi.meb.k12.tr/meb_iys_dosyalar/41/01/964128/resimler/2026_05/k_56de1e2d4d911d1172b8796da9431ca0.jpg" class="news-photo" alt="19 Mayıs Pano" onerror="this.style.display='none'">
+            <h5>🎨 Spor Kulübü 19 Mayıs Pano Çalışmaları <span class="date-badge">Mayıs 2026</span></h5>
+            <p>Spor Kulübümüz, 19 Mayıs Atatürk'ü Anma, Gençlik ve Spor Bayramı Haftası kapsamında anlamlı pano çalışmaları hazırlamıştır.</p>
+          </div>
+        </div>
+      </div>
+
+      <a href="https://izmitlisesi.meb.k12.tr" target="_blank">
+        <button class="action-btn" style="margin-top:20px;">Tüm Haberler — Resmi Site 🌐</button>
+      </a>
     </div>
   `;
 }
-
-// 📋 TÜM ÖNERİLERİ LİSTELE
-function renderOnerilerListesi() {
-  if (!window.oneriListesi || window.oneriListesi.length === 0) {
-    alert('Henüz hiç öneri yok!');
-    renderOneriMenu();
-    return;
-  }
-  const turEmojiMap = { dizi: '📺', film: '🎥', muzik: '🎵' };
-  const turAdMap = { dizi: 'Dizi', film: 'Film', muzik: 'Müzik' };
-
-  const kartlar = window.oneriListesi.map(o => `
-    <div class="achievement-card" style="margin-bottom:10px;">
-      <h5>${turEmojiMap[o.tur]} ${o.icerik} <span class="date-badge">${turAdMap[o.tur]}</span></h5>
-      ${o.neden ? `<p style="margin-bottom:6px;">💬 ${o.neden}</p>` : ''}
-      <p style="font-size:11px; color:#666;">👤 ${o.ad} — ${o.sinif}-${o.sube.toUpperCase()} — ${o.zaman}</p>
-    </div>
-  `).join('');
-
-  document.getElementById('screen').innerHTML = `
-    <div>
-      <h3 class="school-title">📋 Tüm Öneriler (${window.oneriListesi.length})</h3>
-      <div class="news-grid">${kartlar}</div>
-      <button class="action-btn" style="margin-top:16px;" onclick="renderOneriMenu()">← Geri Dön</button>
-    </div>
-  `;
-}
-
-// 📰 RESMİ HABERLER VE DUYURULAR EKRANI (artık kullanılmıyor ama kalabilir)
-function renderNewsAndAnnouncements() {
-  renderOneriMenu();
-}
-
 
 // 🏁 YARIŞMACI GİRİŞ EKRANI ÇİZİMİ
 function renderLoginScreen() {
