@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Okul Bilmecesi - İzmit Lisesi Mobil</title>
+  <style>
+    * { 
+      box-sizing: border-box; 
+      margin: 0; 
+      padding: 0; 
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; 
+    }
+    
+    body {
+      -webkit-tap-highlight-color: transparent; /* Mobil cihazlarda tıklama anındaki mavi gölgeyi kaldırır */
+      background-color: #121212;
+    }
+
+    .bg {
+      background-image: url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxITEhUSEhIWFRUXFxUaFhUYFhUYFRUXFRcXFxgVFRYYHiggGBolGxcXITEhJSkrLi4uFyAzODMtNygtLisBCgoKDg0OGxAQGi8fHyUtLS0tLS0tLS0tLS0uLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLf/AABEIALcBEwMBIgACEQEDEQH/xAAbAAABBQEBAAAAAAAAAAAAAAACAAEDBAUGB//EAE0QAAIBAgQCBgYFCQcCAwkAAAECEQADBBIhMQVBBhMiUWFxMoGRobHRFCNCcsEkM1JigpKywvAVQ1NzorPhY5Oj4vEWNDVEVIO0w9L/xAAaAQADAQEBAQAAAAAAAAAAAAAAAQIDBAUG/8QAKREAAgIBBAMAAQQCAw...');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      min-height: 100vh;
+    }
+
+    .overlay {
+      background: rgba(0,0,0,0.72);
+      min-height: 100vh;
+      padding: 12px;
+    }
+
+    .container { 
+      max-width: 540px; 
+      margin: 0 auto; 
+    }
+    
+    /* Skor ve Başlık Alanı */
+    .header { 
+      display: flex; 
+      align-items: center; 
+      justify-content: space-between; 
+      margin-bottom: 12px; 
+      gap: 8px; 
+    }
+
+    .title { 
+      font-size: 18px; 
+      font-weight: 700; 
+      color: #fff; 
+    }
+    
+    .score-box { 
+      display: flex; 
+      gap: 6px; 
+    }
+
+    .score-item { 
+      background: rgba(255,255,255,0.12); 
+      border-radius: 8px; 
+      padding: 4px 10px; 
+      text-align: center; 
+      border: 1px solid rgba(255,255,255,0.2); 
+    }
+
+    .score-label { 
+      font-size: 10px; 
+      color: rgba(255,255,255,0.6); 
+    }
+
+    .score-value { 
+      font-size: 15px; 
+      font-weight: 600; 
+      color: #fff; 
+    }
+
+    /* Görsel Paneli */
+    .school-card {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 12px;
+    }
+
+    .school-img {
+      width: 100%;
+      height: 135px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .school-info {
+      padding: 8px;
+      color: #fff;
+      background: rgba(0,0,0,0.4);
+      font-size: 12px;
+      font-weight: 500;
+      text-align: center;
+      letter-spacing: 0.3px;
+    }
+
+    /* Mobilde Sağa Kaydırılabilir Yatay Kategori Menüsü */
+    .category-bar { 
+      display: flex; 
+      gap: 8px; 
+      overflow-x: auto; 
+      margin-bottom: 12px;
+      padding-bottom: 4px;
+      -webkit-overflow-scrolling: touch; /* iOS için akıcı kaydırma */
+      scrollbar-width: none; /* Firefox için kaydırma çubuğunu gizler */
+    }
+
+    .category-bar::-webkit-scrollbar { 
+      display: none; /* Chrome ve Safari için kaydırma çubuğunu gizler */
+    }
+    
+    .cat-btn { 
+      padding: 8px 14px; 
+      border-radius: 20px; 
+      border: 1px solid rgba(255,255,255,0.25); 
+      background: rgba(255,255,255,0.1); 
+      color: rgba(255,255,255,0.9); 
+      font-size: 13px; 
+      cursor: pointer; 
+      white-space: nowrap; 
+      transition: all 0.2s;
+    }
+
+    .cat-btn.active { 
+      background: rgba(127,119,221,0.85); 
+      border-color: #AFA9EC; 
+      color: #fff; 
+      font-weight: 600; 
+    }
+
+    /* İlerleme Çubuğu */
+    .progress-bar { 
+      height: 5px; 
+      background: rgba(255,255,255,0.15); 
+      border-radius: 3px; 
+      margin-bottom: 12px; 
+      overflow: hidden; 
+    }
+
+    .progress-fill { 
+      height: 100%; 
+      background: #AFA9EC; 
+      border-radius: 3px; 
+      transition: width 0.3s ease; 
+    }
+    
+    /* Soru Kartı Yapısı */
+    .question-card { 
+      background: rgba(255,255,255,0.12); 
+      border: 1px solid rgba(255,255,255,0.2); 
+      border-radius: 12px; 
+      padding: 16px; 
+      margin-bottom: 12px; 
+    }
+
+    .q-meta { 
+      font-size: 11px; 
+      color: rgba(255,255,255,0.5); 
+      margin-bottom: 6px; 
+    }
+
+    .q-text { 
+      font-size: 16px; 
+      font-weight: 500; 
+      color: #fff; 
+      line-height: 1.5; 
+      margin-bottom: 16px; 
+    }
+    
+    /* Dokunmatik Ekranlar için Büyük Butonlu Şıklar */
+    .options { 
+      display: flex; 
+      flex-direction: column; 
+      gap: 10px; 
+    }
+
+    .opt-btn { 
+      width: 100%;
+      padding: 14px; 
+      border-radius: 10px; 
+      border: 1px solid rgba(255,255,255,0.25); 
+      background: rgba(255,255,255,0.08); 
+      color: #fff; 
+      font-size: 14px; 
+      cursor: pointer; 
+      text-align: left; 
+      transition: background 0.15s ease; 
+    }
+
+    .opt-btn:hover:not(:disabled) { 
+      background: rgba(255,255,255,0.15); 
+    }
+
+    .opt-btn.correct { 
+      background: rgba(99,153,34,0.8); 
+      border-color: #97C459; 
+      color: #fff; 
+    }
+
+    .opt-btn.wrong { 
+      background: rgba(226,75,74,0.8); 
+      border-color: #F09595; 
+      color: #fff; 
+    }
+    
+    /* Bilgi ve Geri Bildirim Kutusu */
+    .feedback { 
+      margin-top: 12px; 
+      padding: 12px; 
+      border-radius: 10px; 
+      font-size: 14px; 
+      line-height: 1.5; 
+    }
+
+    .feedback.correct { 
+      background: rgba(99,153,34,0.35); 
+      color: #d4ffaa; 
+      border: 1px solid #97C459; 
+    }
+
+    .feedback.wrong { 
+      background: rgba(226,75,74,0.35); 
+      color: #ffd0d0; 
+      border: 1px solid #F09595; 
+    }
+    
+    /* İleri / Tekrar Butonları */
+    .next-btn { 
+      width: 100%; 
+      margin-top: 4px; 
+      padding: 14px; 
+      border-radius: 10px; 
+      border: 1px solid rgba(255,255,255,0.3); 
+      background: rgba(255,255,255,0.15); 
+      color: #fff; 
+      font-size: 15px; 
+      font-weight: 600; 
+      cursor: pointer; 
+    }
+    
+    /* Sonuç Ekranı */
+    .result-card { 
+      text-align: center; 
+      padding: 32px 16px; 
+      background: rgba(255,255,255,0.12); 
+      border: 1px solid rgba(255,255,255,0.2); 
+      border-radius: 12px; 
+    }
+
+    .result-emoji { 
+      font-size: 48px; 
+      margin-bottom: 8px; 
+    }
+
+    .result-score { 
+      font-size: 30px; 
+      font-weight: 700; 
+      color: #fff; 
+      margin-bottom: 6px; 
+    }
+
+    .result-label { 
+      font-size: 14px; 
+      color: rgba(255,255,255,0.8); 
+      margin-bottom: 20px; 
+    }
+  </style>
+</head>
+<body>
+
+<div class="bg">
+  <div class="overlay">
+    <div class="container">
+      
+      <div class="header">
+        <div class="title">🏫 Okul Bilmecesi</div>
+        <div class="score-box">
+          <div class="score-item"><div class="score-label">Doğru</div><div class="score-value" id="sc" style="color:#b5f07a;">0</div></div>
+          <div class="score-item"><div class="score-label">Yanlış</div><div class="score-value" id="sw" style="color:#f88;">0</div></div>
+          <div class="score-item"><div class="score-label">Soru</div><div class="score-value" id="sq">0</div></div>
+        </div>
+      </div>
+
+      <div class="school-card">
+        <img src="images.jpg" alt="İzmit Lisesi" class="school-img">
+        <div class="school-info">📍 İzmit Lisesi Yarışma Dünyası</div>
+      </div>
+
+      <div class="category-bar">
+        <button class="cat-btn active" onclick="selectCat('tarih',this)">📚 Tarih</button>
+        <button class="cat-btn" onclick="selectCat('cografya',this)">🌍 Coğrafya</button>
+        <button class="cat-btn" onclick="selectCat('fen',this)">🔬 Fen</button>
+        <button class="cat-btn" onclick="selectCat('matematik',this)">🔢 Matematik</button>
+        <button class="cat-btn" onclick="selectCat('turkce',this)">📖 Türkçe</button>
+        <button class="cat-btn" onclick="selectCat('yapayzeka',this)">🤖 Yapay Zeka</button>
+        <button class="cat-btn" onclick="selectCat('karisik',this)">🎲 Karışık</button>
+      </div>
+      
+      <div class="progress-bar"><div class="progress-fill" id="pgr" style="width:0%"></div></div>
+      
+      <div id="game"></div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+const DB = {
+  tarih: [
+    { s:"Fatih Sultan Mehmet İstanbul'u kaç yaşında fethetti?", o:["A) 19","B) 21","C) 25","D) 30"], d:"B", a:"Fatih Sultan Mehmet, 1453 yılında İstanbul'u fethettiğinde 21 yaşındaydı." },
+    { s:"Kurtuluş Savaşı hangi antlaşmayla sona erdi?", o:["A) Sevr","B) Mondros","C) Lozan","D) Paris"], d:"C", a:"Lozan Antlaşması (1923) Kurtuluş Savaşı'nı hukuken sona erdirdi." },
+    { s:"Türkiye Cumhuriyeti hangi yılda kuruldu?", o:["A) 1920","B) 1921","C) 1923","D) 1925"], d:"C", a:"29 Ekim 1923'te Türkiye Cumhuriyeti ilan edildi." },
+    { s:"Osmanlı Devleti'ni kuran kişi kimdir?", o:["A) Orhan Bey","B) Osman Bey","C) Ertuğrul Gazi","D) Yıldırım Bayezit"], d:"B", a:"Osmanlı Devleti'nin kurucusu Osman Bey'dir (1299)." },
+    { s:"Atatürk hangi şehirde doğmuştur?", o:["A) Ankara","B) İstanbul","C) Selanik","D) İzmir"], d:"C", a:"Mustafa Kemal Atatürk 1881 yılında Selanik'te doğmuştur." },
+    { s:"Malazgirt Savaşı hangi yılda yapıldı?", o:["A) 1071","B) 1096","C) 1204","D) 1453"], d:"A", a:"Malazgirt Savaşı 1071 yılında Selçuklu Sultanı Alparslan ile Bizans arasında yapıldı." },
+    { s:"Kanuni Sultan Süleyman'ın tahta çıktığı yıl hangisidir?", o:["A) 1481","B) 1512","C) 1520","D) 1566"], d:"C", a:"Kanuni Sultan Süleyman 1520 yılında Osmanlı tahtına çıktı." },
+    { s:"İstanbul'un fethi hangi yılda gerçekleşmiştir?", o:["A) 1389","B) 1402","C) 1453","D) 1492"], d:"C", a:"İstanbul 29 Mayıs 1453'te Fatih Sultan Mehmet tarafından fethedildi." }
+  ],
+  cografya: [
+    { s:"Türkiye'nin başkenti neresidir?", o:["A) İstanbul","B) İzmir","C) Ankara","D) Bursa"], d:"C", a:"Ankara, 13 Ekim 1923'ten bu yana Türkiye'nin başkentidir." },
+    { s:"Dünyanın en uzun nehri hangisidir?", o:["A) Amazon","B) Nil","C) Mississippi","D) Yangtze"], d:"B", a:"Nil nehri yaklaşık 6.650 km uzunluğuyla dünyanın en uzun nehridir." },
+    { s:"Türkiye kaç ile bölünmüştür?", o:["A) 73","B) 79","C) 81","D) 85"], d:"C", a:"Türkiye 81 ile bölünmüştür." },
+    { s:"Dünyanın en büyük okyanusu hangisidir?", o:["A) Atlantik","B) Hint","C) Arktik","D) Pasifik"], d:"D", a:"Pasifik Okyanusu yaklaşık 165 milyon km² ile dünyanın en büyük okyanusudur." },
+    { s:"Türkiye'nin en uzun nehri hangisidir?", o:["A) Sakarya","B) Fırat","C) Kızılırmak","D) Dicle"], d:"C", a:"Kızılırmak yaklaşık 1.355 km ile Türkiye'nin en uzun nehridir." },
+    { s:"Afrika'nın en yüksek dağı hangisidir?", o:["A) Kenya","B) Kilimanjaro","C) Atlas","D) Ruwenzori"], d:"B", a:"Kilimanjaro (5.895 m) Afrika'nın en yüksek dağıdır ve Tanzanya'dadır." },
+    { s:"Karadeniz'e kıyısı olmayan il hangisidir?", o:["A) Trabzon","B) Samsun","C) Ankara","D) Rize"], d:"C", a:"Ankara iç bölgede yer alır ve Karadeniz'e kıyısı yoktur." },
+    { s:"Dünyanın en büyük çölü hangisidir?", o:["A) Gobi","B) Arabistan","C) Sahra","D) Antarktika"], d:"D", a:"Antarktika dünyanın en büyük çölüdür. Sahra en büyük sıcak çöldür." }
+  ],
+  fen: [
+    { s:"Suyun kimyasal formülü nedir?", o:["A) CO2","B) H2O","C) NaCl","D) O2"], d:"B", a:"Su, iki hidrojen ve bir oksijen atomundan oluşur; kimyasal formülü H₂O'dur." },
+    { s:"Güneş sisteminde kaç gezegen vardır?", o:["A) 7","B) 8","C) 9","D) 10"], d:"B", a:"2006'dan bu yana resmi olarak 8 gezegen kabul edilmektedir." },
+    { s:"Işığın havadaki hızı yaklaşık ne kadardır?", o:["A) 300.000 km/s","B) 150.000 km/s","C) 30.000 km/s","D) 1.500 km/s"], d:"A", a:"Işık boşlukta ve havada yaklaşık 300.000 km/sn hızla ilerler." },
+    { s:"Fotosentez için gerekli olmayan hangisidir?", o:["A) Güneş ışığı","B) Su","C) Azot","D) Karbondioksit"], d:"C", a:"Fotosentez için güneş ışığı, su ve karbondioksit gereklidir; azot değil." },
+    { s:"İnsan vücudundaki en uzun kemik hangisidir?", o:["A) Tibia","B) Humerus","C) Femur","D) Fibula"], d:"C", a:"Uyluk kemiği (femur) insan vücudunun en uzun ve en güçlü kemiğidir." },
+    { s:"Güneş sistemindeki en büyük gezegen hangisidir?", o:["A) Satürn","B) Jüpiter","C) Neptün","D) Uranüs"], d:"B", a:"Jüpiter güneş sistemindeki en büyük gezegendir." },
+    { s:"İnsan vücudunda kaç kemik bulunur?", o:["A) 186","B) 206","C) 226","D) 246"], d:"B", a:"Yetişkin bir insanın vücudunda 206 kemik bulunur." },
+    { s:"Hangi gaz atmosferin en büyük bölümünü oluşturur?", o:["A) Oksijen","B) Karbondioksit","C) Azot","D) Argon"], d:"C", a:"Atmosferin yaklaşık %78'i azot gazından oluşur." }
+  ],
+  matematik: [
+    { s:"2³ × 3² kaçtır?", o:["A) 54","B) 72","C) 48","D) 36"], d:"B", a:"2³ = 8 ve 3² = 9 olduğundan 8 × 9 = 72'dir." },
+    { s:"Bir üçgenin iç açıları toplamı kaç derecedir?", o:["A) 90°","B) 270°","C) 180°","D) 360°"], d:"C", a:"Her üçgenin iç açıları toplamı 180°'dir." },
+    { s:"√144 kaçtır?", o:["A) 11","B) 12","C) 13","D) 14"], d:"B", a:"12 × 12 = 144 olduğundan √144 = 12'dir." },
+    { s:"Bir dairenin çevresi hangi formülle bulunur?", o:["A) πr²","B) 2πr","C) πr","D) 4πr"], d:"B", a:"Dairenin çevresi = 2πr formülüyle hesaplanır (r = yarıçap)." },
+    { s:"15'in %40'ı kaçtır?", o:["A) 4","B) 5","C) 6","D) 7"], d:"C", a:"15 × 40/100 = 6'dır." },
+    { s:"Asal sayı olmayan hangisidir?", o:["A) 7","B) 11","C) 15","D) 13"], d:"C", a:"15 = 3 × 5 olduğundan asal sayı değildir." },
+    { s:"Bir karenin alanı 64 cm² ise kenar uzunluğu kaç cm'dir?", o:["A) 6","B) 7","C) 8","D) 9"], d:"C", a:"Kenar = √64 = 8 cm'dir." },
+    { s:"0,25 kesrinin yüzde karşılığı nedir?", o:["A) %2,5","B) %25","C) %0,25","D) %250"], d:"B", a:"0,25 × 100 = 25 → %25'tir." }
+  ],
+  turkce: [
+    { s:"'Kitap' kelimesinin çoğulu nedir?", o:["A) Kitaplar","B) Kitapları","C) Kitaplara","D) Kitaplarda"], d:"A", a:"Türkçede çoğul eki '-lar/-ler' eklenir: kitap → kitaplar." },
+    { s:"Aşağıdakilerden hangisi eylem (fiil) değildir?", o:["A) Koşmak","B) Güzel","C) Yazmak","D) Okumak"], d:"B", a:"'Güzel' bir sıfat olup eylem değildir." },
+    { s:"'Mavi gökyüzü' ifadesinde 'mavi' hangi sözcük türüdür?", o:["A) Eylem","B) Ad","C) Sıfat","D) Zarf"], d:"C", a:"'Mavi' ismi nitelediği için sıfat görevindedir." },
+    { s:"Türk alfabesinde kaç harf vardır?", o:["A) 26","B) 28","C) 29","D) 30"], d:"C", a:"Türk alfabesi 29 harften oluşur (8 sesli + 21 sessiz)." },
+    { s:"'Hızlı koştu' cümlesinde 'hızlı' hangi sözcük türüdür?", o:["A) Sıfat","B) Zarf","C) Ad","D) Bağlaç"], d:"B", a:"'Hızlı' eylemi nitelediği için zarf görevindedir." },
+    { s:"Türkçede ünlü harflerin sayısı kaçtır?", o:["A) 6","B) 7","C) 8","D) 9"], d:"C", a:"Türkçede a,e,ı,i,o,ö,u,ü olmak üzere 8 ünlü harf vardır." },
+    { s:"'Ahmet bahçede top oynuyor.' cümlesinde özne hangisidir?", o:["A) Bahçede","B) Top","C) Oynuyor","D) Ahmet"], d:"D", a:"Özne eylemi gerçekleştiren kişidir; burada 'Ahmet' öznedir." },
+    { s:"Türkçede kaç sessiz harf vardır?", o:["A) 19","B) 20","C) 21","D) 22"], d:"C", a:"Türk alfabesinde 21 sessiz (ünsüz) harf bulunur." }
+  ],
+  yapayzeka: [
+    { s:"'AI' kısaltmasının açılımı nedir?", o:["A) Advanced Intelligence","B) Artificial Intelligence","C) Automated Internet","D) App Integration"], d:"B", a:"AI, İngilizce 'Artificial Intelligence' (Yapay Zeka) kelimelerinin baş harflerinden oluşur." },
+    { s:"Yapay zekanın insanı taklit edip edemediğini ölçen ünlü test hangisidir?", o:["A) Turing Testi","B) Einstein Testi","C) Tesla Deneyi","D) Pascal Analizi"], d:"A", a:"Alan Turing tarafından 1950'de önerilen Turing Testi, bir makinenin insan benzeri zeka sergileme yeteneğini ölçer." },
+    { s:"Yapay zekanın verilerden öğrenmesini sağlayan alt dala ne ad verilir?", o:["A) Kriptografi","B) Blokzincir","C) Makine Öğrenmesi","D) Siber Güvenlik"], d:"C", a:"Makine Öğrenmesi (Machine Learning), sistemlerin verilerden öğrenip kendini geliştirmesini sağlayan bir yapay zeka dalıdır." },
+    { s:"Satrançta dünya şampiyonu Kasparov'u yenen ilk IBM yapay zekası hangisidir?", o:["A) Watson","B) Deep Blue","C) AlphaGo","D) Siri"], d:"B", a:"IBM tarafından geliştirilen Deep Blue, 1997 yılında dünya satranç şampiyonu Garry Kasparov'u yenmiştir." },
+    { s:"Go oyununda dünya şampiyonunu yenerek devrim yaratan yapay zeka hangisidir?", o:["A) AlphaGo","B) ChatGPT","C) Midjourney","D) Stockfish"], d:"A", a:"Google DeepMind tarafından geliştirilen AlphaGo, 2016 yılında Go şampiyonu Lee Sedol'u yenerek tarihi bir başarı yakalamıştır." },
+    { s:"Yapay zekanın insan beynindeki nöronları taklit eden yapısına ne denir?", o:["A) Karar Ağaçları","B) Yapay Sinir Ağları","C) Algoritma Blokları","D) Kod Matrisi"], d:"B", a:"Yapay Sinir Ağları (Artificial Neural Networks), insan beynindeki biyolojik nöronların çalışma şeklini model alır." },
+    { s:"Aşağıdakilerden hangisi bir 'Görsel Üretim' yapay zekasıdır?", o:["A) ChatGPT","B) Midjourney","C) Google Translate","D) GitHub Copilot"], d:"B", a:"Midjourney, yazılı metin komutlarını (prompt) sanatsal ve gerçekçi görsellere dönüştüren popüler bir yapay zekadır." },
+    { s:"Yapay zekaya ne yapması gerektiğini söylediğimiz yönlendirici metinlere ne denir?", o:["A) Script","B) Prompt","C) Tag","D) Syntax"], d:"B", a:"Yapay zeka modellerine verilen girdilere veya talimat metinlerine 'Prompt' denir." },
+    { s:"Kendi kendine giden araçların çevreyi algılamak için kullandığı lazer tabanlı teknoloji nedir?", o:["A) Sonar","B) LiDAR","C) Bluetooth","D) GPS"], d:"B", a:"LiDAR teknolojisi, lazer ışınları fırlatarak otonom araçların çevresindeki nesneleri 3 boyutlu haritalandırmasını sağlar." },
+    { s:"Yapay zekanın insan zekasını her alanda geride bıraktığı varsayılan teorik aşamaya ne denir?", o:["A) Dar Yapay Zeka","B) Yapay Genel Zeka (AGI)","C) Doğal Dil İşleme","D) Robotik Otomasyon"], d:"B", a:"Yapay Genel Zeka (AGI), bir insanın yapabileceği her türlü zihinsel görevvi başarıyla yerine getirebilen yapay zekadır." }
+  ],
+  karisik: []
+};
+
+// Karıştırma Algoritması
+function shuffle(arr) {
+  let newArr = [...arr];
+  for (let i = newArr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [newArr[i], newArr[j]] = [newArr[j], newArr[i]];
+  }
+  return newArr;
+}
+
+// Karışık Havuzunu İnşa Etme
+function buildKarisik() {
+  let allQuestions = [];
+  ['tarih','cografya','fen','matematik','turkce','yapayzeka'].forEach(c => {
+    allQuestions = allQuestions.concat(DB[c]);
+  });
+  DB.karisik = shuffle(allQuestions).slice(0, 10);
+}
+buildKarisik();
+
+let cat = 'tarih';
+let pool = shuffle([...DB.tarih]);
+let idx = 0, correct = 0, wrong = 0, total = 0, answered = false;
+
+// Kategori Seçim Fonksiyonu
+function selectCat(c, btn) {
+  cat = c;
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  correct = 0; wrong = 0; total = 0;
+  ['sc','sw','sq'].forEach(id => document.getElementById(id).textContent = 0);
+  document.getElementById('pgr').style.width = '0%';
+  
+  if (c === 'karisik') {
+    buildKarisik();
+    pool = DB.karisik;
+  } else {
+    pool = shuffle([...DB[c]]);
+  }
+  idx = 0; 
+  showQ();
+}
+
+// Soru Gösterme Yapısı
+function showQ() {
+  answered = false;
+  if (idx >= pool.length) { showResult(); return; }
+  const q = pool[idx]; 
+  total++;
+  
+  document.getElementById('sq').textContent = total;
+  document.getElementById('pgr').style.width = Math.round((idx / pool.length) * 100) + '%';
+  
+  // Şık havuzunu ve buton atamalarını karıştırır
+  let randomizedOptions = q.o.map((opt, i) => ({ text: opt, key: ['A','B','C','D'][i] }));
+  randomizedOptions = shuffle(randomizedOptions);
+
+  document.getElementById('game').innerHTML = `
+    <div class="question-card">
+      <div class="q-meta">Soru ${total} / ${pool.length}</div>
+      <div class="q-text">${q.s}</div>
+      <div class="options">
+        ${randomizedOptions.map((opt) => {
+          return `<button class="opt-btn" id="o${opt.key}" onclick="pick('${opt.key}')">${opt.text}</button>`;
+        }).join('')}
+      </div>
+      <div id="fb"></div>
+    </div>
+    <button class="next-btn" id="nb" style="display:none" onclick="next()">Sonraki Soru →</button>
+  `;
+}
+
+// Tıklama Algılama
+function pick(l) {
+  if (answered) return; 
+  answered = true;
+  const q = pool[idx];
+  const ok = l === q.d;
+  
+  if (ok) { 
+    correct++; 
+    document.getElementById('sc').textContent = correct; 
+  } else { 
+    wrong++; 
+    document.getElementById('sw').textContent = wrong; 
+  }
+  
+  ['A','B','C','D'].forEach(x => {
+    const b = document.getElementById('o' + x); 
+    if (!b) return;
+    b.disabled = true;
+    if (x === q.d) b.classList.add('correct');
+    else if (x === l) b.classList.add('wrong');
+  });
+  
+  const dogru = q.o[['A','B','C','D'].indexOf(q.d)];
+  document.getElementById('fb').innerHTML = `
+    <div class="feedback ${ok ? 'correct' : 'wrong'}">
+      ${ok ? '✅ Doğru!' : '❌ Yanlış! Doğru Cevap: ' + dogru}<br>
+      <span style="font-size:13px; opacity:0.95; display:block; margin-top:4px;">${q.a}</span>
+    </div>`;
+  document.getElementById('nb').style.display = 'block';
+}
+
+function next() { 
+  idx++; 
+  showQ(); 
+}
+
+// Sonuç Ekranı
+function showResult() {
+  const pct = Math.round((correct / pool.length) * 100);
+  const emoji = pct >= 80 ? '🏆' : pct >= 60 ? '👏' : pct >= 40 ? '📚' : '💪';
+  const msg = pct >= 80 ? 'Harika!' : pct >= 60 ? 'İyi iş!' : pct >= 40 ? 'Biraz daha çalış!' : 'Daha fazla pratik yap!';
+  
+  document.getElementById('pgr').style.width = '100%';
+  document.getElementById('game').innerHTML = `
+    <div class="result-card">
+      <div class="result-emoji">${emoji}</div>
+      <div class="result-score">${correct} / ${pool.length}</div>
+      <div class="result-label">${msg}<br>Başarı Oranın: %${pct}</div>
+      <button class="next-btn" style="max-width:220px; margin:0 auto; display:block;" onclick="restart()">Tekrar Oyna</button>
+    </div>`;
+}
+
+function restart() {
+  correct = 0; wrong = 0; total = 0;
+  ['sc','sw','sq'].forEach(id => document.getElementById(id).textContent = 0);
+  document.getElementById('pgr').style.width = '0%';
+  if (cat === 'karisik') buildKarisik();
+  pool = shuffle([...DB[cat]]); 
+  idx = 0; 
+  showQ();
+}
+
+// İlk Çalıştırma
+showQ();
+</script>
+</body>
+</html>
