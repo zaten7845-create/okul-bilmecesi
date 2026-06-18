@@ -6,9 +6,9 @@
     <title>İzmit Lisesi - Resmi Dijital Portalı</title>
     <style>
         :root {
-            --bg-karanlik: #060b18; /* Görseldeki derin uzay mavisi/siyah arka plan */
-            --kart-bg: rgba(255, 255, 255, 0.03); /* Yarı saydam cam efekti */
-            --neon-mavi: #1d4ed8; /* Vurucu mavi tonu */
+            --bg-karanlik: #060b18; 
+            --kart-bg: rgba(255, 255, 255, 0.03); 
+            --neon-mavi: #1d4ed8; 
             --neon-mavi-acik: #3b82f6; 
             --yazi-beyaz: #ffffff;
             --yazi-gri: #94a3b8;
@@ -22,11 +22,10 @@
             margin: 0;
             padding: 0;
             overflow-x: hidden;
-            /* Arka plana derinlik katmak için hafif bir ışık süzmesi efekti */
             background-image: radial-gradient(circle at 80% 20%, rgba(29, 78, 216, 0.15) 0%, transparent 50%);
         }
 
-        /* PREMIUM NAVBAR */
+        /* NAVBAR */
         .navbar {
             display: flex;
             justify-content: space-between;
@@ -71,7 +70,7 @@
             background-color: var(--neon-mavi);
             color: white;
             padding: 10px 22px;
-            border-radius: 50px; /* Görseldeki gibi tam yuvarlak buton */
+            border-radius: 50px;
             text-decoration: none;
             font-size: 14px;
             font-weight: 600;
@@ -79,18 +78,13 @@
             box-shadow: 0 4px 15px rgba(29, 78, 216, 0.3);
         }
 
-        .btn-nav:hover {
-            background-color: var(--neon-mavi-acik);
-            transform: translateY(-1px);
-        }
-
         /* HERO REYONU (ANA GÖVDE) */
         .hero-konteyner {
             max-width: 1200px;
-            margin: 60px auto;
+            margin: 50px auto;
             padding: 0 4%;
             display: grid;
-            grid-template-columns: 1.2fr 1fr;
+            grid-template-columns: 1fr 1.1fr;
             gap: 50px;
             align-items: center;
         }
@@ -98,13 +92,11 @@
         @media (max-width: 968px) {
             .hero-konteyner {
                 grid-template-columns: 1fr;
-                text-align: center;
                 margin: 30px auto;
             }
-            .medya-alani { justify-content: center; }
         }
 
-        /* SOL TARAF: BAŞLIKLAR VE SAYAÇLAR */
+        /* SOL BLOK: BAŞLIKLAR VE SAYAÇLAR */
         .icerik-alani .ust-etiket {
             display: inline-block;
             background-color: rgba(29, 78, 216, 0.15);
@@ -119,82 +111,33 @@
         }
 
         .icerik-alani h2 {
-            font-size: 48px;
+            font-size: 42px;
             font-weight: 800;
-            line-height: 1.15;
+            line-height: 1.2;
             margin: 0 0 20px 0;
             letter-spacing: -1px;
         }
 
         .icerik-alani h2 span {
             color: var(--neon-mavi-acik);
-            position: relative;
         }
 
-        .icerik-alani p {
+        .icerik-alani p.ana-ozet {
             color: var(--yazi-gri);
             font-size: 16px;
             line-height: 1.6;
             margin-bottom: 35px;
-            max-width: 550px;
         }
 
-        /* AKSİYON BUTONLARI */
-        .aksiyon-grup {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 50px;
-        }
-
-        @media (max-width: 968px) { .aksiyon-grup { justify-content: center; } }
-
-        .btn-ana {
-            background-color: var(--neon-mavi);
-            color: white;
-            padding: 14px 28px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 15px;
-            transition: all 0.3s;
-            box-shadow: 0 4px 20px rgba(29, 78, 216, 0.4);
-        }
-
-        .btn-ana:hover {
-            background-color: var(--neon-mavi-acik);
-            box-shadow: 0 6px 24px rgba(29, 78, 216, 0.6);
-        }
-
-        .btn-ikincil {
-            background-color: transparent;
-            color: var(--yazi-beyaz);
-            padding: 14px 28px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 15px;
-            border: 1px solid var(--cam-sinir);
-            transition: all 0.3s;
-            backdrop-filter: blur(5px);
-        }
-
-        .btn-ikincil:hover {
-            background-color: rgba(255, 255, 255, 0.05);
-            border-color: var(--yazi-gri);
-        }
-
-        /* İSTATİSTİK SAYAÇLARI (GÖRSELDEKİ +250 ALANI) */
         .istatistikler {
             display: flex;
-            gap: 40px;
+            gap: 35px;
             border-top: 1px solid var(--cam-sinir);
             padding-top: 30px;
         }
 
-        @media (max-width: 968px) { .istatistikler { justify-content: center; } }
-
         .skor-kutu h3 {
-            font-size: 28px;
+            font-size: 26px;
             margin: 0 0 5px 0;
             font-weight: 700;
             color: var(--yazi-beyaz);
@@ -206,90 +149,168 @@
             margin: 0;
         }
 
-        /* SAĞ TARAF: GÖRSEL KART YAPISI */
-        .medya-alani {
+        /* SAĞ BLOK: PREMIUM TARİHÇE PANELİ (KAYDIRILABİLİR GLASSMORPHISM) */
+        .tarihce-alani {
             display: flex;
-            justify-content: flex-end;
-            position: relative;
+            justify-content: center;
         }
 
-        .resim-cerceve {
+        .tarihce-kart {
             width: 100%;
-            max-width: 480px;
-            height: 320px;
-            background-color: rgba(255, 255, 255, 0.05); /* Burası arka plandaki okul binası fotoğrafı olacak */
-            border-radius: 16px;
+            height: 480px;
+            background: var(--kart-bg);
+            border-radius: 20px;
             border: 1px solid var(--cam-sinir);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+            padding: 35px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
             position: relative;
-            overflow: hidden;
         }
 
-        /* Görseldeki gibi kart üzerine binen yarı saydam küçük bilgi çipleri */
-        .yuzen-cip {
+        .tarihce-kart::before {
+            content: '';
             position: absolute;
-            bottom: 20px;
-            left: 20px;
-            background: rgba(6, 11, 24, 0.8);
-            border: 1px solid var(--cam-sinir);
-            backdrop-filter: blur(10px);
-            padding: 10px 16px;
-            border-radius: 8px;
+            top: 0; left: 0; right: 0; height: 40px;
+            background: linear-gradient(to bottom, rgba(6,11,24,0.5), transparent);
+            pointer-events: none;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+        }
+
+        .tarihce-baslik {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--yazi-beyaz);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid var(--cam-sinir);
+            padding-bottom: 15px;
+        }
+
+        .tarihce-baslik span {
+            color: var(--neon-mavi-acik);
+        }
+
+        .tarihce-metin-kutusu {
+            flex: 1;
+            overflow-y: auto; /* İçeriğin taşmasını engelleyip kaydırılabilir yapan sihirli kod */
+            padding-right: 15px;
+            text-align: justify;
+        }
+
+        /* Özel Şık Scrollbar Tasarımı */
+        .tarihce-metin-kutusu::-webkit-scrollbar {
+            width: 6px;
+        }
+        .tarihce-metin-kutusu::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .tarihce-metin-kutusu::-webkit-scrollbar-thumb {
+            background: var(--cam-sinir);
+            border-radius: 10px;
+        }
+        .tarihce-metin-kutusu::-webkit-scrollbar-thumb:hover {
+            background: var(--neon-mavi-acik);
+        }
+
+        .tarihce-metin-kutusu p {
+            color: #cbd5e1;
+            font-size: 14px;
+            line-height: 1.7;
+            margin-top: 0;
+            margin-bottom: 16px;
+        }
+
+        .derleyen-bilgisi {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid var(--cam-sinir);
             font-size: 12px;
-            font-weight: 600;
+            color: var(--yazi-gri);
+            text-align: right;
+            line-height: 1.5;
         }
     </style>
 </head>
 <body>
 
+    <!-- NAVBAR -->
     <nav class="navbar">
         <div class="logo-alani">
             <div style="width: 32px; height: 32px; background: linear-gradient(135deg, var(--neon-mavi-acik), var(--neon-mavi)); border-radius: 8px;"></div>
             <div class="logo-yazi">İZMİT LİSESİ</div>
         </div>
         <div class="nav-linkler">
+            <a href="#">Tarihçemiz</a>
             <a href="#">Duyurular</a>
             <a href="#">Haberler</a>
-            <a href="#">Etkinlikler</a>
         </div>
         <a href="#" class="btn-nav">E-Okul Giriş</a>
     </nav>
 
+    <!-- ANA PORTAL GÖVDESİ -->
     <div class="hero-konteyner">
         
+        <!-- SOL BLOK: GENEL VİZYON VE SAYAÇLAR -->
         <div class="icerik-alani">
-            <div class="ust-etiket">KOCAELİ / İZMİT</div>
-            <h2>Geleceği İnşa Eden <span>Köklü Eğitim</span> Çınarı.</h2>
-            <p>İzmit Lisesi, 1945'ten bu yana süregelen kurumsal hafızası, modern kampüs imkanları ve akademik başarı vizyonuyla gençleri geleceğin dünyasına hazırlıyor.</p>
+            <div class="ust-etiket">DOĞU MARMARA'NIN İLK EĞİTİM MİRASI</div>
+            <h2>Asırlık Geçmiş, <span>Modern Gelecek.</span></h2>
+            <p class="ana-ozet">Yalnızca ilimizin değil tüm Doğu Marmara’nın en eski okullarından birisi olan İzmit İdadîsinin mirasını ve kurumsal köklerini gururla taşıyoruz.</p>
             
-            <div class="aksiyon-grup">
-                <a href="#" class="btn-ana">Güncel Duyurular</a>
-                <a href="#" class="btn-ikincil">Okulumuz Hakkında</a>
-            </div>
-
             <div class="istatistikler">
                 <div class="skor-kutu">
+                    <h3>1887</h3>
+                    <p>Resmi Açılış</p>
+                </div>
+                <div class="skor-kutu">
+                    <h3>1892</h3>
+                    <p>İlk 8 Mezun</p>
+                </div>
+                <div class="skor-kutu">
                     <h3>1945</h3>
-                    <p>Kuruluş Yılı</p>
-                </div>
-                <div class="skor-kutu">
-                    <h3>2.lik</h3>
-                    <p>Genç Kızlar A İl Derecesi</p>
-                </div>
-                <div class="skor-kutu">
-                    <h3>%100</h3>
-                    <p>Güvenli Kampüs</p>
+                    <p>Lise Statüsü</p>
                 </div>
             </div>
         </div>
 
-        <div class="medya-alani">
-            <div class="resim-cerceve">
-                <div style="width:100%; height:100%; background: linear-gradient(to bottom, transparent, rgba(6,11,24,0.7)); display:flex; align-items:center; justify-content:center; color:var(--yazi-gri); font-size:14px;">
-                    [Okul Binası Fotoğraf Alanı]
+        <!-- SAĞ BLOK: ENTEGRE EDİLEN YENİ TARİHÇE PANELİ -->
+        <div class="tarihce-alani">
+            <div class="tarihce-kart">
+                <div class="tarihce-baslik">
+                    📜 <span>Tarihçemiz</span>
                 </div>
-                <div class="yuzen-cip">
-                    🚀 Başarı Odaklı Modern Vizyon
+                
+                <div class="tarihce-metin-kutusu">
+                    <p>Yalnızca ilimizin değil tüm Doğu Marmara’nın en eski okullarından birisi olan İzmit İdadîsinin mirası bugün Gazi Lisesi ve İzmit Lisesi tarafından paylaşılmaktadır. O yüzden iki okulun da geçmiş tarihi bir noktaya kadar aynıdır.</p>
+                    
+                    <p>Osmanlı İmparatorluğunun son yıllarında ortaokul seviyesinde (Rüştiye) okulları yaygınlaştırabilmek için “Mekteb-i Rüştiye Nezareti” kuruldu. Bu nezaretin hazırladığı 1869 tarihli Milli Eğitim (Maarif) tüzüğünde rüştiyelerden bir derece daha yüksek ve bugünkü lise seviyesinde İdadilerden de bahsedilir. Bu okulların hem yüksek okullar için öğrenci hem de devletin üst kademelerine memur yetiştirmek için planlandığı ve ona uygun bir program yürütüldüğü görülür. Ancak bu amaca hizmet edecek idadi binalarını yapacak mimar ve plan sıkıntısı söz konusuydu. Bu yüzden yapılacak okulların planları Avrupa’dan araştırılmış ve nihayet Fransa’nın Paris kentinde uygulanan bina biçimleri uygun bulunmuştu. İncelemek için bulunan bina planları üç tip olup, şehrimiz için uygun görüleni de başta olmak üzere orta büyüklükteki planın çoğunlukla tatbiki uygun görülmüştür.</p>
+                    
+                    <p>Yapılış amacı ve planı yukarıda açıklanan idadilerden birinin ilimizde açılmasına da Maarif Nezareti’nin (Milli Eğitim) emriyle karar verilmiş, yer olarak da eski Bağdad sonra İstanbul ve halen İnönü caddesi isimlerini alan cadde ile Alemdar caddesinin kesiştiği köşedeki eski Şer’iye Mahkemesinin binasının olduğu arsa düşünülmüştür. Mahkeme binası yıktırılarak 1884 yılında temel atılan okul binasının inşaatı iki senede tamamlanmıştır. 31 Ağustos 1887 de resmi açılışı yapılan bina 12 Eylül 1887 de Mekteb-i İdadi adıyla; altı kişilik eğitim heyeti ve bir derslikle faaliyete geçmiştir. Binayı yaptıran kişi olarak Sultan II. Mahmut’un torunu ve Sultan Abdülmecit’in oğlu II. Abdülhamit olduğu ve maliyetin o günkü para birimiyle 439.785 kuruş olduğu bilinmektedir.</p>
+                    
+                    <p>Bu okul 1892 yılında sekiz mezun vermiştir. Bunu takip eden yirmi iki yıllık idadi döneminde toplam yüz elli iki mezun verilmiştir. Okul 1913 senesinde “Sultani” adını almış ve 1919 a kadar geçen Sultani döneminde on yedi mezun verilmiştir. I. Dünya savaşı (1914–1918) yıllarında okulun aynı zamanda öğretmen okulu olarak da kullanıldığı sanılmaktadır. Sultani döneminde okulumuzda ders vermiş ünlü bir isim göze çarpar ki kendisi Şair ve Akbaba adlı mizah ve karikatür dergilerinin kurucu sahibi, edebiyatçı Yusuf Ziya Ortaç’tır. Birinci dünya savaşı döneminde hastane olarak da kullanılan bina yüzünden öğrenciler geçici binalarda öğrenime devam etmişlerdir. Savaştan sonra Yunanlıların işgali günlerinde okul binasının kullanılamadığı ve eşyaların Yunanlılar tarafından yağmalandığı da bilinmektedir.</p>
+                    
+                    <p>İzmit’in geri alınmasından sonra 1922–1923 eğitim yılı başında ortaokul olarak açılmıştır ve o günkü adı “Akçakoca Numune Mektebidir”. O yıllarda öğrenci azlığı nedeniyle ortaokul talebeleri bugünkü Kız Meslek Lisesi binasına naklolunmuş, bina ilkokul olarak tahsis edilmiştir.</p>
+                    
+                    <p>Okul Cumhuriyet devri başında “Leyli (yatılı) İzmit Sultaniyesi” adı ile tedrisata devam etmiş daha sonraları sırasıyla “Nehari (gündüzlü) Sultani”, “Lise” ,”Orta mekteb” adlarını almıştır. 1926 yılına kadar sadece erkeklerin okuduğu okul eğitim öğretim birliği yasasına bağlı olarak kız öğrencileri de bünyesine almıştır. Okula kayıt olan ilk kız öğrenci sayısı on yedidir. Uzun yıllar bakımsız kalan okul 1931 yılında Maarif vekâletinin ciddi bir bütçe ayırmasıyla onarımdan geçirilmiş hatta okul bahçesine bitişik Hafız Binbaşının evi istimlâk edilerek yıkıldıktan sonra açılan geniş arsa okula ilave edilmiştir. Ancak bu istimlâk ve yıkım işleminin 1936’dan sonra yapıldığı tahmin edilmektedir. 19 Haziran 1943 tarihindeki Adapazarı Hendek depreminde okulun çatı kısmı ciddi zarara uğramış fakat kısa sürede tamir edilmiştir.</p>
+                    
+                    <p>Yukarıda adı geçen ve bugün Gazi Lisesi adı altında hizmet vermeye devam eden binanın tam karşısında bulunan arazi eskiden “Ambar Bahçe” adıyla anılan boş alan olup bayram yeri olarak da kullanılmaktaydı. Çocukların boş zamanlarında top oynadıkları bu bahçenin güney doğu köşesinde eskiden mezarlık olduğu, daha sonra mezarların taşınarak buraya iki katlı bir ev yapıldığı, bu evin de yıkıldıktan sonra ilk lise binasını giriş kapısının buradan verildiği bilinmektedir. Ambar Bahçenin doğusundaki boş alanın tamamının mezarlık olduğu ve sonradan bu mezarların kaldırılarak çocuk parkı şeklinde tanzim edildiği bilinmektedir. 1945 yılına kadar ortaokul adı altında faaliyet gösteren okul bu tarihte liseye çevrilmiş tek müdürlük yönetiminde toplanarak adı İzmit Lisesi olarak belirlenmiştir.</p>
+                    
+                    <p>Okulumuzun spor salonu olarak kullanılan bölümü ilk yapılışı bakımından toplantı ve müsamere salonu olarak planlanmış olup 1950–51 Eğitim Öğretim yılında büyük gayretlerle spor salonu haline getirilmiştir. 1956–59 mali yıllarında gönderilen ödenekle ahşap bina betonarmeye döndürülmüş dört derslik daha ilave edilerek tamir edilmiş ve genişletilmiştir. 1965–66 Eğitim-Öğretim yılında İzmit Lisesi ile Merkez (İzmit )ortaokulu tamamen ayrılmış; lise yeni bina ile spor salonunun bulunduğu bölümde faaliyetini sürdürürken eski idadi binası İzmit ortaokulu olarak devam etmiştir. 1968–1969 Öğretim yılında okula 12 derslikli bir bina eklenmiştir. (Merkez ortaokulu adıyla anılan bölüm 1993–94 öğretim yılında Gazi Lisesi adını alarak liseye çevrilmiştir). 1990–91 Eğitim-öğretim yılına kadar klasik sisteme göre eğitim veren okulumuz 1993-94’e kadar kredili sisteme göre eğitim vermiştir. 1993–94 Eğitim-öğretim yılından itibaren “Yabancı Dil Ağırlıklı Lise” haline gelen okulumuz eğitim-öğretim faaliyetine 17 Ağustos 1999 depreminde aldığı hasar sebebiyle o eğitim – öğretim yılında (1999–2000) tamirat yüzünden Kanlıbağ da bulunan Kız İmam hatip binasında devam etmiş, kendi binasına öğretim yılı sonlarına doğru dönmüştür.</p>
+                    
+                    <p>Okulumuz 2005 yılından beri Anadolu Lisesi Statüsünde faaliyetini sürdürmektedir. Ancak köklü geçmişi ve tarihi özellikleri yüzünden adı değiştirilmemiş ve “Anadolu” kelimesi ilave edilmemiştir.</p>
+                    
+                    <p style="font-size: 11px; color: var(--yazi-gri); font-style: italic;">NOT: Okulumuzun tarihçesi derlenirken okul arşivinden, eski idareci ve mezunların bilgilerinden ve Kocaeli Dokümantasyon Merkezinden yararlanılmıştır.</p>
+                </div>
+
+                <div class="derleyen-bilgisi">
+                    Derleyen<br>
+                    <strong>Arsan SAVUR</strong><br>
+                    (İzmit Lisesi Tarih Öğretmeni)
                 </div>
             </div>
         </div>
