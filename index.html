@@ -3,147 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>İzmit Lisesi - T.C. Millî Eğitim Bakanlığı</title>
+    <title>Benim Yakışıklı Sayfam</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Arial, sans-serif; }
-        body { background: #f4f6f9; color: #333; line-height: 1.6; }
-        
-        header {
-            background: linear-gradient(to right, #003087, #0066cc);
-            color: white;
-            padding: 15px 0;
-        }
-        .header-content {
-            max-width: 1250px;
-            margin: 0 auto;
+        /* CSS Kodlarımız Buraya Geliyor */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #1e1e24; /* Koyu modern arka plan */
+            color: #fff; /* Beyaz yazı rengi */
             display: flex;
+            justify-content: center;
             align-items: center;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
+            height: 100vh;
+            margin: 0;
         }
-        .logo {
-            height: 90px;
-            width: auto;
-        }
-        .okul-bilgi {
-            text-align: center;
-        }
-        .meb { font-size: 18px; font-weight: bold; }
-        .okul-adi { font-size: 32px; margin: 8px 0; font-weight: bold; }
 
-        nav {
-            background: #002d5a;
-            padding: 16px 0;
+        .kart {
+            background-color: #2a2a35; /* Kartın arka planı */
+            padding: 30px;
+            border-radius: 15px; /* Köşeleri yuvarlama */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3); /* Hafif gölge */
+            text-align: center;
+            max-width: 400px;
+            border: 2px solid #ff4a5a; /* Canlı bir detay çizgisi */
         }
-        nav ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 28px;
+
+        h1 {
+            color: #ff4a5a; /* Başlık rengi */
+            margin-top: 0;
         }
-        nav a {
+
+        p {
+            color: #b3b3cc; /* Yardımcı yazı rengi */
+            line-height: 1.6;
+        }
+
+        .buton {
+            display: inline-block;
+            background-color: #ff4a5a;
             color: white;
+            padding: 10px 20px;
             text-decoration: none;
-            font-weight: 500;
-            font-size: 17px;
-        }
-        nav a:hover { color: #ffd700; }
-
-        .hero {
-            background: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url('https://via.placeholder.com/1920x500?text=%C4%B0zmit+Lisesi+Binasi') center/cover no-repeat;
-            height: 450px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            text-align: center;
-        }
-        .hero h1 { font-size: 48px; text-shadow: 0 4px 15px rgba(0,0,0,0.9); }
-
-        .container { max-width: 1250px; margin: 0 auto; padding: 30px 20px; }
-
-        .section { margin: 50px 0; }
-        h2 { 
-            color: #003087; 
-            border-bottom: 4px solid #0066cc; 
-            padding-bottom: 12px;
-            margin-bottom: 25px;
+            border-radius: 8px;
+            font-weight: bold;
+            margin-top: 15px;
+            transition: background 0.3s ease; /* Geçiş efekti */
         }
 
-        .news-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-            gap: 25px;
+        .buton:hover {
+            background-color: #e03e4d; /* Fareyle üzerine gelince renk değişimi */
         }
-        .card {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 6px 16px rgba(0,0,0,0.1);
-        }
-        .card:hover { transform: translateY(-8px); transition: 0.3s; }
-        .card img { width: 100%; height: 200px; object-fit: cover; }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="header-content">
-            <img src="https://via.placeholder.com/120x120?text=LOGO" alt="İzmit Lisesi Logo" class="logo">
-            <div class="okul-bilgi">
-                <div class="meb">T.C. MİLLÎ EĞİTİM BAKANLIĞI</div>
-                <div class="okul-adi">İZMİT LİSESİ</div>
-                <div>Kocaeli / İzmit</div>
-            </div>
-        </div>
-    </header>
-
-    <nav>
-        <ul>
-            <li><a href="#">Ana Sayfa</a></li>
-            <li><a href="#">Okulumuz</a></li>
-            <li><a href="#">Haberler</a></li>
-            <li><a href="#">Duyurular</a></li>
-            <li><a href="#">Öğretmen Kadrosu</a></li>
-            <li><a href="#">Galeri</a></li>
-            <li><a href="#">İletişim</a></li>
-        </ul>
-    </nav>
-
-    <div class="hero">
-        <h1>Hoş Geldiniz</h1>
-    </div>
-
-    <div class="container">
-        <div class="section">
-            <h2>Son Haberler</h2>
-            <div class="news-grid">
-                <div class="card">
-                    <img src="https://via.placeholder.com/400x220?text=Haber+1" alt="">
-                    <div style="padding:20px;">
-                        <h3>Yeni Eğitim Yılı Başladı</h3>
-                        <p>Öğrencilerimiz 2025-2026 eğitim öğretim yılına büyük bir heyecanla başladı.</p>
-                    </div>
-                </div>
-                <div class="card">
-                    <img src="https://via.placeholder.com/400x220?text=Haber+2" alt="">
-                    <div style="padding:20px;">
-                        <h3>Başarılarımız Devam Ediyor</h3>
-                        <p>Öğrencilerimiz çeşitli yarışmalarda önemli dereceler elde etti.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <footer style="background: #002d5a; color: white; text-align: center; padding: 40px 20px; margin-top: 50px;">
-        <p><strong>İzmit Lisesi</strong></p>
-        <p>Adres: [Okulunuzun tam adresi]</p>
-        <p>Telefon: (0262) XXX XX XX</p>
-        <p>© 2026 İzmit Lisesi - Tüm Hakları Saklıdır.</p>
-    </footer>
-
-</body>
-</html>
+    <div class="kart">
