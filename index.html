@@ -3,57 +3,195 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Benim Yakışıklı Sayfam</title>
+    <title>Okul Bilmecesi</title>
     <style>
-        /* CSS Kodlarımız Buraya Geliyor */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #1e1e24; /* Koyu modern arka plan */
-            color: #fff; /* Beyaz yazı rengi */
+            background-color: #1e1e24; 
+            color: #fff; 
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* ÜST MENÜ (NAVBAR) */
+        .navbar {
+            background-color: #16161a;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #ff4a5a;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: bold;
+            color: #ff4a5a;
+        }
+
+        .skor-tabelasi {
+            background-color: #2a2a35;
+            padding: 5px 15px;
+            border-radius: 20px;
+            border: 1px solid #ff4a5a;
+            font-weight: bold;
+        }
+
+        /* OYUN ALANI */
+        .icerik {
+            flex: 1;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
+            padding: 20px;
         }
 
         .kart {
-            background-color: #2a2a35; /* Kartın arka planı */
-            padding: 30px;
-            border-radius: 15px; /* Köşeleri yuvarlama */
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3); /* Hafif gölge */
+            background-color: #2a2a35; 
+            padding: 40px;
+            border-radius: 15px; 
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3); 
             text-align: center;
-            max-width: 400px;
-            border: 2px solid #ff4a5a; /* Canlı bir detay çizgisi */
+            max-width: 500px;
+            width: 100%;
+            border-left: 5px solid #ff4a5a;
         }
 
         h1 {
-            color: #ff4a5a; /* Başlık rengi */
+            color: #fff;
             margin-top: 0;
+            font-size: 24px;
+            margin-bottom: 25px;
         }
 
-        p {
-            color: #b3b3cc; /* Yardımcı yazı rengi */
-            line-height: 1.6;
+        /* SEÇENEK BUTONLARI */
+        .secenekler {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
         }
 
-        .buton {
-            display: inline-block;
-            background-color: #ff4a5a;
-            color: white;
-            padding: 10px 20px;
-            text-decoration: none;
+        .secenek-btn {
+            background-color: #1e1e24;
+            color: #fff;
+            border: 2px solid #3f3f4e;
+            padding: 14px;
             border-radius: 8px;
-            font-weight: bold;
-            margin-top: 15px;
-            transition: background 0.3s ease; /* Geçiş efekti */
+            font-size: 16px;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.2s ease;
         }
 
-        .buton:hover {
-            background-color: #e03e4d; /* Fareyle üzerine gelince renk değişimi */
+        .secenek-btn:hover {
+            border-color: #ff4a5a;
+            background-color: #25252d;
+            transform: translateX(5px);
+        }
+
+        /* BİLDİRİM MESAJI */
+        #mesaj {
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 18px;
+            min-height: 24px;
         }
     </style>
 </head>
 <body>
 
-    <div class="kart">
+    <!-- ÜST MENÜ VE SKOR -->
+    <nav class="navbar">
+        <div class="logo">🏫 Okul Bilmecesi</div>
+        <div class="skor-tabelasi">Puan: <span id="puan">0</span></div>
+    </nav>
+
+    <!-- BİLMENCE KART ALANI -->
+    <div class="icerik">
+        <div class="kart">
+            <h1 id="soru-metni">Soru yükleniyor...</h1>
+            
+            <div class="secenekler">
+                <button class="secenek-btn" onclick="cevapKontrol(0)" id="btn0">A şıkkı</button>
+                <button class="secenek-btn" onclick="cevapKontrol(1)" id="btn1">B şıkkı</button>
+                <button class="secenek-btn" onclick="cevapKontrol(2)" id="btn2">C şıkkı</button>
+                <button class="secenek-btn" onclick="cevapKontrol(3)" id="btn3">D şıkkı</button>
+            </div>
+
+            <div id="mesaj"></div>
+        </div>
+    </div>
+
+    <!-- OYUN MANTIĞI (JAVASCRIPT) -->
+    <script>
+        // Bilmece Soruları
+        const sorular = [
+            {
+                soru: "Sıra sıra dizilirler, her gün bizi beklerler. Üzerinde yazı yazar, bazen de resim çizeriz. Nedir bu?",
+                secenekler: ["Okul Tahtası", "Öğrenci Sırası", "Kütüphane", "Öğretmen Kürsüsü"],
+                dogru: 1 // "Öğrenci Sırası"
+            },
+            {
+                soru: "Zil çalınca herkes ona koşar, içinde neşeyle oyunlar coşar. Okulun en geniş yeridir, bilin bakalım neresidir?",
+                secenekler: ["Sınıf", "Kantin", "Okul Bahçesi", "Müdür Odası"],
+                dogru: 2 // "Okul Bahçesi"
+            },
+            {
+                soru: "Bilgi verir herkese, ışık tutar zihne. Okulda en çok sevilen, rehber olan kimdir bize?",
+                secenekler: ["Öğretmen", "Müdür", "Nöbetçi Öğrenci", "Arkadaş"],
+                dogru: 0 // "Öğretmen"
+            }
+        ];
+
+        let mevcutSoruIndex = 0;
+        let toplamPuan = 0;
+
+        function soruYukle() {
+            if (mevcutSoruIndex < sorular.length) {
+                const mevcutSoru = sorular[mevcutSoruIndex];
+                document.getElementById("soru-metni").innerText = mevcutSoru.soru;
+                document.getElementById("btn0").innerText = mevcutSoru.secenekler[0];
+                document.getElementById("btn1").innerText = mevcutSoru.secenekler[1];
+                document.getElementById("btn2").innerText = mevcutSoru.secenekler[2];
+                document.getElementById("btn3").innerText = mevcutSoru.secenekler[3];
+                document.getElementById("mesaj").innerText = "";
+            } else {
+                // Oyun bittiğinde
+                document.getElementById("soru-metni").innerText = "Tebrikler! Tüm bilmeceleri tamamladın 🎉";
+                document.querySelector(".secenekler").style.display = "none";
+                document.getElementById("mesaj").innerText = "Oyun bitti. Toplam Puanın: " + toplamPuan;
+                document.getElementById("mesaj").style.color = "#ff4a5a";
+            }
+        }
+
+        function cevapKontrol(secilenIndex) {
+            const dogruCevap = sorular[mevcutSoruIndex].dogru;
+            const mesajAlani = document.getElementById("mesaj");
+
+            if (secilenIndex === dogruCevap) {
+                toplamPuan += 10;
+                document.getElementById("puan").innerText = toplamPuan;
+                mesajAlani.innerText = "Doğru Cevap! 🎉 +10 Puan";
+                mesajAlani.style.color = "#2ecc71"; // Yeşil
+            } else {
+                toplamPuan -= 5;
+                document.getElementById("puan").innerText = toplamPuan;
+                mesajAlani.innerText = "Yanlış Cevap! ❌ -5 Puan";
+                mesajAlani.style.color = "#e74c3c"; // Kırmızı
+            }
+
+            // 1.5 saniye sonra sonraki soruya geç
+            setTimeout(() => {
+                mevcutSoruIndex++;
+                soruYukle();
+            }, 1500);
+        }
+
+        // Sayfa ilk açıldığında ilk soruyu getir
+        soruYukle();
+    </script>
+
+</body>
+</html>
