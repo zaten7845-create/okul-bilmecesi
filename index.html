@@ -1,204 +1,870 @@
-<!DOCTYPE html>
+html
+
+<!DOKTİP html>
 <html lang="tr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>İzmit Lisesi - Resmi Dijital Portalı</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <style>
-        :root {
-            --bg: #060b18;
-            --card: rgba(255,255,255,0.03);
-            --neon: #3b82f6;
-            --neon-light: #60a5fa;
-            --text: #ffffff;
-            --text-gray: #94a3b8;
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Segoe UI', system-ui, sans-serif;
-            background: var(--bg);
-            color: var(--text);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
+<kafa>
+<meta charset="UTF-8">
+<meta isim="görünüm alanı" i̇çerik="genişlik=cihaz genişliği, başlangıç ölçeği=1,0">
+<başlık>Atatürk Ortaokulu — Duyuru Panosu</başlık>
+<bağlantı rel="ön bağlantı" href="https://fonts.googleapis.com">
+<bağlantı href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@500&display=swap" rel="stil sayfası">
+<stil>
+  :kök{
+    --mantar: #8a6240;
+    --mantar-karanlık: #6e4d33;
+    --mürekkep: #2b2118;
+    --donanma: #1b2a4a;
+    --krema: #fbf7ec;
+    --kağıt-sarı: #f7e9b0;
+    --kağıt-mavi: #dcebf5;
+    --kağıt-pembe: #f6d8d0;
+    --kağıt yeşili: #e3ecd9;
+    --iğne kırmızısı: #c0392b;
+    --pin-donanma: #1b2a4a;
+    --pin-yeşil: #2f6b4f;
+    --hardal iğnesi: #c98a2c;
+  }
 
-        .navbar {
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            background: rgba(6,11,24,0.95);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255,255,255,0.08);
-            padding: 18px 8%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-weight: 800;
-            font-size: 22px;
-            letter-spacing: 1px;
-        }
-        .nav-links a {
-            color: var(--text-gray);
-            margin: 0 18px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: 0.3s;
-        }
-        .nav-links a:hover, .nav-links a.active {
-            color: white;
-        }
+  *{ kutu boyutu: sınır kutusu; }
 
-        .hero {
-            padding: 80px 8% 60px;
-            display: grid;
-            grid-template-columns: 1fr 1.1fr;
-            gap: 60px;
-            align-items: center;
-            max-width: 1300px;
-            margin: 0 auto;
-        }
-        @media (max-width: 968px) {
-            .hero { grid-template-columns: 1fr; text-align: center; }
-        }
+  vücut{
+    marjı: 0;
+    yazı tipi ailesi: 'İçeri', sans-serif;
+    renk: var(--mürekkep);
+    arka plan rengi: var(--mantar);
+    arka plan resmi:
+      radyal gradyan(daire çizin 20% 30%, rgba(0,0,0,0,10) 1.5px, şeffaf 1.6px),
+      radyal gradyan(daire çizin 60% 70%, rgba(0,0,0,0,08) 1.5px, şeffaf 1.6px),
+      radyal gradyan(daire çizin 80% 20%, rgba(0,0,0,0,07) 1.5px, şeffaf 1.6px),
+      doğrusal gradyan(160deg, var(--mantar) 0%, var(--mantar-karanlık) 100%);
+    arka plan boyutu: 38px 38px, 44px 44px, 30px 30px, 100% 100%;
+    min-yükseklik: 100vh;
+  }
 
-        .content h1 {
-            font-size: 42px;
-            line-height: 1.1;
-            margin-bottom: 20px;
-        }
-        .content h1 span { color: var(--neon-light); }
-        .content p { color: var(--text-gray); font-size: 17px; }
+  /* ---------- BAŞLIK ------------ */
+  başlık{
+    pozisyon: göreceli;
+    arka plan: var(--donanma);
+    renk: var(--krema);
+    metin hizala: merkez;
+    dolgu: 38px 20px 30px;
+    kutu gölgesi: 0 6px 18px rgba(0,0,0,0,35);
+  }
+  başlık .kaş{
+    yazı tipi ailesi: 'IBM Plex Mono', monospace;
+    yazı tipi boyutu: 12px;
+    harf aralığı: 3px;
+    metin dönüşümü: büyük harf;
+    renk: var(--hardal iğnesi);
+  }
+  başlık h1{
+    yazı tipi ailesi: 'Mağara', el yazısı;
+    yazı tipi ağırlığı: 700;
+    yazı tipi boyutu: kelepçe(40px, 7vw, 64px);
+    marjı: 4px 0 6px;
+    çizgi yüksekliği: 1;
+  }
+  başlık s{
+    marjı: 0;
+    yazı tipi boyutu: 14px;
+    opaklık: 0,8;
+  }
+  başlık::sonra{
+    i̇çerik: "";
+    pozisyon: mutlak;
+    alt: -10px; sol sol: 50%;
+    dönüştür: çevirmekX(-50%);
+    genişlik: 3px; yükseklik: 20px;
+    arka plan: var(--hardal iğnesi);
+  }
 
-        .stats {
-            display: flex;
-            gap: 40px;
-            margin-top: 30px;
-        }
-        .stat-item h3 {
-            font-size: 28px;
-            color: var(--neon-light);
-        }
+  /* ---------- FILTRE ÇIPLERI ----------- */
+  .filtreler{
+    görüntülemek: flex;
+    gerekçelendirme içeriği: merkez;
+    esnek sargı: sarmak;
+    boşluk: 10px;
+    dolgu: 24px 16px 6px;
+  }
+  .çip{
+    yazı tipi ailesi: 'IBM Plex Mono', monospace;
+    yazı tipi boyutu: 12px;
+    harf aralığı: 0,5px;
+    dolgu: 7px 14px;
+    sınır yarıçapı: 20px;
+    sınır: 1px katı rgba(251,247,236,0,4);
+    arka plan: rgba(0,0,0,0,18);
+    renk: var(--krema);
+    i̇mleç: i̇şaretçi;
+    geçiş: dönüştür 0,15s kolaylık, arka plan 0,15s kolaylık;
+  }
+  .çip:hover{ dönüştür: çevirmekY(-1px); }
+  .çip.aktif{
+    arka plan: var(--hardal iğnesi);
+    kenarlık rengi: var(--hardal iğnesi);
+    renk: var(--mürekkep);
+    yazı tipi ağırlığı: 600;
+  }
 
-        /* Dinamik Kart */
-        .dynamic-card {
-            background: var(--card);
-            border: 1px solid rgba(255,255,255,0.08);
-            border-radius: 20px;
-            padding: 35px;
-            height: 520px;
-            box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.4);
-            position: relative;
-            overflow: hidden;
-        }
+  /* ---------- KURUL ------------ */
+  .board{
+    maksimum genişlik: 1100px;
+    marjı: 0 otomatik;
+    dolgu: 30px 24px 70px;
+    görüntülemek: izgara;
+    izgara-şablon-sütunlar: tekrarlayın(otomatik doldurma, minmaks(250px, 1fr));
+    boşluk: 38px 28px;
+  }
 
-        .history-panel {
-            display: none;
-            flex-direction: column;
-            height: 100%;
-        }
-        .history-panel.active { display: flex; }
+  /* ---------- NOT KARTI ------------ */
+  .not{
+    pozisyon: göreceli;
+    dolgu: 22px 18px 18px;
+    kutu gölgesi: 0 10px 18px rgba(0,0,0,0,28);
+    geçiş: dönüştür 0,2s kolaylık, kutu gölgesi 0,2s kolaylık;
+    yazı tipi boyutu: 14.5px;
+    çizgi yüksekliği: 1.5;
+  }
+  .not:hover{
+    dönüştür: çevirmekY(-4px) döndürmek(0deg) !önemli;
+    kutu gölgesi: 0 16px 26px rgba(0,0,0,0,32);
+    z-indeksi: 5;
+  }
 
-        footer {
-            text-align: center;
-            padding: 40px;
-            color: var(--text-gray);
-            border-top: 1px solid rgba(255,255,255,0.08);
-            margin-top: 80px;
-        }
-    </style>
-</head>
-<body>
+  /* bazı notlara bant */
+  .bant{
+    pozisyon: mutlak;
+    üst: -12px; sol sol: 50%;
+    dönüştür: çevirmekX(-50%) döndürmek(-3deg);
+    genişlik: 70px; yükseklik: 22px;
+    arka plan: rgba(255,255,255,0,55);
+    sınır: 1px katı rgba(255,255,255,0,7);
+  }
 
-    <nav class="navbar">
-        <div class="logo">
-            <div style="width:42px;height:42px;background:linear-gradient(135deg,#3b82f6,#1e40af);border-radius:10px;"></div>
-            İZMİT LİSESİ
-        </div>
-        <div class="nav-links">
-            <a href="#">Ana Sayfa</a>
-            <a href="#" onclick="toggleHistory()" id="tarihce-btn">Tarihçemiz</a>
-            <a href="#">Duyurular</a>
-            <a href="#">Haberler</a>
-            <a href="#">Galeri</a>
-            <a href="#">İletişim</a>
-        </div>
-        <a href="#" style="background:#1e40af;color:white;padding:10px 24px;border-radius:50px;font-weight:600;">E-Okul</a>
-    </nav>
+  /* bant yerine başkalarına sabitleyin */
+  .pin{
+    pozisyon: mutlak;
+    üst: -9px; sol sol: 50%;
+    dönüştür: çevirmekX(-50%);
+    genişlik: 16px; yükseklik: 16px;
+    sınır yarıçapı: 50%;
+    kutu gölgesi: 0 3px 4px rgba(0,0,0,0,4);
+  }
+  .pin.red{ arka plan: var(--iğne kırmızısı); }
+  .pin.donanma{ arka plan: var(--pin-donanma); }
+  .pin.yeşil{ arka plan: var(--pin-yeşil); }
 
-    <div class="hero">
-        <div class="content">
-            <div style="display:inline-block;background:rgba(59,130,246,0.15);color:var(--neon-light);padding:8px 20px;border-radius:50px;font-size:13px;margin-bottom:20px;">
-                DOĞU MARMARA'NIN KÖKLÜ EĞİTİM MİRASI
-            </div>
-            <h1>Asırlık Geçmiş,<br><span>Modern Gelecek</span></h1>
-            <p>1887'den beri kaliteyi ve geleneği bir arada taşıyan İzmit Lisesi olarak, geleceğin aydınlarını yetiştirmeye devam ediyoruz.</p>
+  .etiket sırası{
+    görüntülemek: flex;
+    gerekçelendirme içeriği: uzay-arasında;
+    align-öğeleri: merkez;
+    kenar boşluğu-alt: 10px;
+    boşluk: 8px;
+  }
+  .etiket{
+    yazı tipi ailesi: 'IBM Plex Mono', monospace;
+    yazı tipi boyutu: 10.5px;
+    harf aralığı: 0,5px;
+    metin dönüşümü: büyük harf;
+    dolgu: 3px 8px;
+    sınır yarıçapı: 3px;
+    renk: var(--krema);
+    beyaz boşluk: şimdirap;
+  }
+  .etiket.sinav{ arka plan: var(--iğne kırmızısı); }
+  .etiket.etkinlik{ arka plan: var(--pin-yeşil); }
+  .etiket.tatil{ arka plan: var(--hardal iğnesi); renk: var(--mürekkep); }
+  .etiket.toplanti{ arka plan: var(--pin-donanma); }
+  .etiket.spor{ arka plan: #4a7a96; }
+  .etiket.kutuphane{ arka plan: #6b5b95; }
 
-            <div class="stats">
-                <div class="stat-item">
-                    <h3>1887</h3>
-                    <p>Kuruluş</p>
-                </div>
-                <div class="stat-item">
-                    <h3>137+</h3>
-                    <p>Yıllık Deneyim</p>
-                </div>
-                <div class="stat-item">
-                    <h3>1945</h3>
-                    <p>Lise Statüsü</p>
-                </div>
-            </div>
-        </div>
+  .tarih{
+    yazı tipi ailesi: 'IBM Plex Mono', monospace;
+    yazı tipi boyutu: 11px;
+    opaklık: 0,65;
+  }
 
-        <!-- Dinamik Kart -->
-        <div class="dynamic-card" id="kart">
-            <!-- Ana Ekran -->
-            <div id="ana-ekran">
-                <div style="height:280px;background:linear-gradient(135deg,rgba(255,255,255,0.05),rgba(59,130,246,0.1));border-radius:16px;display:flex;align-items:center;justify-content:center;color:#64748b;font-size:15px;border:1px solid rgba(255,255,255,0.08);">
-                    Okul Binası Fotoğrafı
-                </div>
-                <div style="margin-top:25px;padding:14px 20px;background:rgba(6,11,24,0.8);border-radius:12px;display:inline-block;">
-                    🚀 Başarı Odaklı Eğitim
-                </div>
-            </div>
+  .not h3{
+    yazı tipi ailesi: 'Mağara', el yazısı;
+    yazı tipi boyutu: 24px;
+    yazı tipi ağırlığı: 700;
+    marjı: 0 0 8px;
+    çizgi yüksekliği: 1.1;
+  }
+  .not p{ marjı: 0; opaklık: 0,85; beyaz boşluk: ön sarma; }
 
-            <!-- Tarihçe Paneli -->
-            <div id="tarihce-panel" class="history-panel">
-                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
-                    <h2 style="font-size:24px;">📜 Tarihçemiz</h2>
-                    <button onclick="toggleHistory()" style="background:none;border:none;color:#94a3b8;font-size:28px;cursor:pointer;">✕</button>
-                </div>
-                <div style="flex:1;overflow-y:auto;color:#cbd5e1;font-size:15px;line-height:1.8;">
-                    <p>1887 yılında açılan İzmit İdadîsi, Doğu Marmara'nın en köklü eğitim kurumlarından biridir...</p>
-                    <!-- İstersen buraya tam metni ekleyebiliriz -->
-                </div>
-            </div>
-        </div>
+  .acil bayrak{
+    görüntülemek: satır içi blok;
+    kenar boşluğu-üst: 10px;
+    yazı tipi boyutu: 11px;
+    yazı tipi ağırlığı: 600;
+    renk: var(--iğne kırmızısı);
+    yazı tipi ailesi: 'IBM Plex Mono', monospace;
+  }
+
+  /* ---------- BOŞ DURUM ----------- */
+  .boş{
+    izgara sütunu: 1 / -1;
+    metin hizala: merkez;
+    renk: var(--krema);
+    yazı tipi ailesi: 'Mağara', el yazısı;
+    yazı tipi boyutu: 26px;
+    dolgu: 40px 0;
+    opaklık: 0,85;
+  }
+
+  altbilgi{
+    metin hizala: merkez;
+    renk: var(--krema);
+    opaklık: 0,55;
+    yazı tipi boyutu: 12px;
+    dolgu-alt: 28px;
+    yazı tipi ailesi: 'IBM Plex Mono', monospace;
+  }
+
+  /* ================= YÖNETICI PANELI =============== */
+  .yönetici-tab{
+    pozisyon: sabitlendi;
+    alt: 26px;
+    sağ: 26px;
+    z-indeksi: 40;
+    yazı tipi ailesi: 'IBM Plex Mono', monospace;
+    yazı tipi boyutu: 12.5px;
+    yazı tipi ağırlığı: 600;
+    harf aralığı: 0,4px;
+    renk: var(--mürekkep);
+    arka plan: var(--hardal iğnesi);
+    sınır: hiçbiri;
+    dolgu: 12px 18px;
+    sınır yarıçapı: 24px;
+    i̇mleç: i̇şaretçi;
+    kutu gölgesi: 0 8px 16px rgba(0,0,0,0,4);
+    geçiş: dönüştür 0,15s kolaylık, kutu gölgesi 0,15s kolaylık;
+  }
+  .yönetici-tab:hover{ dönüştür: çevirmekY(-2px); kutu gölgesi: 0 10px 20px rgba(0,0,0,0,45); }
+
+  .yönetici arka planı{
+    pozisyon: sabitlendi;
+    i̇çeriye: 0;
+    arka plan: rgba(0,0,0,0,45);
+    z-indeksi: 45;
+    opaklık: 0;
+    i̇şaretçi olayları: hiçbiri;
+    geçiş: opaklık 0,25s kolaylık;
+  }
+  .yönetici arka planı.açık{ opaklık: 1; i̇şaretçi olayları: otomatik; }
+
+  .yönetici paneli{
+    pozisyon: sabitlendi;
+    üst: 0; sağ: 0;
+    genişlik: min(400px, 100vw);
+    yükseklik: 100vh;
+    arka plan: var(--krema);
+    z-indeksi: 46;
+    kutu gölgesi: -10px 0 30px rgba(0,0,0,0,4);
+    dönüştür: çevirmekX(100%);
+    geçiş: dönüştür 0,3s kolaylık;
+    görüntülemek: flex;
+    esnek yön: sütun;
+    taşma: gizlenmiş;
+  }
+  .yönetici paneli.açık{ dönüştür: çevirmekX(0); }
+
+  .yönetici başlığı{
+    arka plan: var(--donanma);
+    renk: var(--krema);
+    dolgu: 18px 20px;
+    görüntülemek: flex;
+    align-öğeleri: merkez;
+    gerekçelendirme içeriği: uzay-arasında;
+    esnek küçültme: 0;
+  }
+  .yönetici başlığı h2{
+    yazı tipi ailesi: 'Mağara', el yazısı;
+    yazı tipi boyutu: 26px;
+    marjı: 0;
+  }
+  .yönetici-kapat{
+    arka plan: hiçbiri;
+    sınır: hiçbiri;
+    renk: var(--krema);
+    yazı tipi boyutu: 22px;
+    çizgi yüksekliği: 1;
+    i̇mleç: i̇şaretçi;
+    dolgu: 2px 6px;
+    opaklık: 0,8;
+  }
+  .yönetici-kapat:hover{ opaklık: 1; }
+
+  .yönetici gövdesi{
+    dolgu: 20px;
+    taşma-y: otomatik;
+    flex: 1;
+  }
+
+  .yönetici notu{
+    yazı tipi boyutu: 11.5px;
+    yazı tipi ailesi: 'IBM Plex Mono', monospace;
+    renk: var(--mantar-karanlık);
+    arka plan: var(--kağıt-sarı);
+    sınır: 1px katı rgba(0,0,0,0,1);
+    sınır yarıçapı: 6px;
+    dolgu: 10px 12px;
+    kenar boşluğu-alt: 18px;
+    çizgi yüksekliği: 1.5;
+  }
+
+  .alan{
+    kenar boşluğu-alt: 14px;
+  }
+  .alan etiket{
+    görüntülemek: blok;
+    yazı tipi ailesi: 'IBM Plex Mono', monospace;
+    yazı tipi boyutu: 11px;
+    harf aralığı: 0,4px;
+    metin dönüşümü: büyük harf;
+    renk: var(--mantar-karanlık);
+    kenar boşluğu-alt: 5px;
+  }
+  .alan giriş[türü="metin"],
+  .alan giriş[türü="şifre"],
+  .alan seçiniz,
+  .alan metin alanı{
+    genişlik: 100%;
+    yazı tipi ailesi: 'İçeri', sans-serif;
+    yazı tipi boyutu: 14px;
+    dolgu: 9px 10px;
+    sınır: 1.5px katı rgba(43,33,24,0,2);
+    sınır yarıçapı: 6px;
+    arka plan: #fff;
+    renk: var(--mürekkep);
+  }
+  .alan metin alanı{ yeniden boyutlandır: dikey; min-yükseklik: 70px; }
+  .alan onay kutusu{
+    görüntülemek: flex;
+    align-öğeleri: merkez;
+    boşluk: 8px;
+    yazı tipi boyutu: 13px;
+  }
+  .alan onay kutusu giriş{ genişlik: 16px; yükseklik: 16px; }
+
+  .btn{
+    yazı tipi ailesi: 'IBM Plex Mono', monospace;
+    yazı tipi boyutu: 12.5px;
+    yazı tipi ağırlığı: 600;
+    sınır: hiçbiri;
+    sınır yarıçapı: 6px;
+    dolgu: 10px 16px;
+    i̇mleç: i̇şaretçi;
+    harf aralığı: 0,3px;
+  }
+  .btn-birincil{ arka plan: var(--pin-donanma); renk: var(--krema); }
+  .btn-birincil:hover{ arka plan: #243a63; }
+  .btn-i̇kincil{ arka plan: rgba(43,33,24,0,08); renk: var(--mürekkep); }
+  .btn-i̇kincil:hover{ arka plan: rgba(43,33,24,0,14); }
+  .btn-tehlikesi{ arka plan: var(--iğne kırmızısı); renk: var(--krema); }
+  .btn-tehlikesi:hover{ arka plan: #a52f21; }
+  .btn-row{ görüntülemek: flex; boşluk: 10px; kenar boşluğu-üst: 16px; esnek sargı: sarmak; }
+
+  .giriş hatası{
+    renk: var(--iğne kırmızısı);
+    yazı tipi boyutu: 12.5px;
+    yazı tipi ailesi: 'IBM Plex Mono', monospace;
+    kenar boşluğu-üst: 8px;
+    min-yükseklik: 16px;
+  }
+  .giriş-ipucu{
+    yazı tipi boyutu: 11.5px;
+    opaklık: 0,55;
+    kenar boşluğu-üst: 4px;
+  }
+
+  .yönetici-bölücü{
+    sınır: hiçbiri;
+    sınır üstü: 1.5px kesikli rgba(43,33,24,0,2);
+    marjı: 22px 0;
+  }
+
+  .yönetici listesi başlığı{
+    yazı tipi ailesi: 'Mağara', el yazısı;
+    yazı tipi boyutu: 22px;
+    marjı: 0 0 10px;
+  }
+  .yönetici listesi{
+    görüntülemek: flex;
+    esnek yön: sütun;
+    boşluk: 10px;
+  }
+  .yönetici listesi öğesi{
+    arka plan: #fff;
+    sınır: 1.5px katı rgba(43,33,24,0,12);
+    sınır yarıçapı: 8px;
+    dolgu: 10px 12px;
+  }
+  .yönetici listesi öğesi .öğe üstü{
+    görüntülemek: flex;
+    gerekçelendirme içeriği: uzay-arasında;
+    align-öğeleri: temel çizgi;
+    boşluk: 8px;
+  }
+  .yönetici listesi öğesi .madde başlığı{
+    yazı tipi ağırlığı: 600;
+    yazı tipi boyutu: 13.5px;
+  }
+  .yönetici listesi öğesi .madde tarihi{
+    yazı tipi ailesi: 'IBM Plex Mono', monospace;
+    yazı tipi boyutu: 10.5px;
+    opaklık: 0,6;
+    beyaz boşluk: şimdirap;
+  }
+  .yönetici listesi öğesi .öğe-meta{
+    yazı tipi ailesi: 'IBM Plex Mono', monospace;
+    yazı tipi boyutu: 10px;
+    metin dönüşümü: büyük harf;
+    opaklık: 0,55;
+    kenar boşluğu-üst: 2px;
+  }
+  .yönetici listesi öğesi .madde eylemleri{
+    görüntülemek: flex;
+    boşluk: 8px;
+    kenar boşluğu-üst: 8px;
+  }
+  .yönetici listesi öğesi .madde eylemleri düğme{
+    yazı tipi ailesi: 'IBM Plex Mono', monospace;
+    yazı tipi boyutu: 11px;
+    sınır: hiçbiri;
+    arka plan: hiçbiri;
+    i̇mleç: i̇şaretçi;
+    dolgu: 4px 8px;
+    sınır yarıçapı: 4px;
+  }
+  .madde eylemleri .düzenle-btn{ arka plan: rgba(27,42,74,0,1); renk: var(--donanma); }
+  .madde eylemleri .düzenle-btn:hover{ arka plan: rgba(27,42,74,0,18); }
+  .madde eylemleri .sil-btn{ arka plan: rgba(192,57,43,0,1); renk: var(--iğne kırmızısı); }
+  .madde eylemleri .sil-btn:hover{ arka plan: rgba(192,57,43,0,18); }
+
+  .yönetici-boş-liste{
+    yazı tipi boyutu: 13px;
+    opaklık: 0,6;
+    yazı tipi stili: i̇talik;
+  }
+
+  .yönetici-form-başlık{
+    yazı tipi ailesi: 'Mağara', el yazısı;
+    yazı tipi boyutu: 22px;
+    marjı: 0 0 14px;
+  }
+
+  @medya (azaltılmış hareketi tercih eder: azaltmak){
+    .not, .çip, .yönetici paneli, .yönetici arka planı, .yönetici-tab{ geçiş: hiçbiri; }
+  }
+
+  @medya (maksimum genişlik: 480px){
+    .yönetici-tab{ sağ: 16px; alt: 16px; dolgu: 10px 14px; yazı tipi boyutu: 11.5px; }
+  }
+</stil>
+</kafa>
+<vücut>
+
+  <başlık>
+    <div sınıf="kaş">Atatürk Ortaokulu</div>
+    <h1>Duyuru Panosu</h1>
+    <p>Okulumuzdan güncel haberler ve hatırlatmalar</p>
+  </başlık>
+
+  <div sınıf="filtreler" kimlik="filtreler">
+    <düğme sınıf="çip aktif" veri filtresi="tüm">Tümü</düğme>
+    <düğme sınıf="çip" veri filtresi="sinav">Sınav</düğme>
+    <düğme sınıf="çip" veri filtresi="etkinlik">Etkinlik</düğme>
+    <düğme sınıf="çip" veri filtresi="tatil">Tatil</düğme>
+    <düğme sınıf="çip" veri filtresi="toplanti">Toplantı</düğme>
+    <düğme sınıf="çip" veri filtresi="spor">Spor</düğme>
+    <düğme sınıf="çip" veri filtresi="kutuphane">Kütüphane</düğme>
+  </div>
+
+  <ana sınıf="kurulu" kimlik="kurulu">
+    <div sınıf="boş">Duyurular yüksekleniyor...</div>
+  </ana>
+
+  <altbilgi>Sorularınız için rehberlik servisine başvurabilirsiniz · Bu sayfa öğrenciler ve veliler için hazırlanmıştır</altbilgi>
+
+  <!-- ================= ADMIN PANELI ============= -->
+  <düğme sınıf="yönetici sekmesi" kimlik="admin-tab-btn">🛠 Yönetici Paneli</düğme>
+  <div sınıf="yönetici-arka plan" kimlik="yönetici-arka plan"></div>
+
+  <kenara sınıf="yönetici paneli" kimlik="yönetici paneli">
+    <div sınıf="yönetici başlığı">
+      <h2>Yönetici Paneli</h2>
+      <düğme sınıf="yönetici-kapat" kimlik="yönetici-kapat-btn" aria-etiket="Kapat">✕</düğme>
     </div>
+    <div sınıf="yönetici gövdesi" kimlik="yönetici gövdesi">
 
-    <footer>
-        <p><strong>İzmit Lisesi</strong> © 2026 • Kocaeli / İzmit</p>
-        <p>T.C. Millî Eğitim Bakanlığı</p>
-    </footer>
+      <!-- GIRIŞ GÖRÜNÜMÜ -->
+      <div kimlik="giriş-görüntüleme">
+        <p stil="yazı tipi boyutu:13.5px; opaklık:0,75; kenar boşluğu-üst:0;">Duyuru eklemek, düzenlemek veya silmek için yönetici şifresini girin.</p>
+        <div sınıf="alan">
+          <etiket için="yönetici şifresi">Şifre</etiket>
+          <giriş türü="şifre" kimlik="yönetici şifresi" yer tutucu="Şifre">
+        </div>
+        <düğme sınıf="btn btn-birincil" kimlik="yönetici-giriş-btn" türü="düğme">Giriş Yap</düğme>
+        <div sınıf="giriş hatası" kimlik="giriş hatası"></div>
+        <div sınıf="giriş-ipucu">Demo şifresi: <güçlü>2026admin</güçlü></div>
+      </div>
 
-    <script>
-        function toggleHistory() {
-            const ana = document.getElementById('ana-ekran');
-            const tarihce = document.getElementById('tarihce-panel');
-            
-            if (tarihce.classList.contains('active')) {
-                tarihce.classList.remove('active');
-                ana.style.display = 'block';
-            } else {
-                ana.style.display = 'none';
-                tarihce.classList.add('active');
-            }
+      <!-- YÖNETİM GÖRÜNÜMÜ (girişten sonra gösterilir) -->
+      <div kimlik="manage-görünüm" stil="görüntülemek:hiçbiri;">
+        <div sınıf="yönetici notu">
+          Buradan eklediğiniz, düzenlediğiniz veya sildiğiniz duyurular panoyu görüntüleyen <güçlü>herkes</güçlü> için anda güncellenir.
+        </div>
+
+        <h3 sınıf="yönetici-form-başlık" kimlik="form başlığı">Yeni Duyuru Ekle</h3>
+        <form kimlik="duyuru formu">
+          <div sınıf="alan">
+            <etiket için="f başlığı">Başlık</etiket>
+            <giriş türü="metin" kimlik="f başlığı" gerekli maksimum uzunluk="80">
+          </div>
+          <div sınıf="alan">
+            <etiket için="f kategorisi">Kategori</etiket>
+            <seçiniz kimlik="f kategorisi"></seçiniz>
+          </div>
+          <div sınıf="alan">
+            <etiket için="f tarihi">Tarih (örn. 22 Haz)</etiket>
+            <giriş türü="metin" kimlik="f tarihi" gerekli maksimum uzunluk="20">
+          </div>
+          <div sınıf="alan">
+            <etiket için="f-metin">Açıklama</etiket>
+            <metin alanı kimlik="f-metin" gerekli maksimum uzunluk="400"></metin alanı>
+          </div>
+          <div sınıf="alan alanı onay kutusu">
+            <giriş türü="onay kutusu" kimlik="f-acil">
+            <etiket için="f-acil" stil="marjı:0; metin dönüşümü:hiçbiri; yazı tipi boyutu:13px;">"Yaklaşıyor" etiketi göster</etiket>
+          </div>
+          <div sınıf="btn-row">
+            <düğme sınıf="btn btn-birincil" türü="gönder" kimlik="kaydet-btn">Kaydet</düğme>
+            <düğme sınıf="btn btn-i̇kincil" türü="düğme" kimlik="i̇ptal-düzenle-btn" stil="görüntülemek:hiçbiri;">İptal</düğme>
+          </div>
+        </form>
+
+        <i̇k sınıf="yönetici-bölücü">
+
+        <h3 sınıf="yönetici listesi başlığı">Tüm Duyurular</h3>
+        <div sınıf="yönetici listesi" kimlik="yönetici listesi"></div>
+
+        <i̇k sınıf="yönetici-bölücü">
+        <düğme sınıf="btn btn-i̇kincil" kimlik="yönetici-logout-btn" türü="düğme">Çalış Yap</düğme>
+      </div>
+
+    </div>
+  </kenara>
+
+<senaryo>
+(fonksiyon(){
+  i̇nşaat ADMIN_PASSCODE = '2026yönetici';
+
+  i̇nşaat KATEGORILER = {
+    sinav:     { etiket: 'Sınav',      etiket Sınıfı: 'sinav' },
+    etkinlik:  { etiket: 'Etkinlik',   etiket Sınıfı: 'etkinlik' },
+    tatil:     { etiket: 'Tatil',      etiket Sınıfı: 'tatil' },
+    toplanti:  { etiket: 'Toplantı',   etiket Sınıfı: 'toplanti' },
+    spor:      { etiket: 'Spor',       etiket Sınıfı: 'spor' },
+    kutuphane: { etiket: 'Kütüphane',  etiket Sınıfı: 'kutuphane' }
+  };
+
+  // not kartları için görsel çeşitlilik, indeks — ile çevrilen orijinal elle tutturulmuş görünümü yeniden yaratır
+  i̇nşaat SÜSLEMELER = [
+    { bg: 'var(--kağıt-sarı)', döndürmek: - -2,   deko: 'pin',  pinSınıfı: 'kırmızı'   },
+    { bg: 'var(--krem)',        döndürmek: 1.5,  deko: 'bant' },
+    { bg: 'var(--kağıt-mavi)',   döndürmek: - -1,   deko: 'bant' },
+    { bg: 'var(--kağıt-pembe)',   döndürmek: 2,    deko: 'pin',  pinSınıfı: 'donanma'  },
+    { bg: 'var(--kağıt-yeşil)',  döndürmek: - -1.5, deko: 'bant' },
+    { bg: 'var(--krem)',        döndürmek: 1,    deko: 'pin',  pinSınıfı: 'yeşil' }
+  ];
+
+  i̇nşaat DEFAULT_ANNOUNCEMENTS = [
+    { kimlik: 'a1', kategori: 'sinav',     tarih: '22 Haz', başlık: Dönem Sonu Sınavları',
+      metin: '8. sınıflar için dönem sonu sınavları 22–26 Haziran tarihleri arasında yapılacaktır. Sınav giriş belgelerinizi unutmayın.', acil: doğru },
+    { kimlik: 'a2', kategori: 'etkinlik',  tarih: '28 Haz', başlık: 'Yıl Sonu Şenliği',
+      metin: 'Okul bahçesinde düzenlenecek yıl sonu şenliğe tüm öğrenciler ve aileler davetlidir. Müzik, oyunlar ve ikramlar olacak.', acil: yanlış },
+    { kimlik: 'a3', kategori: 'tatil',     tarih: '30 Haz', başlık: 'Yaz Tatili Başlıyor',
+      metin: '2025–2026 eğitim yıl 30 Haziran itibarıyla sona eriyor. Tüm öğrencilerimize keyifli bir tatil deriz!', acil: yanlış },
+    { kimlik: 'a4', kategori: 'toplanti',  tarih: '20 Haz', başlık: ‘Veli Toplantısı’,
+      metin: "Karne dağıtımı öncesi veli toplantısı 20 Haziran Cuma günü saat 14:00'te okul konferans salonunda yapılacaktır.", acil: yanlış },
+    { kimlik: 'a5', kategori: 'spor',      tarih: '24 Haz', başlık: ‘Okullar Arası Voleybol Turnuvası’,
+      metin: "Okulumuzun voleybol takımı bölge finaline yüksekdi. Final maçı 24 Haziran'da kendi sahamızda oynanacak. Herkes davetli!", acil: yanlış },
+    { kimlik: 'a6', kategori: 'kutuphane', tarih: '19 Haz', başlık: Kütüphane Çalışma Saatleri',
+      metin: 'Sınav dönemde kütüphanemiz hafta içi 08:00–18:00 saatleri arasında açık olacaktır. Sessiz çalışma odaları rezervatyonla kullanılabilir.', acil: yanlış }
+  ];
+
+  izin ver duyurular = [];
+  izin ver akım Filtresi = 'hepsi';
+  izin ver isAdmin = yanlış;
+  izin ver düzenlemeId = boş;
+
+  i̇nşaat kurulu = belge.getElementById('tahta');
+  i̇nşaat cips = belge.sorguSeçmenTüm('.çip');
+
+  i̇nşaat adminTabBtn = belge.getElementById('yönetici-tab-btn');
+  i̇nşaat adminPanel = belge.getElementById('yönetici paneli');
+  i̇nşaat adminArka plan = belge.getElementById('yönetici arka planı');
+  i̇nşaat adminBtn'yi kapat = belge.getElementById('yönet-kapat-btn');
+  i̇nşaat girişgörüntüle = belge.getElementById('giriş-görüntüleme');
+  i̇nşaat manageview = belge.getElementById('yönet-görüntüle');
+  i̇nşaat adminPasswordInput = belge.getElementById('yönetici şifresi');
+  i̇nşaat adminLoginBtn = belge.getElementById('yönetici girişi-btn');
+  i̇nşaat giriş Hatası = belge.getElementById('giriş hatası');
+  i̇nşaat adminLogoutBtn = belge.getElementById('yönetici-logout-btn');
+
+  i̇nşaat form = belge.getElementById('duyuru-formu');
+  i̇nşaat fBaşlık = belge.getElementById('f başlığı');
+  i̇nşaat fKategori = belge.getElementById('f kategorisi');
+  i̇nşaat fTarih = belge.getElementById('f-tarihi');
+  i̇nşaat fMetin = belge.getElementById('f-metni');
+  i̇nşaat acil = belge.getElementById('acil');
+  i̇nşaat form Başlığı = belge.getElementById('form başlığı');
+  i̇nşaat btn'yi kaydet = belge.getElementById('kaydet-btn');
+  i̇nşaat i̇ptalDüzenleBtn = belge.getElementById('iptal-düzenle-btn');
+  i̇nşaat adminListesi = belge.getElementById('yönetici listesi');
+
+  fonksiyon kaçışHTML(str){
+    i̇nşaat div = belge.öğe Oluştur('div');
+    div.metinİçerik = str == boş ? '' : Dize(str);
+    dönüş div.i̇ç HTML;
+  }
+
+  fonksiyon cin(){
+    dönüş 'ann_' + Tarih.şimdi().dizgi(36) + '_' + Matematik.rastgele().dizgi(36).dilim(2, 7);
+  }
+
+  // kategoriyi doldurun bir kez seçin
+  Nesne.anahtarlar(KATEGORILER).Her biri için(anahtar => {
+    i̇nşaat opt = belge.öğe Oluştur('seçenek');
+    opt.değer = anahtar;
+    opt.metinİçerik = KATEGORILER[anahtar].etiket;
+    fKategori.ek çocuk(opt);
+  });
+
+  eşzamansız fonksiyon yükDuyurular(){
+    dene{
+      i̇nşaat sonuç = beklemek pencere.depolama.almak(‘duyurular’, doğru);
+      i̇nşaat ayrıştırıldı = JSON.ayrıştırmak(sonuç.değer);
+      duyurular = Dizi.isArray(ayrıştırıldı) ? ayrıştırıldı : DEFAULT_ANNOUNCEMENTS.dilim();
+    } yakalamak(hata){
+      duyurular = DEFAULT_ANNOUNCEMENTS.dilim();
+      dene{ beklemek pencere.depolama.ayarla(‘duyurular’, JSON.dizmek(duyurular), doğru); }
+      yakalamak(hata2){ konsol.hata(‘Başlangıç verisi kaydedilemedi:’, hata2); }
+    }
+    renderBoard();
+    eğer(isAdmin) renderAdminList();
+  }
+
+  eşzamansız fonksiyon ısrar et(){
+    dene{
+      i̇nşaat sonuç = beklemek pencere.depolama.ayarla(‘duyurular’, JSON.dizmek(duyurular), doğru);
+      eğer(!sonuç){ atmak yeni Hata('Depolama seti boş döndü'); }
+      dönüş doğru;
+    } yakalamak(hata){
+      konsol.hata('Kaydetme hatası:', hata);
+      uyarı('Duyuru kaydedilirken bir hata oluştu. Lütfen tekrar deneyin.');
+      dönüş yanlış;
+    }
+  }
+
+  fonksiyon not Öğesi Oluştur(madde, dizin){
+    i̇nşaat deko = SÜSLEMELER[dizin % SÜSLEMELER.uzunluk];
+    i̇nşaat kedi = KATEGORILER[madde.kategori] || { etiket: madde.kategori, etiket Sınıfı: '' };
+    i̇nşaat makale = belge.öğe Oluştur('makale');
+    makale.sınıfName = 'not';
+    makale.veri kümesi.kategori = madde.kategori;
+    makale.stil.arka plan = deko.bg;
+    makale.stil.dönüştür = 'döndürmek (' + deko.döndürmek + 'derece)';
+
+    i̇nşaat decoSpan = deko.deko === 'bant'
+      ? '<span sınıfı="bant"></span>'
+      : '<span sınıfı="pin ' + deko.pinSınıfı + '"></span>';
+
+    makale.i̇ç HTML =
+      decoSpan +
+      '<div sınıfı="etiket sırası">' +
+        '<span sınıfı="etiket ' + kedi.etiket Sınıfı + '">' + kaçışHTML(kedi.etiket) + '</span>' +
+        '<span sınıfı="tarih">' + kaçışHTML(madde.tarih) + '</span>' +
+      '</böl>' +
+      '<h3>' + kaçışHTML(madde.başlık) + '</h3>' +
+      '<p>' + kaçışHTML(madde.metin) + '</p>' +
+      (madde.acil ? '<span class="acil bayrak">● Yaklaşıyor</span>' : '');
+
+    dönüş makale;
+  }
+
+  fonksiyon renderBoard(){
+    kurulu.i̇ç HTML = '';
+    i̇nşaat süzüldü = akım Filtresi === 'hepsi'
+      ? duyurular
+      : duyurular.filtre(a => a.kategori === akım Filtresi);
+
+    eğer(süzüldü.uzunluk === 0){
+      i̇nşaat boşMsg = belge.öğe Oluştur('div');
+      boşMsg.sınıfName = 'boş';
+      boşMsg.kimlik = 'boş-msg';
+      boşMsg.metinİçerik = 'Bu kategoride henüz duyuru yok.';
+      kurulu.ek çocuk(boşMsg);
+    } başka {
+      süzüldü.Her biri için((madde, idx) => kurulu.ek çocuk(not Öğesi Oluştur(madde, idx)));
+    }
+  }
+
+  cips.Her biri için(çip => {
+    çip.etkinlik Dinleyicisi ekle('tıkla', () => {
+      cips.Her biri için(c => c.sınıf Listesi.kaldır('aktif'));
+      çip.sınıf Listesi.eklemek('aktif');
+      akım Filtresi = çip.veri kümesi.filtre;
+      renderBoard();
+    });
+  });
+
+  // ------------ Yönetici paneli aç/kapa ----------
+  fonksiyon openPanel(){
+    adminPanel.sınıf Listesi.eklemek('açık');
+    adminArka plan.sınıf Listesi.eklemek('açık');
+  }
+  fonksiyon kapatPanel(){
+    adminPanel.sınıf Listesi.kaldır('açık');
+    adminArka plan.sınıf Listesi.kaldır('açık');
+  }
+  adminTabBtn.etkinlik Dinleyicisi ekle('tıkla', openPanel);
+  adminBtn'yi kapat.etkinlik Dinleyicisi ekle('tıkla', kapatPanel);
+  adminArka plan.etkinlik Dinleyicisi ekle('tıkla', kapatPanel);
+
+  // ---------- Giriş -------------
+  fonksiyon denemeGiriş(){
+    i̇nşaat değer = adminPasswordInput.değer;
+    eğer(değer === ADMIN_PASSCODE){
+      isAdmin = doğru;
+      giriş Hatası.metinİçerik = '';
+      adminPasswordInput.değer = '';
+      girişgörüntüle.stil.görüntülemek = 'hiçbiri';
+      manageview.stil.görüntülemek = 'engelle';
+      renderAdminList();
+    } başka {
+      giriş Hatası.metinİçerik = 'Şifre hatalı. Lütfen tekrar deneyin.';
+    }
+  }
+  adminLoginBtn.etkinlik Dinleyicisi ekle('tıkla', denemeGiriş);
+  adminPasswordInput.etkinlik Dinleyicisi ekle('anahtarlama', e => {
+    eğer(e.anahtar === 'Girmek'){ e.önleVarsayılan(); denemeGiriş(); }
+  });
+
+  adminLogoutBtn.etkinlik Dinleyicisi ekle('tıkla', () => {
+    isAdmin = yanlış;
+    düzenlemeId = boş;
+    form sıfırla();
+    manageview.stil.görüntülemek = 'hiçbiri';
+    girişgörüntüle.stil.görüntülemek = 'engelle';
+  });
+
+  // ---------- Form ekle / Düzenle ------------
+  fonksiyon form sıfırla(){
+    form.sıfırlamak();
+    fKategori.değer = Nesne.anahtarlar(KATEGORILER)[0];
+    düzenlemeId = boş;
+    form Başlığı.metinİçerik = 'Yeni Duyuru Ekle';
+    btn'yi kaydet.metinİçerik = 'Kaydet';
+    i̇ptalDüzenleBtn.stil.görüntülemek = 'hiçbiri';
+  }
+
+  fonksiyon başlatDüzenle(kimlik){
+    i̇nşaat madde = duyurular.bulmak(a => a.kimlik === kimlik);
+    eğer(!madde) dönüş;
+    düzenlemeId = kimlik;
+    fBaşlık.değer = madde.başlık;
+    fKategori.değer = madde.kategori;
+    fTarih.değer = madde.tarih;
+    fMetin.değer = madde.metin;
+    acil.kontrol edildi = !!madde.acil;
+    form Başlığı.metinİçerik = 'Duyuruyu Düzinle';
+    btn'yi kaydet.metinİçerik = 'Güncelle';
+    i̇ptalDüzenleBtn.stil.görüntülemek = 'satır içi blok';
+    fBaşlık.odaklan();
+  }
+
+  i̇ptalDüzenleBtn.etkinlik Dinleyicisi ekle('tıkla', form sıfırla);
+
+  form.etkinlik Dinleyicisi ekle('Gönder', eşzamansız (e) => {
+    e.önleVarsayılan();
+    i̇nşaat başlık = fBaşlık.değer.trim();
+    i̇nşaat tarih = fTarih.değer.trim();
+    i̇nşaat metin = fMetin.değer.trim();
+    i̇nşaat kategori = fKategori.değer;
+    i̇nşaat acil = acil.kontrol edildi;
+    eğer(!başlık || !tarih || !metin) dönüş;
+
+    eğer(düzenlemeId){
+      i̇nşaat madde = duyurular.bulmak(a => a.kimlik === düzenlemeId);
+      eğer(madde){
+        madde.başlık = başlık;
+        madde.tarih = tarih;
+        madde.metin = metin;
+        madde.kategori = kategori;
+        madde.acil = acil;
+      }
+    } başka {
+      duyurular.vites değiştirme({ kimlik: cin(), başlık, tarih, metin, kategori, acil });
+    }
+
+    i̇nşaat tamam = beklemek ısrar et();
+    eğer(tamam){
+      form sıfırla();
+      renderBoard();
+      renderAdminList();
+    }
+  });
+
+  // ---------- Yönetici listesi (tüm duyuruları yönetin) ----------
+  fonksiyon renderAdminList(){
+    adminListesi.i̇ç HTML = '';
+    eğer(duyurular.uzunluk === 0){
+      i̇nşaat boş = belge.öğe Oluştur('div');
+      boş.sınıfName = 'yönetici-boş liste';
+      boş.metinİçerik = 'Henüz hiç duygu eklenmedi.';
+      adminListesi.ek çocuk(boş);
+      dönüş;
+    }
+
+    duyurular.Her biri için(madde => {
+      i̇nşaat kedi = KATEGORILER[madde.kategori] || { etiket: madde.kategori };
+      i̇nşaat sıra = belge.öğe Oluştur('div');
+      sıra.sınıfName = 'yönetici listesi öğesi';
+      sıra.i̇ç HTML =
+        '<div sınıfı="öğe üstü">' +
+          '<span sınıfı="öğe başlığı">' + kaçışHTML(madde.başlık) + '</span>' +
+          '<span sınıfı="öğe-tarihi">' + kaçışHTML(madde.tarih) + '</span>' +
+        '</böl>' +
+        '<div sınıfı="öğe-meta">' + kaçışHTML(kedi.etiket) + (madde.acil ? ' · Yaklaşıyor' : '') + '</böl>' +
+        '<div sınıfı="öğe-eylemleri">' +
+          '<button class="edit-btn" type="button">Düzenle</button>' +
+          '<button class="delete-btn" type="button">Sil</button>' +
+        '</böl>';
+
+      sıra.sorguSeçici('.düzenle-btn').etkinlik Dinleyicisi ekle('tıkla', () => başlatDüzenle(madde.kimlik));
+      sıra.sorguSeçici('.sil-btn').etkinlik Dinleyicisi ekle('tıkla', eşzamansız () => {
+        i̇nşaat doğrulandı = onaylamak('"' + madde.başlık + '"duyurusunu silmek istediğiniz emin misiniz?');
+        eğer(!doğrulandı) dönüş;
+        duyurular = duyurular.filtre(a => a.kimlik !== madde.kimlik);
+        eğer(düzenlemeId === madde.kimlik) form sıfırla();
+        i̇nşaat tamam = beklemek ısrar et();
+        eğer(tamam){
+          renderBoard();
+          renderAdminList();
         }
-    </script>
-</body>
+      });
+
+      adminListesi.ek çocuk(sıra);
+    });
+  }
+
+  form sıfırla();
+  yükDuyurular();
+})();
+</senaryo>
+
+</vücut>
 </html>
