@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>İzmit Lisesi - Kurumsal Bilgi Yarışması</title>
+    <title>İzmit Lisesi - Resmi Duyuru ve Haber Portalı</title>
     <style>
         :root {
             --meb-mavi: #003366;
-            --meb-mavi-koyu: #002244;
+            --meb-mavi-koyu: #001F3F;
             --altin: #D4AF37;
-            --gri-arka: #F4F6F9;
+            --gri-arka: #F5F7FA;
             --yazi-koyu: #2C3E50;
+            --yazi-acik: #7F8C8D;
             --beyaz: #FFFFFF;
-            --yesil: #2ECC71;
-            --kirmizi: #E74C3C;
+            --kirmizi: #C0392B;
         }
 
         body {
@@ -22,280 +22,287 @@
             color: var(--yazi-koyu);
             margin: 0;
             padding: 0;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
         }
 
-        /* PROFESYONEL NAVBAR */
+        /* MEB STANDARTLARINDA ÜST BAR */
+        .meb-top-bar {
+            background-color: var(--meb-mavi-koyu);
+            color: var(--beyaz);
+            padding: 5px 5%;
+            font-size: 12px;
+            display: flex;
+            justify-content: space-between;
+            border-bottom: 2px solid var(--altin);
+        }
+
+        /* LOGOLU ANA NAVBAR */
         .navbar {
             background-color: var(--meb-mavi);
             color: var(--beyaz);
             padding: 15px 5%;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            justify-content: space-between;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
         }
 
         .navbar-brand {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 15px;
         }
 
-        .logo-text {
-            font-size: 18px;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-            border-left: 3px solid var(--altin);
-            padding-left: 10px;
-        }
-
-        .skor-alani {
-            background-color: rgba(255, 255, 255, 0.1);
-            padding: 8px 18px;
-            border-radius: 6px;
-            border: 1px solid var(--altin);
-            font-weight: 600;
-            font-size: 15px;
-        }
-
-        /* ANA KONTEYNER */
-        .ana-konteyner {
-            flex: 1;
+        /* Yuvarlak Amblem Alanı (Yüklediğin Amblem İçin) */
+        .logo-amblem {
+            width: 55px;
+            height: 55px;
+            background-color: var(--beyaz);
+            border-radius: 50%;
+            border: 2px solid var(--altin);
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 40px 20px;
+            font-weight: bold;
+            color: var(--meb-mavi);
+            font-size: 11px;
+            text-align: center;
         }
 
-        .yarisma-karti {
-            background-color: var(--beyaz);
-            width: 100%;
-            max-width: 650px;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
-            border-top: 6px solid var(--meb-mavi);
-            padding: 40px;
-            box-sizing: border-box;
-            position: relative;
-        }
-
-        /* SORU İLERLEME CHIPLERİ */
-        .ilerleme-bar {
-            display: flex;
-            gap: 6px;
-            margin-bottom: 25px;
-        }
-
-        .adim {
-            flex: 1;
-            height: 4px;
-            background-color: #E0E6ED;
-            border-radius: 2px;
-            transition: background 0.3s;
-        }
-
-        .adim.aktif {
-            background-color: var(--altin);
-        }
-
-        .soru-kategori {
-            text-transform: uppercase;
-            font-size: 12px;
+        .logo-yazi h1 {
+            font-size: 20px;
+            margin: 0;
             font-weight: 700;
-            color: var(--altin);
-            margin-bottom: 8px;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
         }
 
-        h1 {
-            font-size: 22px;
-            color: var(--meb-mavi-koyu);
-            margin-top: 0;
-            margin-bottom: 30px;
-            line-height: 1.5;
+        .logo-yazi p {
+            font-size: 12px;
+            margin: 3px 0 0 0;
+            color: #BDC3C7;
+        }
+
+        /* SON DAKİKA ŞERİDİ (KAYAN YAZI) */
+        .son-dakika-bandi {
+            background-color: var(--kirmizi);
+            color: var(--beyaz);
+            padding: 10px 5%;
+            display: flex;
+            font-size: 14px;
             font-weight: 600;
         }
 
-        /* SEÇENEK TASARIMLARI */
-        .secenek-listesi {
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
+        .sd-baslik {
+            background-color: var(--meb-mavi-koyu);
+            padding: 0 10px;
+            margin-right: 15px;
+            border-radius: 3px;
         }
 
-        .secenek {
-            background-color: var(--beyaz);
-            color: var(--yazi-koyu);
-            border: 1px solid #DCE4EC;
-            padding: 16px 20px;
-            border-radius: 8px;
-            font-size: 15px;
-            font-weight: 500;
-            cursor: pointer;
-            text-align: left;
-            transition: all 0.2s ease-in-out;
-            outline: none;
+        /* OKUL BİNASI MANŞET ALANI */
+        .manset-alani {
+            background-color: #DFE4EA;
+            height: 220px;
             display: flex;
+            align-items: flex-end;
+            padding: 20px 5%;
+            color: var(--beyaz);
+            position: relative;
+            overflow: hidden;
+            border-bottom: 4px solid var(--altin);
+        }
+
+        /* Görsel Yer tutucu (Yüklediğin Okul Binası Fotoğrafı Buraya Gelecek) */
+        .manset-overlay {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,31,63,0.85));
+            z-index: 1;
+        }
+
+        .manset-yazi {
+            position: relative;
+            z-index: 2;
+        }
+
+        .manset-yazi h2 {
+            margin: 0 0 5px 0;
+            font-size: 24px;
+        }
+
+        /* ANA İÇERİK YAPISI (SOL DUYURU - SAĞ HABER) */
+        .ana-grid {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        @media (max-width: 768px) {
+            .ana-grid { grid-template-columns: 1fr; }
+        }
+
+        .panel {
+            background-color: var(--beyaz);
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            padding: 25px;
+            border-top: 4px solid var(--meb-mavi);
+        }
+
+        .panel-duyuru { border-top-color: var(--altin); }
+
+        .panel-baslik {
+            font-size: 18px;
+            font-weight: 700;
+            margin-top: 0;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #ECF0F1;
+            color: var(--meb-mavi-koyu);
+            display: flex;
+            justify-content: space-between;
             align-items: center;
         }
 
-        .secenek:hover {
-            border-color: var(--meb-mavi);
-            background-color: #F8FAFC;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,51,102,0.08);
+        /* LİSTE ELEMENTLERİ */
+        .liste-elemani {
+            display: flex;
+            flex-direction: column;
+            padding: 15px 0;
+            border-bottom: 1px dashed #BDC3C7;
+            transition: padding-left 0.2s;
         }
 
-        /* SONUÇ BİLDİRİMLERİ */
-        .geribildirim {
-            margin-top: 25px;
-            padding: 12px;
-            border-radius: 6px;
-            font-weight: 600;
-            text-align: center;
+        .liste-elemani:last-child { border-bottom: none; }
+
+        .liste-elemani:hover {
+            padding-left: 5px;
+            background-color: #FDFEFE;
+        }
+
+        .tarih-etiketi {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--altin);
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+
+        .eleman-baslik {
             font-size: 15px;
-            min-height: 22px;
-            opacity: 0;
-            transition: opacity 0.3s;
+            font-weight: 600;
+            margin: 0 0 5px 0;
+            color: var(--yazi-koyu);
         }
 
-        .goster {
-            opacity: 1;
+        .eleman-ozet {
+            font-size: 13px;
+            color: var(--yazi-acik);
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        /* ALT BİLGİ (FOOTER) */
+        .footer {
+            background-color: var(--meb-mavi-koyu);
+            color: #BDC3C7;
+            text-align: center;
+            padding: 20px;
+            font-size: 12px;
+            margin-top: 40px;
+            border-top: 3px solid var(--altin);
         }
     </style>
 </head>
 <body>
 
-    <!-- YÖNETİM PANELİ & NAVBAR -->
+    <div class="meb-top-bar">
+        <div>Türkiye Cumhuriyeti Millî Eğitim Bakanlığı</div>
+        <div>Kocaeli / İzmit</div>
+    </div>
+
     <nav class="navbar">
         <div class="navbar-brand">
-            <div class="logo-text">İZMİT LİSESİ<br><span style="font-size: 12px; font-weight: 400; color: #BDC3C7;">Kurumsal Panel</span></div>
+            <div class="logo-amblem">
+                <span style="font-size: 10px;">İZMİT LİSESİ<br>1945</span>
+            </div>
+            <div class="logo-yazi">
+                <h1>İZMİT LİSESİ</h1>
+                <p>Resmi Mobil Haber & Duyuru Sistemi</p>
+            </div>
         </div>
-        <div class="skor-alani">Başarı Puanı: <span id="puan">0</span></div>
     </nav>
 
-    <!-- OYUN ALANI -->
-    <div class="ana-konteyner">
-        <div class="yarisma-karti">
-            <div class="ilerleme-bar" id="ilerleme"></div>
-            <div class="soru-kategori">Kurumsal Bilgi Testi</div>
-            <h1 id="soru-metni">Yükleniyor...</h1>
-            
-            <div class="secenek-listesi">
-                <button class="secenek" onclick="cevapVer(0)" id="s0"></button>
-                <button class="secenek" onclick="cevapVer(1)" id="s1"></button>
-                <button class="secenek" onclick="sanalCevap(2)" id="s2"></button>
-                <button class="secenek" onclick="cevapVer(3)" id="s3"></button>
-            </div>
+    <div class="son-dakika-bandi">
+        <span class="sd-baslik">ÖNEMLİ</span>
+        <marquee behavior="scroll" direction="left">Sayın Velilerimiz ve Öğrencilerimiz, Okulumuzun Güncel Duyuru, Sınav Takvimi ve Etkinlik Haberlerine Aşağıdaki Panellerden Ulaşabilirsiniz.</marquee>
+    </div>
 
-            <div id="geribildirim" class="geribildirim"></div>
+    <div class="manset-alani">
+        <div class="manset-overlay"></div>
+        <div class="manset-yazi">
+            <h2>Nitelikli Eğitimle Geleceğe Güvenle</h2>
+            <p>İzmit Lisesi Modern Eğitim Kampüsü</p>
         </div>
     </div>
 
-    <script>
-        // Resmi MEB sitesi misyon, vizyon ve tarihçe verilerinden derlenen sorular
-        const okulSorulari = [
-            {
-                soru: "Kocaeli'nin en köklü eğitim kurumlarından biri olan İzmit Lisesi, ilk olarak hangi tarihi yılda eğitim-öğretim hayatına başlamıştır?",
-                secenekler: ["1923", "1932", "1945", "1950"],
-                dogru: 1
-            },
-            {
-                soru: "İzmit Lisesi'nin kurumsal vizyonunun temel hedefi aşağıdakilerden hangisidir?",
-                secenekler: [
-                    "Sadece yerel düzeyde başarı sağlamak", 
-                    "Akademik, sosyal ve kültürel alanlarda ulusal ve uluslararası düzeyde öncü bir kurum olmak", 
-                    "Yalnızca spor odaklı eğitim sunmak", 
-                    "Teknik eleman yetiştirmek"
-                ],
-                dogru: 1
-            },
-            {
-                soru: "Okulun benimsediği misyon tanımına göre öğrencilere kazandırılması hedeflenen öncelikli değer hangisidir?",
-                secenekler: [
-                    "Ezberci eğitim modeli", 
-                    "Bireysel başarıyı toplumsal faydanın önüne koymak", 
-                    "Atatürk ilke ve inkılaplarına bağlı, çağdaş ve analitik düşünebilen bireyler yetiştirmek", 
-                    "Sadece teorik bilgi birikimi"
-                ],
-                dogru: 2
-            }
-        ];
-
-        let mevcutSoru = 0;
-        let skor = 0;
-
-        // İlerleme çubuklarını oluştur
-        const ilerlemeAlani = document.getElementById("ilerleme");
-        for(let i=0; i<okulSorulari.length; i++) {
-            let adim = document.createElement("div");
-            adim.className = "adim";
-            adim.id = "adim-" + i;
-            ilerlemeAlani.appendChild(adim);
-        }
-
-        function soruGetir() {
-            if (mevcutSoru < okulSorulari.length) {
-                document.getElementById("adim-" + mevcutSoru).classList.add("aktif");
-                const data = okulSorulari[mevcutSoru];
-                document.getElementById("soru-metni").innerText = data.soru;
-                document.getElementById("s0").innerText = "A) " + data.secenekler[0];
-                document.getElementById("s1").innerText = "B) " + data.secenekler[1];
-                document.getElementById("s2").innerText = "C) " + data.secenekler[2];
-                document.getElementById("s3").innerText = "D) " + data.secenekler[3];
-                
-                let gb = document.getElementById("geribildirim");
-                gb.className = "geribildirim";
-                gb.innerText = "";
-            } else {
-                bitir();
-            }
-        }
-
-        // JavaScript fonksiyon isim eşleşme düzeltmesi
-        function sanalCevap(idx) { cevapVer(idx); }
-
-        function cevapVer(secilen) {
-            const dogruCevap = okulSorulari[mevcutSoru].dogru;
-            const gb = document.getElementById("geribildirim");
+    <div class="ana-grid">
+        
+        <div class="panel panel-duyuru">
+            <div class="panel-baslik">
+                <span>📢 Resmi Duyurular</span>
+            </div>
             
-            if(secilen === dogruCevap) {
-                skor += 25;
-                document.getElementById("puan").innerText = skor;
-                gb.innerText = "✓ Doğru Bilgi. Kurumsal sistem güncellendi.";
-                gb.style.backgroundColor = "#E8F8F5";
-                gb.style.color = varSec("yesil");
-            } else {
-                gb.innerText = "❌ Hatalı Veri Girişi. Doğru cevap MEB kayıtlarında farklıdır.";
-                gb.style.backgroundColor = "#FDEDEC";
-                gb.style.color = varSec("kirmizi");
-            }
-            gb.classList.add("goster");
+            <div class="liste-elemani">
+                <span class="tarih-etiketi">Haziran 2026</span>
+                <h3 class="eleman-baslik">Yıl Sonu Kapanış ve Karne Töreni Programı</h3>
+                <p class="eleman-ozet">2025-2026 Eğitim-Öğretim yılı kapanış töreni ve karne dağıtım saatleri ile ilgili detaylı planlama sınıf öğretmenleri tarafından gruplarda paylaşılmıştır.</p>
+            </div>
 
-            setTimeout(() => {
-                mevcutSoru++;
-                soruGetir();
-            }, 2000);
-        }
+            <div class="liste-elemani">
+                <span class="tarih-etiketi">Mayıs 2026</span>
+                <h3 class="eleman-baslik">9. Sınıf Biyoloji Dersi Sınav Giriş Şartları</h3>
+                <p class="eleman-ozet">9. Sınıf ortak sınavları kapsamında yapılacak biyoloji muafiyet ve telafi sınavına girecek öğrencilerin listesi ilan panosuna asılmıştır.</p>
+            </div>
 
-        function varSec(isim) {
-            return getComputedStyle(document.documentElement).getPropertyValue('--' + isim).trim();
-        }
+            <div class="liste-elemani">
+                <span class="tarih-etiketi">Nisan 2026</span>
+                <h3 class="eleman-baslik">Destekleme ve Yetiştirme Kursları (DYK) Yaz Dönemi</h3>
+                <p class="eleman-ozet">Yaz dönemi DYK kurs başvuruları e-Kurs modülü üzerinden başlamış olup, ders seçimlerinizi zamanında tamamlamanız önemle rica olunur.</p>
+            </div>
+        </div>
 
-        function bitir() {
-            document.getElementById("soru-metni").innerText = "Kurumsal Değerlendirme Testi Tamamlandı.";
-            document.querySelector(".secenek-listesi").style.display = "none";
-            const gb = document.getElementById("geribildirim");
-            gb.className = "geribildirim goster";
-            gb.style.backgroundColor = "#EBF5FB";
-            gb.style.color = varSec("meb-mavi");
-            gb.innerText = "Toplam Başarı Skorunuz: " + skor + " / 75. Katılımınız için teşekkür ederiz.";
-        }
+        <div class="panel">
+            <div class="panel-baslik">
+                <span>📰 Okulumuzdan Haberler</span>
+            </div>
+            
+            <div class="liste-elemani">
+                <span class="tarih-etiketi">Haziran 2026</span>
+                <h3 class="eleman-baslik">"Genç Kızlar A" Kategorisinde İl İkinciliği Gururu</h3>
+                <p class="eleman-ozet">Okulumuz spor takımı, Kocaeli genelinde düzenlenen liseler arası müsabakalarda "Genç Kızlar A" kategorisinde büyük bir başarıya imza atarak il 2.'si olmuştur. Öğrencilerimizi tebrik ederiz.</p>
+            </div>
 
-        soruGetir();
-    </script>
+            <div class="liste-elemani">
+                <span class="tarih-etiketi">Mayıs 2026</span>
+                <h3 class="eleman-baslik">Geleneksel Bilgi Yarışması Yazılım Projesi Başlatıldı</h3>
+                <p class="eleman-ozet">Öğrencilerimizin katılımıyla gerçekleştirilen okul içi interaktif bilgi yarışması projesinin web tabanlı ve mobil tabanlı yazılım altyapı çalışmaları başarıyla tamamlandı.</p>
+            </div>
+
+            <div class="liste-elemani">
+                <span class="tarih-etiketi">Nisan 2026</span>
+                <h3 class="eleman-baslik">Tarihi İzmit Lisesi Animasyon ve Kültür Gösterimi</h3>
+                <p class="eleman-ozet">Okulumuzun köklü tarihini ve günlük yaşamını konu alan dijital animasyon ve senaryo projesi kültür haftası etkinlikleri kapsamında izleyicilerle buluştu.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        <p>© 2026 İzmit Lisesi - Tüm Hakları Saklıdır. MEB Altyapısı ve Kurumsal Mobil Teması</p>
+    </div>
+
 </body>
 </html>
