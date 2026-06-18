@@ -3,305 +3,297 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>İzmit Lisesi - Resmi Duyuru ve Haber Portalı</title>
+    <title>İzmit Lisesi - Resmi Dijital Portalı</title>
     <style>
         :root {
-            --meb-mavi: #003366;
-            --meb-mavi-koyu: #001F3F;
-            --altin: #D4AF37;
-            --gri-arka: #F5F7FA;
-            --yazi-koyu: #2C3E50;
-            --yazi-acik: #7F8C8D;
-            --beyaz: #FFFFFF;
-            --kirmizi: #C0392B;
+            --bg-karanlik: #060b18; /* Görseldeki derin uzay mavisi/siyah arka plan */
+            --kart-bg: rgba(255, 255, 255, 0.03); /* Yarı saydam cam efekti */
+            --neon-mavi: #1d4ed8; /* Vurucu mavi tonu */
+            --neon-mavi-acik: #3b82f6; 
+            --yazi-beyaz: #ffffff;
+            --yazi-gri: #94a3b8;
+            --cam-sinir: rgba(255, 255, 255, 0.08);
         }
 
         body {
-            font-family: 'Segoe UI', Arial, sans-serif;
-            background-color: var(--gri-arka);
-            color: var(--yazi-koyu);
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-karanlik);
+            color: var(--yazi-beyaz);
             margin: 0;
             padding: 0;
+            overflow-x: hidden;
+            /* Arka plana derinlik katmak için hafif bir ışık süzmesi efekti */
+            background-image: radial-gradient(circle at 80% 20%, rgba(29, 78, 216, 0.15) 0%, transparent 50%);
         }
 
-        /* MEB STANDARTLARINDA ÜST BAR */
-        .meb-top-bar {
-            background-color: var(--meb-mavi-koyu);
-            color: var(--beyaz);
-            padding: 5px 5%;
-            font-size: 12px;
-            display: flex;
-            justify-content: space-between;
-            border-bottom: 2px solid var(--altin);
-        }
-
-        /* LOGOLU ANA NAVBAR */
+        /* PREMIUM NAVBAR */
         .navbar {
-            background-color: var(--meb-mavi);
-            color: var(--beyaz);
-            padding: 15px 5%;
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            align-items: center;
+            padding: 20px 8%;
+            border-bottom: 1px solid var(--cam-sinir);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
-        .navbar-brand {
+        .logo-alani {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
         }
 
-        /* Yuvarlak Amblem Alanı (Yüklediğin Amblem İçin) */
-        .logo-amblem {
-            width: 55px;
-            height: 55px;
-            background-color: var(--beyaz);
-            border-radius: 50%;
-            border: 2px solid var(--altin);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-weight: bold;
-            color: var(--meb-mavi);
-            font-size: 11px;
-            text-align: center;
+        .logo-yazi {
+            font-size: 18px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            background: linear-gradient(to right, #fff, var(--yazi-gri));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .logo-yazi h1 {
-            font-size: 20px;
-            margin: 0;
-            font-weight: 700;
-            letter-spacing: 0.5px;
+        .nav-linkler a {
+            color: var(--yazi-gri);
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.3s;
         }
 
-        .logo-yazi p {
-            font-size: 12px;
-            margin: 3px 0 0 0;
-            color: #BDC3C7;
+        .nav-linkler a:hover {
+            color: var(--yazi-beyaz);
         }
 
-        /* SON DAKİKA ŞERİDİ (KAYAN YAZI) */
-        .son-dakika-bandi {
-            background-color: var(--kirmizi);
-            color: var(--beyaz);
-            padding: 10px 5%;
-            display: flex;
+        .btn-nav {
+            background-color: var(--neon-mavi);
+            color: white;
+            padding: 10px 22px;
+            border-radius: 50px; /* Görseldeki gibi tam yuvarlak buton */
+            text-decoration: none;
             font-size: 14px;
             font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(29, 78, 216, 0.3);
         }
 
-        .sd-baslik {
-            background-color: var(--meb-mavi-koyu);
-            padding: 0 10px;
-            margin-right: 15px;
-            border-radius: 3px;
+        .btn-nav:hover {
+            background-color: var(--neon-mavi-acik);
+            transform: translateY(-1px);
         }
 
-        /* OKUL BİNASI MANŞET ALANI */
-        .manset-alani {
-            background-color: #DFE4EA;
-            height: 220px;
-            display: flex;
-            align-items: flex-end;
-            padding: 20px 5%;
-            color: var(--beyaz);
-            position: relative;
-            overflow: hidden;
-            border-bottom: 4px solid var(--altin);
-        }
-
-        /* Görsel Yer tutucu (Yüklediğin Okul Binası Fotoğrafı Buraya Gelecek) */
-        .manset-overlay {
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,31,63,0.85));
-            z-index: 1;
-        }
-
-        .manset-yazi {
-            position: relative;
-            z-index: 2;
-        }
-
-        .manset-yazi h2 {
-            margin: 0 0 5px 0;
-            font-size: 24px;
-        }
-
-        /* ANA İÇERİK YAPISI (SOL DUYURU - SAĞ HABER) */
-        .ana-grid {
+        /* HERO REYONU (ANA GÖVDE) */
+        .hero-konteyner {
             max-width: 1200px;
-            margin: 30px auto;
-            padding: 0 20px;
+            margin: 60px auto;
+            padding: 0 4%;
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-        }
-
-        @media (max-width: 768px) {
-            .ana-grid { grid-template-columns: 1fr; }
-        }
-
-        .panel {
-            background-color: var(--beyaz);
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
-            padding: 25px;
-            border-top: 4px solid var(--meb-mavi);
-        }
-
-        .panel-duyuru { border-top-color: var(--altin); }
-
-        .panel-baslik {
-            font-size: 18px;
-            font-weight: 700;
-            margin-top: 0;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #ECF0F1;
-            color: var(--meb-mavi-koyu);
-            display: flex;
-            justify-content: space-between;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 50px;
             align-items: center;
         }
 
-        /* LİSTE ELEMENTLERİ */
-        .liste-elemani {
-            display: flex;
-            flex-direction: column;
-            padding: 15px 0;
-            border-bottom: 1px dashed #BDC3C7;
-            transition: padding-left 0.2s;
+        @media (max-width: 968px) {
+            .hero-konteyner {
+                grid-template-columns: 1fr;
+                text-align: center;
+                margin: 30px auto;
+            }
+            .medya-alani { justify-content: center; }
         }
 
-        .liste-elemani:last-child { border-bottom: none; }
-
-        .liste-elemani:hover {
-            padding-left: 5px;
-            background-color: #FDFEFE;
-        }
-
-        .tarih-etiketi {
-            font-size: 11px;
-            font-weight: 700;
-            color: var(--altin);
-            text-transform: uppercase;
-            margin-bottom: 5px;
-        }
-
-        .eleman-baslik {
-            font-size: 15px;
-            font-weight: 600;
-            margin: 0 0 5px 0;
-            color: var(--yazi-koyu);
-        }
-
-        .eleman-ozet {
-            font-size: 13px;
-            color: var(--yazi-acik);
-            margin: 0;
-            line-height: 1.4;
-        }
-
-        /* ALT BİLGİ (FOOTER) */
-        .footer {
-            background-color: var(--meb-mavi-koyu);
-            color: #BDC3C7;
-            text-align: center;
-            padding: 20px;
+        /* SOL TARAF: BAŞLIKLAR VE SAYAÇLAR */
+        .icerik-alani .ust-etiket {
+            display: inline-block;
+            background-color: rgba(29, 78, 216, 0.15);
+            color: var(--neon-mavi-acik);
+            padding: 6px 16px;
+            border-radius: 50px;
             font-size: 12px;
-            margin-top: 40px;
-            border-top: 3px solid var(--altin);
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(29, 78, 216, 0.3);
+        }
+
+        .icerik-alani h2 {
+            font-size: 48px;
+            font-weight: 800;
+            line-height: 1.15;
+            margin: 0 0 20px 0;
+            letter-spacing: -1px;
+        }
+
+        .icerik-alani h2 span {
+            color: var(--neon-mavi-acik);
+            position: relative;
+        }
+
+        .icerik-alani p {
+            color: var(--yazi-gri);
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 35px;
+            max-width: 550px;
+        }
+
+        /* AKSİYON BUTONLARI */
+        .aksiyon-grup {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 50px;
+        }
+
+        @media (max-width: 968px) { .aksiyon-grup { justify-content: center; } }
+
+        .btn-ana {
+            background-color: var(--neon-mavi);
+            color: white;
+            padding: 14px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(29, 78, 216, 0.4);
+        }
+
+        .btn-ana:hover {
+            background-color: var(--neon-mavi-acik);
+            box-shadow: 0 6px 24px rgba(29, 78, 216, 0.6);
+        }
+
+        .btn-ikincil {
+            background-color: transparent;
+            color: var(--yazi-beyaz);
+            padding: 14px 28px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            border: 1px solid var(--cam-sinir);
+            transition: all 0.3s;
+            backdrop-filter: blur(5px);
+        }
+
+        .btn-ikincil:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-color: var(--yazi-gri);
+        }
+
+        /* İSTATİSTİK SAYAÇLARI (GÖRSELDEKİ +250 ALANI) */
+        .istatistikler {
+            display: flex;
+            gap: 40px;
+            border-top: 1px solid var(--cam-sinir);
+            padding-top: 30px;
+        }
+
+        @media (max-width: 968px) { .istatistikler { justify-content: center; } }
+
+        .skor-kutu h3 {
+            font-size: 28px;
+            margin: 0 0 5px 0;
+            font-weight: 700;
+            color: var(--yazi-beyaz);
+        }
+
+        .skor-kutu p {
+            font-size: 13px;
+            color: var(--yazi-gri);
+            margin: 0;
+        }
+
+        /* SAĞ TARAF: GÖRSEL KART YAPISI */
+        .medya-alani {
+            display: flex;
+            justify-content: flex-end;
+            position: relative;
+        }
+
+        .resim-cerceve {
+            width: 100%;
+            max-width: 480px;
+            height: 320px;
+            background-color: rgba(255, 255, 255, 0.05); /* Burası arka plandaki okul binası fotoğrafı olacak */
+            border-radius: 16px;
+            border: 1px solid var(--cam-sinir);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Görseldeki gibi kart üzerine binen yarı saydam küçük bilgi çipleri */
+        .yuzen-cip {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(6, 11, 24, 0.8);
+            border: 1px solid var(--cam-sinir);
+            backdrop-filter: blur(10px);
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
         }
     </style>
 </head>
 <body>
 
-    <div class="meb-top-bar">
-        <div>Türkiye Cumhuriyeti Millî Eğitim Bakanlığı</div>
-        <div>Kocaeli / İzmit</div>
-    </div>
-
     <nav class="navbar">
-        <div class="navbar-brand">
-            <div class="logo-amblem">
-                <span style="font-size: 10px;">İZMİT LİSESİ<br>1945</span>
-            </div>
-            <div class="logo-yazi">
-                <h1>İZMİT LİSESİ</h1>
-                <p>Resmi Mobil Haber & Duyuru Sistemi</p>
-            </div>
+        <div class="logo-alani">
+            <div style="width: 32px; height: 32px; background: linear-gradient(135deg, var(--neon-mavi-acik), var(--neon-mavi)); border-radius: 8px;"></div>
+            <div class="logo-yazi">İZMİT LİSESİ</div>
         </div>
+        <div class="nav-linkler">
+            <a href="#">Duyurular</a>
+            <a href="#">Haberler</a>
+            <a href="#">Etkinlikler</a>
+        </div>
+        <a href="#" class="btn-nav">E-Okul Giriş</a>
     </nav>
 
-    <div class="son-dakika-bandi">
-        <span class="sd-baslik">ÖNEMLİ</span>
-        <marquee behavior="scroll" direction="left">Sayın Velilerimiz ve Öğrencilerimiz, Okulumuzun Güncel Duyuru, Sınav Takvimi ve Etkinlik Haberlerine Aşağıdaki Panellerden Ulaşabilirsiniz.</marquee>
-    </div>
-
-    <div class="manset-alani">
-        <div class="manset-overlay"></div>
-        <div class="manset-yazi">
-            <h2>Nitelikli Eğitimle Geleceğe Güvenle</h2>
-            <p>İzmit Lisesi Modern Eğitim Kampüsü</p>
-        </div>
-    </div>
-
-    <div class="ana-grid">
+    <div class="hero-konteyner">
         
-        <div class="panel panel-duyuru">
-            <div class="panel-baslik">
-                <span>📢 Resmi Duyurular</span>
-            </div>
+        <div class="icerik-alani">
+            <div class="ust-etiket">KOCAELİ / İZMİT</div>
+            <h2>Geleceği İnşa Eden <span>Köklü Eğitim</span> Çınarı.</h2>
+            <p>İzmit Lisesi, 1945'ten bu yana süregelen kurumsal hafızası, modern kampüs imkanları ve akademik başarı vizyonuyla gençleri geleceğin dünyasına hazırlıyor.</p>
             
-            <div class="liste-elemani">
-                <span class="tarih-etiketi">Haziran 2026</span>
-                <h3 class="eleman-baslik">Yıl Sonu Kapanış ve Karne Töreni Programı</h3>
-                <p class="eleman-ozet">2025-2026 Eğitim-Öğretim yılı kapanış töreni ve karne dağıtım saatleri ile ilgili detaylı planlama sınıf öğretmenleri tarafından gruplarda paylaşılmıştır.</p>
+            <div class="aksiyon-grup">
+                <a href="#" class="btn-ana">Güncel Duyurular</a>
+                <a href="#" class="btn-ikincil">Okulumuz Hakkında</a>
             </div>
 
-            <div class="liste-elemani">
-                <span class="tarih-etiketi">Mayıs 2026</span>
-                <h3 class="eleman-baslik">9. Sınıf Biyoloji Dersi Sınav Giriş Şartları</h3>
-                <p class="eleman-ozet">9. Sınıf ortak sınavları kapsamında yapılacak biyoloji muafiyet ve telafi sınavına girecek öğrencilerin listesi ilan panosuna asılmıştır.</p>
-            </div>
-
-            <div class="liste-elemani">
-                <span class="tarih-etiketi">Nisan 2026</span>
-                <h3 class="eleman-baslik">Destekleme ve Yetiştirme Kursları (DYK) Yaz Dönemi</h3>
-                <p class="eleman-ozet">Yaz dönemi DYK kurs başvuruları e-Kurs modülü üzerinden başlamış olup, ders seçimlerinizi zamanında tamamlamanız önemle rica olunur.</p>
+            <div class="istatistikler">
+                <div class="skor-kutu">
+                    <h3>1945</h3>
+                    <p>Kuruluş Yılı</p>
+                </div>
+                <div class="skor-kutu">
+                    <h3>2.lik</h3>
+                    <p>Genç Kızlar A İl Derecesi</p>
+                </div>
+                <div class="skor-kutu">
+                    <h3>%100</h3>
+                    <p>Güvenli Kampüs</p>
+                </div>
             </div>
         </div>
 
-        <div class="panel">
-            <div class="panel-baslik">
-                <span>📰 Okulumuzdan Haberler</span>
-            </div>
-            
-            <div class="liste-elemani">
-                <span class="tarih-etiketi">Haziran 2026</span>
-                <h3 class="eleman-baslik">"Genç Kızlar A" Kategorisinde İl İkinciliği Gururu</h3>
-                <p class="eleman-ozet">Okulumuz spor takımı, Kocaeli genelinde düzenlenen liseler arası müsabakalarda "Genç Kızlar A" kategorisinde büyük bir başarıya imza atarak il 2.'si olmuştur. Öğrencilerimizi tebrik ederiz.</p>
-            </div>
-
-            <div class="liste-elemani">
-                <span class="tarih-etiketi">Mayıs 2026</span>
-                <h3 class="eleman-baslik">Geleneksel Bilgi Yarışması Yazılım Projesi Başlatıldı</h3>
-                <p class="eleman-ozet">Öğrencilerimizin katılımıyla gerçekleştirilen okul içi interaktif bilgi yarışması projesinin web tabanlı ve mobil tabanlı yazılım altyapı çalışmaları başarıyla tamamlandı.</p>
-            </div>
-
-            <div class="liste-elemani">
-                <span class="tarih-etiketi">Nisan 2026</span>
-                <h3 class="eleman-baslik">Tarihi İzmit Lisesi Animasyon ve Kültür Gösterimi</h3>
-                <p class="eleman-ozet">Okulumuzun köklü tarihini ve günlük yaşamını konu alan dijital animasyon ve senaryo projesi kültür haftası etkinlikleri kapsamında izleyicilerle buluştu.</p>
+        <div class="medya-alani">
+            <div class="resim-cerceve">
+                <div style="width:100%; height:100%; background: linear-gradient(to bottom, transparent, rgba(6,11,24,0.7)); display:flex; align-items:center; justify-content:center; color:var(--yazi-gri); font-size:14px;">
+                    [Okul Binası Fotoğraf Alanı]
+                </div>
+                <div class="yuzen-cip">
+                    🚀 Başarı Odaklı Modern Vizyon
+                </div>
             </div>
         </div>
 
-    </div>
-
-    <div class="footer">
-        <p>© 2026 İzmit Lisesi - Tüm Hakları Saklıdır. MEB Altyapısı ve Kurumsal Mobil Teması</p>
     </div>
 
 </body>
