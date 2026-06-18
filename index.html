@@ -3,195 +3,299 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Okul Bilmecesi</title>
+    <title>İzmit Lisesi - Kurumsal Bilgi Yarışması</title>
     <style>
+        :root {
+            --meb-mavi: #003366;
+            --meb-mavi-koyu: #002244;
+            --altin: #D4AF37;
+            --gri-arka: #F4F6F9;
+            --yazi-koyu: #2C3E50;
+            --beyaz: #FFFFFF;
+            --yesil: #2ECC71;
+            --kirmizi: #E74C3C;
+        }
+
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #1e1e24; 
-            color: #fff; 
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background-color: var(--gri-arka);
+            color: var(--yazi-koyu);
             margin: 0;
+            padding: 0;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
         }
 
-        /* ÜST MENÜ (NAVBAR) */
+        /* PROFESYONEL NAVBAR */
         .navbar {
-            background-color: #16161a;
-            padding: 15px 30px;
+            background-color: var(--meb-mavi);
+            color: var(--beyaz);
+            padding: 15px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 2px solid #ff4a5a;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
 
-        .logo {
-            font-size: 20px;
-            font-weight: bold;
-            color: #ff4a5a;
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
-        .skor-tabelasi {
-            background-color: #2a2a35;
-            padding: 5px 15px;
-            border-radius: 20px;
-            border: 1px solid #ff4a5a;
-            font-weight: bold;
+        .logo-text {
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            border-left: 3px solid var(--altin);
+            padding-left: 10px;
         }
 
-        /* OYUN ALANI */
-        .icerik {
+        .skor-alani {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 8px 18px;
+            border-radius: 6px;
+            border: 1px solid var(--altin);
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        /* ANA KONTEYNER */
+        .ana-konteyner {
             flex: 1;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: 40px 20px;
         }
 
-        .kart {
-            background-color: #2a2a35; 
-            padding: 40px;
-            border-radius: 15px; 
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3); 
-            text-align: center;
-            max-width: 500px;
+        .yarisma-karti {
+            background-color: var(--beyaz);
             width: 100%;
-            border-left: 5px solid #ff4a5a;
+            max-width: 650px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+            border-top: 6px solid var(--meb-mavi);
+            padding: 40px;
+            box-sizing: border-box;
+            position: relative;
         }
 
-        h1 {
-            color: #fff;
-            margin-top: 0;
-            font-size: 24px;
+        /* SORU İLERLEME CHIPLERİ */
+        .ilerleme-bar {
+            display: flex;
+            gap: 6px;
             margin-bottom: 25px;
         }
 
-        /* SEÇENEK BUTONLARI */
-        .secenekler {
+        .adim {
+            flex: 1;
+            height: 4px;
+            background-color: #E0E6ED;
+            border-radius: 2px;
+            transition: background 0.3s;
+        }
+
+        .adim.aktif {
+            background-color: var(--altin);
+        }
+
+        .soru-kategori {
+            text-transform: uppercase;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--altin);
+            margin-bottom: 8px;
+            letter-spacing: 1px;
+        }
+
+        h1 {
+            font-size: 22px;
+            color: var(--meb-mavi-koyu);
+            margin-top: 0;
+            margin-bottom: 30px;
+            line-height: 1.5;
+            font-weight: 600;
+        }
+
+        /* SEÇENEK TASARIMLARI */
+        .secenek-listesi {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 14px;
         }
 
-        .secenek-btn {
-            background-color: #1e1e24;
-            color: #fff;
-            border: 2px solid #3f3f4e;
-            padding: 14px;
+        .secenek {
+            background-color: var(--beyaz);
+            color: var(--yazi-koyu);
+            border: 1px solid #DCE4EC;
+            padding: 16px 20px;
             border-radius: 8px;
-            font-size: 16px;
+            font-size: 15px;
+            font-weight: 500;
             cursor: pointer;
             text-align: left;
-            transition: all 0.2s ease;
+            transition: all 0.2s ease-in-out;
+            outline: none;
+            display: flex;
+            align-items: center;
         }
 
-        .secenek-btn:hover {
-            border-color: #ff4a5a;
-            background-color: #25252d;
-            transform: translateX(5px);
+        .secenek:hover {
+            border-color: var(--meb-mavi);
+            background-color: #F8FAFC;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,51,102,0.08);
         }
 
-        /* BİLDİRİM MESAJI */
-        #mesaj {
-            margin-top: 20px;
-            font-weight: bold;
-            font-size: 18px;
-            min-height: 24px;
+        /* SONUÇ BİLDİRİMLERİ */
+        .geribildirim {
+            margin-top: 25px;
+            padding: 12px;
+            border-radius: 6px;
+            font-weight: 600;
+            text-align: center;
+            font-size: 15px;
+            min-height: 22px;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .goster {
+            opacity: 1;
         }
     </style>
 </head>
 <body>
 
-    <!-- ÜST MENÜ VE SKOR -->
+    <!-- YÖNETİM PANELİ & NAVBAR -->
     <nav class="navbar">
-        <div class="logo">🏫 Okul Bilmecesi</div>
-        <div class="skor-tabelasi">Puan: <span id="puan">0</span></div>
+        <div class="navbar-brand">
+            <div class="logo-text">İZMİT LİSESİ<br><span style="font-size: 12px; font-weight: 400; color: #BDC3C7;">Kurumsal Panel</span></div>
+        </div>
+        <div class="skor-alani">Başarı Puanı: <span id="puan">0</span></div>
     </nav>
 
-    <!-- BİLMENCE KART ALANI -->
-    <div class="icerik">
-        <div class="kart">
-            <h1 id="soru-metni">Soru yükleniyor...</h1>
+    <!-- OYUN ALANI -->
+    <div class="ana-konteyner">
+        <div class="yarisma-karti">
+            <div class="ilerleme-bar" id="ilerleme"></div>
+            <div class="soru-kategori">Kurumsal Bilgi Testi</div>
+            <h1 id="soru-metni">Yükleniyor...</h1>
             
-            <div class="secenekler">
-                <button class="secenek-btn" onclick="cevapKontrol(0)" id="btn0">A şıkkı</button>
-                <button class="secenek-btn" onclick="cevapKontrol(1)" id="btn1">B şıkkı</button>
-                <button class="secenek-btn" onclick="cevapKontrol(2)" id="btn2">C şıkkı</button>
-                <button class="secenek-btn" onclick="cevapKontrol(3)" id="btn3">D şıkkı</button>
+            <div class="secenek-listesi">
+                <button class="secenek" onclick="cevapVer(0)" id="s0"></button>
+                <button class="secenek" onclick="cevapVer(1)" id="s1"></button>
+                <button class="secenek" onclick="sanalCevap(2)" id="s2"></button>
+                <button class="secenek" onclick="cevapVer(3)" id="s3"></button>
             </div>
 
-            <div id="mesaj"></div>
+            <div id="geribildirim" class="geribildirim"></div>
         </div>
     </div>
 
-    <!-- OYUN MANTIĞI (JAVASCRIPT) -->
     <script>
-        // Bilmece Soruları
-        const sorular = [
+        // Resmi MEB sitesi misyon, vizyon ve tarihçe verilerinden derlenen sorular
+        const okulSorulari = [
             {
-                soru: "Sıra sıra dizilirler, her gün bizi beklerler. Üzerinde yazı yazar, bazen de resim çizeriz. Nedir bu?",
-                secenekler: ["Okul Tahtası", "Öğrenci Sırası", "Kütüphane", "Öğretmen Kürsüsü"],
-                dogru: 1 // "Öğrenci Sırası"
+                soru: "Kocaeli'nin en köklü eğitim kurumlarından biri olan İzmit Lisesi, ilk olarak hangi tarihi yılda eğitim-öğretim hayatına başlamıştır?",
+                secenekler: ["1923", "1932", "1945", "1950"],
+                dogru: 1
             },
             {
-                soru: "Zil çalınca herkes ona koşar, içinde neşeyle oyunlar coşar. Okulun en geniş yeridir, bilin bakalım neresidir?",
-                secenekler: ["Sınıf", "Kantin", "Okul Bahçesi", "Müdür Odası"],
-                dogru: 2 // "Okul Bahçesi"
+                soru: "İzmit Lisesi'nin kurumsal vizyonunun temel hedefi aşağıdakilerden hangisidir?",
+                secenekler: [
+                    "Sadece yerel düzeyde başarı sağlamak", 
+                    "Akademik, sosyal ve kültürel alanlarda ulusal ve uluslararası düzeyde öncü bir kurum olmak", 
+                    "Yalnızca spor odaklı eğitim sunmak", 
+                    "Teknik eleman yetiştirmek"
+                ],
+                dogru: 1
             },
             {
-                soru: "Bilgi verir herkese, ışık tutar zihne. Okulda en çok sevilen, rehber olan kimdir bize?",
-                secenekler: ["Öğretmen", "Müdür", "Nöbetçi Öğrenci", "Arkadaş"],
-                dogru: 0 // "Öğretmen"
+                soru: "Okulun benimsediği misyon tanımına göre öğrencilere kazandırılması hedeflenen öncelikli değer hangisidir?",
+                secenekler: [
+                    "Ezberci eğitim modeli", 
+                    "Bireysel başarıyı toplumsal faydanın önüne koymak", 
+                    "Atatürk ilke ve inkılaplarına bağlı, çağdaş ve analitik düşünebilen bireyler yetiştirmek", 
+                    "Sadece teorik bilgi birikimi"
+                ],
+                dogru: 2
             }
         ];
 
-        let mevcutSoruIndex = 0;
-        let toplamPuan = 0;
+        let mevcutSoru = 0;
+        let skor = 0;
 
-        function soruYukle() {
-            if (mevcutSoruIndex < sorular.length) {
-                const mevcutSoru = sorular[mevcutSoruIndex];
-                document.getElementById("soru-metni").innerText = mevcutSoru.soru;
-                document.getElementById("btn0").innerText = mevcutSoru.secenekler[0];
-                document.getElementById("btn1").innerText = mevcutSoru.secenekler[1];
-                document.getElementById("btn2").innerText = mevcutSoru.secenekler[2];
-                document.getElementById("btn3").innerText = mevcutSoru.secenekler[3];
-                document.getElementById("mesaj").innerText = "";
+        // İlerleme çubuklarını oluştur
+        const ilerlemeAlani = document.getElementById("ilerleme");
+        for(let i=0; i<okulSorulari.length; i++) {
+            let adim = document.createElement("div");
+            adim.className = "adim";
+            adim.id = "adim-" + i;
+            ilerlemeAlani.appendChild(adim);
+        }
+
+        function soruGetir() {
+            if (mevcutSoru < okulSorulari.length) {
+                document.getElementById("adim-" + mevcutSoru).classList.add("aktif");
+                const data = okulSorulari[mevcutSoru];
+                document.getElementById("soru-metni").innerText = data.soru;
+                document.getElementById("s0").innerText = "A) " + data.secenekler[0];
+                document.getElementById("s1").innerText = "B) " + data.secenekler[1];
+                document.getElementById("s2").innerText = "C) " + data.secenekler[2];
+                document.getElementById("s3").innerText = "D) " + data.secenekler[3];
+                
+                let gb = document.getElementById("geribildirim");
+                gb.className = "geribildirim";
+                gb.innerText = "";
             } else {
-                // Oyun bittiğinde
-                document.getElementById("soru-metni").innerText = "Tebrikler! Tüm bilmeceleri tamamladın 🎉";
-                document.querySelector(".secenekler").style.display = "none";
-                document.getElementById("mesaj").innerText = "Oyun bitti. Toplam Puanın: " + toplamPuan;
-                document.getElementById("mesaj").style.color = "#ff4a5a";
+                bitir();
             }
         }
 
-        function cevapKontrol(secilenIndex) {
-            const dogruCevap = sorular[mevcutSoruIndex].dogru;
-            const mesajAlani = document.getElementById("mesaj");
+        // JavaScript fonksiyon isim eşleşme düzeltmesi
+        function sanalCevap(idx) { cevapVer(idx); }
 
-            if (secilenIndex === dogruCevap) {
-                toplamPuan += 10;
-                document.getElementById("puan").innerText = toplamPuan;
-                mesajAlani.innerText = "Doğru Cevap! 🎉 +10 Puan";
-                mesajAlani.style.color = "#2ecc71"; // Yeşil
+        function cevapVer(secilen) {
+            const dogruCevap = okulSorulari[mevcutSoru].dogru;
+            const gb = document.getElementById("geribildirim");
+            
+            if(secilen === dogruCevap) {
+                skor += 25;
+                document.getElementById("puan").innerText = skor;
+                gb.innerText = "✓ Doğru Bilgi. Kurumsal sistem güncellendi.";
+                gb.style.backgroundColor = "#E8F8F5";
+                gb.style.color = varSec("yesil");
             } else {
-                toplamPuan -= 5;
-                document.getElementById("puan").innerText = toplamPuan;
-                mesajAlani.innerText = "Yanlış Cevap! ❌ -5 Puan";
-                mesajAlani.style.color = "#e74c3c"; // Kırmızı
+                gb.innerText = "❌ Hatalı Veri Girişi. Doğru cevap MEB kayıtlarında farklıdır.";
+                gb.style.backgroundColor = "#FDEDEC";
+                gb.style.color = varSec("kirmizi");
             }
+            gb.classList.add("goster");
 
-            // 1.5 saniye sonra sonraki soruya geç
             setTimeout(() => {
-                mevcutSoruIndex++;
-                soruYukle();
-            }, 1500);
+                mevcutSoru++;
+                soruGetir();
+            }, 2000);
         }
 
-        // Sayfa ilk açıldığında ilk soruyu getir
-        soruYukle();
-    </script>
+        function varSec(isim) {
+            return getComputedStyle(document.documentElement).getPropertyValue('--' + isim).trim();
+        }
 
+        function bitir() {
+            document.getElementById("soru-metni").innerText = "Kurumsal Değerlendirme Testi Tamamlandı.";
+            document.querySelector(".secenek-listesi").style.display = "none";
+            const gb = document.getElementById("geribildirim");
+            gb.className = "geribildirim goster";
+            gb.style.backgroundColor = "#EBF5FB";
+            gb.style.color = varSec("meb-mavi");
+            gb.innerText = "Toplam Başarı Skorunuz: " + skor + " / 75. Katılımınız için teşekkür ederiz.";
+        }
+
+        soruGetir();
+    </script>
 </body>
 </html>
