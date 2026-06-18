@@ -60,9 +60,10 @@
             font-size: 14px;
             font-weight: 500;
             transition: color 0.3s;
+            cursor: pointer;
         }
 
-        .nav-linkler a:hover {
+        .nav-linkler a:hover, .nav-linkler a.aktif {
             color: var(--yazi-beyaz);
         }
 
@@ -78,7 +79,7 @@
             box-shadow: 0 4px 15px rgba(29, 78, 216, 0.3);
         }
 
-        /* HERO REYONU (ANA GÖVDE) */
+        /* HERO REYONU */
         .hero-konteyner {
             max-width: 1200px;
             margin: 50px auto;
@@ -96,7 +97,7 @@
             }
         }
 
-        /* SOL BLOK: BAŞLIKLAR VE SAYAÇLAR */
+        /* SOL BLOK */
         .icerik-alani .ust-etiket {
             display: inline-block;
             background-color: rgba(29, 78, 216, 0.15);
@@ -149,13 +150,13 @@
             margin: 0;
         }
 
-        /* SAĞ BLOK: PREMIUM TARİHÇE PANELİ (KAYDIRILABİLİR GLASSMORPHISM) */
-        .tarihce-alani {
+        /* SAĞ BLOK: DİNAMİK DEĞİŞEN PREMIUM KART */
+        .interaktif-alan {
             display: flex;
             justify-content: center;
         }
 
-        .tarihce-kart {
+        .dinamik-kart {
             width: 100%;
             height: 480px;
             background: var(--kart-bg);
@@ -168,16 +169,45 @@
             display: flex;
             flex-direction: column;
             position: relative;
+            transition: all 0.5s ease;
         }
 
-        .tarihce-kart::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; height: 40px;
-            background: linear-gradient(to bottom, rgba(6,11,24,0.5), transparent);
-            pointer-events: none;
-            border-top-left-radius: 20px;
-            border-top-right-radius: 20px;
+        /* 1. GÖRÜNÜM: ANA SAYFA KARŞILAMA EKRANI (AÇILIŞTA BU AKTİF) */
+        .ekran-ana {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+        }
+
+        .resim-yer-tutucu {
+            width: 100%;
+            height: 260px;
+            background: linear-gradient(135deg, rgba(255,255,255,0.02), rgba(29, 78, 216, 0.05));
+            border-radius: 12px;
+            border: 1px solid var(--cam-sinir);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--yazi-gri);
+            font-size: 14px;
+        }
+
+        .yuzen-cip {
+            background: rgba(6, 11, 24, 0.8);
+            border: 1px solid var(--cam-sinir);
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            align-self: flex-start;
+        }
+
+        /* 2. GÖRÜNÜM: GİZLİ TARİHÇE PANELİ */
+        .ekran-tarihce {
+            display: none; /* Başlangıçta gizli */
+            flex-direction: column;
+            height: 100%;
         }
 
         .tarihce-baslik {
@@ -187,7 +217,7 @@
             margin-bottom: 20px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            justify-content: space-between;
             border-bottom: 1px solid var(--cam-sinir);
             padding-bottom: 15px;
         }
@@ -196,27 +226,27 @@
             color: var(--neon-mavi-acik);
         }
 
+        .btn-kapat {
+            background: none;
+            border: none;
+            color: var(--yazi-gri);
+            font-size: 20px;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .btn-kapat:hover { color: #fff; }
+
         .tarihce-metin-kutusu {
             flex: 1;
-            overflow-y: auto; /* İçeriğin taşmasını engelleyip kaydırılabilir yapan sihirli kod */
+            overflow-y: auto;
             padding-right: 15px;
             text-align: justify;
         }
 
-        /* Özel Şık Scrollbar Tasarımı */
-        .tarihce-metin-kutusu::-webkit-scrollbar {
-            width: 6px;
-        }
-        .tarihce-metin-kutusu::-webkit-scrollbar-track {
-            background: transparent;
-        }
-        .tarihce-metin-kutusu::-webkit-scrollbar-thumb {
-            background: var(--cam-sinir);
-            border-radius: 10px;
-        }
-        .tarihce-metin-kutusu::-webkit-scrollbar-thumb:hover {
-            background: var(--neon-mavi-acik);
-        }
+        .tarihce-metin-kutusu::-webkit-scrollbar { width: 6px; }
+        .tarihce-metin-kutusu::-webkit-scrollbar-track { background: transparent; }
+        .tarihce-metin-kutusu::-webkit-scrollbar-thumb { background: var(--cam-sinir); border-radius: 10px; }
 
         .tarihce-metin-kutusu p {
             color: #cbd5e1;
@@ -233,7 +263,6 @@
             font-size: 12px;
             color: var(--yazi-gri);
             text-align: right;
-            line-height: 1.5;
         }
     </style>
 </head>
@@ -243,10 +272,10 @@
     <nav class="navbar">
         <div class="logo-alani">
             <div style="width: 32px; height: 32px; background: linear-gradient(135deg, var(--neon-mavi-acik), var(--neon-mavi)); border-radius: 8px;"></div>
-            <div class="logo-yazi">İZMİT LİSESİ</div>
+            <div class="logo-yazi" onclick="anaEkranıGoster()" style="cursor: pointer;">İZMİT LİSESİ</div>
         </div>
         <div class="nav-linkler">
-            <a href="#">Tarihçemiz</a>
+            <a onclick="tarihceyiGoster()" id="menu-tarihce">Tarihçemiz</a>
             <a href="#">Duyurular</a>
             <a href="#">Haberler</a>
         </div>
@@ -256,7 +285,7 @@
     <!-- ANA PORTAL GÖVDESİ -->
     <div class="hero-konteyner">
         
-        <!-- SOL BLOK: GENEL VİZYON VE SAYAÇLAR -->
+        <!-- SOL BLOK -->
         <div class="icerik-alani">
             <div class="ust-etiket">DOĞU MARMARA'NIN İLK EĞİTİM MİRASI</div>
             <h2>Asırlık Geçmiş, <span>Modern Gelecek.</span></h2>
@@ -278,44 +307,67 @@
             </div>
         </div>
 
-        <!-- SAĞ BLOK: ENTEGRE EDİLEN YENİ TARİHÇE PANELİ -->
-        <div class="tarihce-alani">
-            <div class="tarihce-kart">
-                <div class="tarihce-baslik">
-                    📜 <span>Tarihçemiz</span>
-                </div>
+        <!-- SAĞ BLOK: İNTERAKTİF DİNAMİK KART -->
+        <div class="interaktif-alan">
+            <div class="dinamik-kart" id="portal-kart">
                 
-                <div class="tarihce-metin-kutusu">
-                    <p>Yalnızca ilimizin değil tüm Doğu Marmara’nın en eski okullarından birisi olan İzmit İdadîsinin mirası bugün Gazi Lisesi ve İzmit Lisesi tarafından paylaşılmaktadır. O yüzden iki okulun da geçmiş tarihi bir noktaya kadar aynıdır.</p>
-                    
-                    <p>Osmanlı İmparatorluğunun son yıllarında ortaokul seviyesinde (Rüştiye) okulları yaygınlaştırabilmek için “Mekteb-i Rüştiye Nezareti” kuruldu. Bu nezaretin hazırladığı 1869 tarihli Milli Eğitim (Maarif) tüzüğünde rüştiyelerden bir derece daha yüksek ve bugünkü lise seviyesinde İdadilerden de bahsedilir. Bu okulların hem yüksek okullar için öğrenci hem de devletin üst kademelerine memur yetiştirmek için planlandığı ve ona uygun bir program yürütüldüğü görülür. Ancak bu amaca hizmet edecek idadi binalarını yapacak mimar ve plan sıkıntısı söz konusuydu. Bu yüzden yapılacak okulların planları Avrupa’dan araştırılmış ve nihayet Fransa’nın Paris kentinde uygulanan bina biçimleri uygun bulunmuştu. İncelemek için bulunan bina planları üç tip olup, şehrimiz için uygun görüleni de başta olmak üzere orta büyüklükteki planın çoğunlukla tatbiki uygun görülmüştür.</p>
-                    
-                    <p>Yapılış amacı ve planı yukarıda açıklanan idadilerden birinin ilimizde açılmasına da Maarif Nezareti’nin (Milli Eğitim) emriyle karar verilmiş, yer olarak da eski Bağdad sonra İstanbul ve halen İnönü caddesi isimlerini alan cadde ile Alemdar caddesinin kesiştiği köşedeki eski Şer’iye Mahkemesinin binasının olduğu arsa düşünülmüştür. Mahkeme binası yıktırılarak 1884 yılında temel atılan okul binasının inşaatı iki senede tamamlanmıştır. 31 Ağustos 1887 de resmi açılışı yapılan bina 12 Eylül 1887 de Mekteb-i İdadi adıyla; altı kişilik eğitim heyeti ve bir derslikle faaliyete geçmiştir. Binayı yaptıran kişi olarak Sultan II. Mahmut’un torunu ve Sultan Abdülmecit’in oğlu II. Abdülhamit olduğu ve maliyetin o günkü para birimiyle 439.785 kuruş olduğu bilinmektedir.</p>
-                    
-                    <p>Bu okul 1892 yılında sekiz mezun vermiştir. Bunu takip eden yirmi iki yıllık idadi döneminde toplam yüz elli iki mezun verilmiştir. Okul 1913 senesinde “Sultani” adını almış ve 1919 a kadar geçen Sultani döneminde on yedi mezun verilmiştir. I. Dünya savaşı (1914–1918) yıllarında okulun aynı zamanda öğretmen okulu olarak da kullanıldığı sanılmaktadır. Sultani döneminde okulumuzda ders vermiş ünlü bir isim göze çarpar ki kendisi Şair ve Akbaba adlı mizah ve karikatür dergilerinin kurucu sahibi, edebiyatçı Yusuf Ziya Ortaç’tır. Birinci dünya savaşı döneminde hastane olarak da kullanılan bina yüzünden öğrenciler geçici binalarda öğrenime devam etmişlerdir. Savaştan sonra Yunanlıların işgali günlerinde okul binasının kullanılamadığı ve eşyaların Yunanlılar tarafından yağmalandığı da bilinmektedir.</p>
-                    
-                    <p>İzmit’in geri alınmasından sonra 1922–1923 eğitim yılı başında ortaokul olarak açılmıştır ve o günkü adı “Akçakoca Numune Mektebidir”. O yıllarda öğrenci azlığı nedeniyle ortaokul talebeleri bugünkü Kız Meslek Lisesi binasına naklolunmuş, bina ilkokul olarak tahsis edilmiştir.</p>
-                    
-                    <p>Okul Cumhuriyet devri başında “Leyli (yatılı) İzmit Sultaniyesi” adı ile tedrisata devam etmiş daha sonraları sırasıyla “Nehari (gündüzlü) Sultani”, “Lise” ,”Orta mekteb” adlarını almıştır. 1926 yılına kadar sadece erkeklerin okuduğu okul eğitim öğretim birliği yasasına bağlı olarak kız öğrencileri de bünyesine almıştır. Okula kayıt olan ilk kız öğrenci sayısı on yedidir. Uzun yıllar bakımsız kalan okul 1931 yılında Maarif vekâletinin ciddi bir bütçe ayırmasıyla onarımdan geçirilmiş hatta okul bahçesine bitişik Hafız Binbaşının evi istimlâk edilerek yıkıldıktan sonra açılan geniş arsa okula ilave edilmiştir. Ancak bu istimlâk ve yıkım işleminin 1936’dan sonra yapıldığı tahmin edilmektedir. 19 Haziran 1943 tarihindeki Adapazarı Hendek depreminde okulun çatı kısmı ciddi zarara uğramış fakat kısa sürede tamir edilmiştir.</p>
-                    
-                    <p>Yukarıda adı geçen ve bugün Gazi Lisesi adı altında hizmet vermeye devam eden binanın tam karşısında bulunan arazi eskiden “Ambar Bahçe” adıyla anılan boş alan olup bayram yeri olarak da kullanılmaktaydı. Çocukların boş zamanlarında top oynadıkları bu bahçenin güney doğu köşesinde eskiden mezarlık olduğu, daha sonra mezarların taşınarak buraya iki katlı bir ev yapıldığı, bu evin de yıkıldıktan sonra ilk lise binasını giriş kapısının buradan verildiği bilinmektedir. Ambar Bahçenin doğusundaki boş alanın tamamının mezarlık olduğu ve sonradan bu mezarların kaldırılarak çocuk parkı şeklinde tanzim edildiği bilinmektedir. 1945 yılına kadar ortaokul adı altında faaliyet gösteren okul bu tarihte liseye çevrilmiş tek müdürlük yönetiminde toplanarak adı İzmit Lisesi olarak belirlenmiştir.</p>
-                    
-                    <p>Okulumuzun spor salonu olarak kullanılan bölümü ilk yapılışı bakımından toplantı ve müsamere salonu olarak planlanmış olup 1950–51 Eğitim Öğretim yılında büyük gayretlerle spor salonu haline getirilmiştir. 1956–59 mali yıllarında gönderilen ödenekle ahşap bina betonarmeye döndürülmüş dört derslik daha ilave edilerek tamir edilmiş ve genişletilmiştir. 1965–66 Eğitim-Öğretim yılında İzmit Lisesi ile Merkez (İzmit )ortaokulu tamamen ayrılmış; lise yeni bina ile spor salonunun bulunduğu bölümde faaliyetini sürdürürken eski idadi binası İzmit ortaokulu olarak devam etmiştir. 1968–1969 Öğretim yılında okula 12 derslikli bir bina eklenmiştir. (Merkez ortaokulu adıyla anılan bölüm 1993–94 öğretim yılında Gazi Lisesi adını alarak liseye çevrilmiştir). 1990–91 Eğitim-öğretim yılına kadar klasik sisteme göre eğitim veren okulumuz 1993-94’e kadar kredili sisteme göre eğitim vermiştir. 1993–94 Eğitim-öğretim yılından itibaren “Yabancı Dil Ağırlıklı Lise” haline gelen okulumuz eğitim-öğretim faaliyetine 17 Ağustos 1999 depreminde aldığı hasar sebebiyle o eğitim – öğretim yılında (1999–2000) tamirat yüzünden Kanlıbağ da bulunan Kız İmam hatip binasında devam etmiş, kendi binasına öğretim yılı sonlarına doğru dönmüştür.</p>
-                    
-                    <p>Okulumuz 2005 yılından beri Anadolu Lisesi Statüsünde faaliyetini sürdürmektedir. Ancak köklü geçmişi ve tarihi özellikleri yüzünden adı değiştirilmemiş ve “Anadolu” kelimesi ilave edilmemiştir.</p>
-                    
-                    <p style="font-size: 11px; color: var(--yazi-gri); font-style: italic;">NOT: Okulumuzun tarihçesi derlenirken okul arşivinden, eski idareci ve mezunların bilgilerinden ve Kocaeli Dokümantasyon Merkezinden yararlanılmıştır.</p>
+                <!-- BAŞLANGIÇTAKİ ANA GÖRÜNÜM (AÇILIŞ EKRANI) -->
+                <div class="ekran-ana" id="panel-ana">
+                    <div class="resim-yer-tutucu">
+                        [Okul Binası Fotoğraf Alanı]
+                    </div>
+                    <div class="yuzen-cip">
+                        🚀 Başarı Odaklı Modern Kurumsal Vizyon
+                    </div>
                 </div>
 
-                <div class="derleyen-bilgisi">
-                    Derleyen<br>
-                    <strong>Arsan SAVUR</strong><br>
-                    (İzmit Lisesi Tarih Öğretmeni)
+                <!-- GİZLİ OLAN VE LİNKE BASINCA AÇILACAK TARİHÇE EKRANI -->
+                <div class="ekran-tarihce" id="panel-tarihce">
+                    <div class="tarihce-baslik">
+                        <span>📜 Tarihçemiz</span>
+                        <button class="btn-kapat" onclick="anaEkranıGoster()">✕</button>
+                    </div>
+                    
+                    <div class="tarihce-metin-kutusu">
+                        <p>Yalnızca ilimizin değil tüm Doğu Marmara’nın en eski okullarından birisi olan İzmit İdadîsinin mirası bugün Gazi Lisesi ve İzmit Lisesi tarafından paylaşılmaktadır. O yüzden iki okulun da geçmiş tarihi bir noktaya kadar aynıdır.</p>
+                        <p>Osmanlı İmparatorluğunun son yıllarında ortaokul seviyesinde (Rüştiye) okulları yaygınlaştırabilmek için “Mekteb-i Rüştiye Nezareti” kuruldu. Bu nezaretin hazırladığı 1869 tarihli Milli Eğitim (Maarif) tüzüğünde rüştiyelerden bir derece daha yüksek ve bugünkü lise seviyesinde İdadilerden de bahsedilir. Bu okulların hem yüksek okullar için öğrenci hem de devletin üst kademelerine memur yetiştirmek için planlandığı ve ona uygun bir program yürütüldüğü görülür. Ancak bu amaca hizmet edecek idadi binalarını yapacak mimar ve plan sıkıntısı söz konusuydu. Bu yüzden yapılacak okulların planları Avrupa’dan araştırılmış ve nihayet Fransa’nın Paris kentinde uygulanan bina biçimleri uygun bulunmuştu. İncelemek için bulunan bina planları üç tip olup, şehrimiz için uygun görüleni de başta olmak üzere orta büyüklükteki planın çoğunlukla tatbiki uygun görülmüştür.</p>
+                        <p>Yapılış amacı ve planı yukarıda açıklanan idadilerden birinin ilimizde açılmasına da Maarif Nezareti’nin (Milli Eğitim) emriyle karar verilmiş, yer olarak da eski Bağdad sonra İstanbul ve halen İnönü caddesi isimlerini alan cadde ile Alemdar caddesinin kesiştiği köşedeki eski Şer’iye Mahkemesinin binasının olduğu arsa düşünülmüştür. Mahkeme binası yıktırılarak 1884 yılında temel atılan okul binasının inşaatı iki senede tamamlanmıştır. 31 Ağustos 1887 de resmi açılışı yapılan bina 12 Eylül 1887 de Mekteb-i İdadi adıyla; altı kişilik eğitim heyeti ve bir derslikle faaliyete geçmiştir. Binayı yaptıran kişi olarak Sultan II. Mahmut’un torunu ve Sultan Abdülmecit’in oğlu II. Abdülhamit olduğu ve maliyetin o günkü para birimiyle 439.785 kuruş olduğu bilinmektedir.</p>
+                        <p>Bu okul 1892 yılında sekiz mezun vermiştir. Bunu takip eden yirmi iki yıllık idadi döneminde toplam yüz elli iki mezun verilmiştir. Okul 1913 senesinde “Sultani” adını almış ve 1919 a kadar geçen Sultani döneminde on yedi mezun verilmiştir. I. Dünya savaşı (1914–1918) yıllarında okulun aynı zamanda öğretmen okulu olarak da kullanıldığı sanılmaktadır. Sultani döneminde okulumuzda ders vermiş ünlü bir isim göze çarpar ki kendisi Şair ve Akbaba adlı mizah ve karikatür dergilerinin kurucu sahibi, edebiyatçı Yusuf Ziya Ortaç’tır. Birinci dünya savaşı döneminde hastane olarak da kullanılan bina yüzünden öğrenciler geçici binalarda öğrenime devam etmişlerdir. Savaştan sonra Yunanlıların işgali günlerinde okul binasının kullanılamadığı ve eşyaların Yunanlılar tarafından yağmalandığı da bilinmektedir.</p>
+                        <p>Izmit’in geri alınmasından sonra 1922–1923 eğitim yılı başında ortaokul olarak açılmıştır ve o günkü adı “Akçakoca Numune Mektebidir”. O yıllarda öğrenci azlığı nedeniyle ortaokul talebeleri bugünkü Kız Meslek Lisesi binasına naklolunmuş, bina ilkokul olarak tahsis edilmiştir.</p>
+                        <p>Okul Cumhuriyet devri başında “Leyli (yatılı) İzmit Sultaniyesi” adı ile tedrisata devam etmiş daha sonraları sırasıyla “Nehari (gündüzlü) Sultani”, “Lise” ,”Orta mekteb” adlarını almıştır. 1926 yılına kadar sadece erkeklerin okuduğu okul eğitim öğretim birliği yasasına bağlı olarak kız öğrencileri de bünyesine almıştır. Okula kayıt olan ilk kız öğrenci sayısı on yedidir. Uzun yıllar bakımsız kalan okul 1931 yılında Maarif vekâletinin ciddi bir bütçe ayırmasıyla onarımdan geçirilmiş hatta okul bahçesine bitişik Hafız Binbaşının evi istimlâk edilerek yıkıldıktan sonra açılan geniş arsa okula ilave edilmiştir. Ancak bu istimlâk ve yıkım işleminin 1936’dan sonra yapıldığı tahmin edilmektedir. 19 June 1943 tarihindeki Adapazarı Hendek depreminde okulun çatı kısmı ciddi zarara uğramış fakat kısa sürede tamir edilmiştir.</p>
+                        <p>Yukarıda adı geçen ve bugün Gazi Lisesi adı altında hizmet vermeye devam eden binanın tam karşısında bulunan arazi eskiden “Ambar Bahçe” adıyla anılan boş alan olup bayram yeri olarak da kullanılmaktaydı. Çocukların boş zamanlarında top oynadıkları bu bahçenin güney doğu köşesinde eskiden mezarlık olduğu, daha sonra mezarların taşınarak buraya iki katlı bir ev yapıldığı, bu evin de yıkıldıktan sonra ilk lise binasını giriş kapısının buradan verildiği bilinmektedir. Ambar Bahçenin doğusundaki boş alanın tamamının mezarlık olduğu ve sonradan bu mezarların kaldırılarak çocuk parkı şeklinde tanzim edildiği bilinmektedir. 1945 yılına kadar ortaokul adı altında faaliyet gösteren okul bu tarihte liseye çevrilmiş tek müdürlük yönetiminde toplanarak adı İzmit Lisesi olarak belirlenmiştir.</p>
+                        <p>Okulumuzun spor salonu olarak kullanılan bölümü ilk yapılışı bakımından toplantı ve müsamere salonu olarak planlanmış olup 1950–51 Eğitim Öğretim yılında büyük gayretlerle spor salonu haline getirilmiştir. 1956–59 mali yıllarında gönderilen ödenekle ahşap bina betonarmeye döndürülmüş dört derslik daha ilave edilerek tamir edilmiş ve genişletilmiştir. 1965–66 Eğitim-Öğretim yılında İzmit Lisesi ile Merkez (İzmit )ortaokulu tamamen ayrılmış; lise yeni bina ile spor salonunun bulunduğu bölümde faaliyetini sürdürürken eski idadi binası İzmit ortaokulu olarak devam etmiştir. 1968–1969 Öğretim yılında okula 12 derslikli bir bina eklenmiştir. (Merkez ortaokulu adıyla anılan bölüm 1993–94 öğretim yılında Gazi Lisesi adını alarak liseye çevrilmiştir). 1990–91 Eğitim-öğretim yılına kadar klasik sisteme göre eğitim veren okulumuz 1993-94’e kadar kredili sisteme göre eğitim vermiştir. 1993–94 Eğitim-öğretim yılından itibaren “Yabancı Dil Ağırlıklı Lise” haline gelen okulumuz eğitim-öğretim faaliyetine 17 Ağustos 1999 depreminde aldığı hasar sebebiyle o eğitim – öğretim yılında (1999–2000) tamirat yüzünden Kanlıbağ da bulunan Kız İmam hatip binasında devam etmiş, kendi binasına öğretim yılı sonlarına doğru dönmüştür.</p>
+                        <p>Okulumuz 2005 yılından beri Anadolu Lisesi Statüsünde faaliyetini sürdürmektedir. Ancak köklü geçmişi ve tarihi özellikleri yüzünden adı değiştirilmemiş ve “Anadolu” kelimesi ilave edilmemiştir.</p>
+                    </div>
+
+                    <div class="derleyen-bilgisi">
+                        Derleyen<br>
+                        <strong>Arsan SAVUR</strong><br>
+                        (İzmit Lisesi Tarih Öğretmeni)
+                    </div>
                 </div>
+
             </div>
         </div>
 
     </div>
+
+    <!-- EKRAN DEĞİŞTİRME SİHRİ (JAVASCRIPT) -->
+    <script>
+        function tarihceyiGoster() {
+            // Ana ekranı gizle, tarihçeyi aç
+            document.getElementById("panel-ana").style.display = "none";
+            document.getElementById("panel-tarihce").style.display = "flex";
+            document.getElementById("menu-tarihce").classList.add("aktif");
+        }
+
+        function anaEkranıGoster() {
+            // Tarihçeyi gizle, ana ekranı aç
+            document.getElementById("panel-tarihce").style.display = "none";
+            document.getElementById("panel-ana").style.display = "flex";
+            document.getElementById("menu-tarihce").classList.remove("aktif");
+        }
+    </script>
 
 </body>
 </html>
